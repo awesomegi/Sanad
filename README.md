@@ -11,29 +11,29 @@ Sanad was inspired by a real experience: a sprained ankle, a week of being unabl
 Sanad connects seekers (people needing help) with helpers who are authorized and verified by the Ministry of Health, ensuring every helper is trained, accountable, and equipped to support disability-specific needs.
 
 
-##  Features
+## Features
 
 ### For Seekers (People with Disabilities)
-- Create a profile with disability type (permanent or temporary) and specific needs
-- Post help requests with task type, date/time, location, estimated hours, and notes
-- Browse and filter approved helpers by specialization and hourly rate
-- View helper offers with their hourly rate and total estimated cost
-- Pay upfront via secure checkout when accepting a helper
-- Receive automatic refund if request is cancelled before the task starts
-- Track request status (open → accepted → paid → active → completed)
+- Create a profile with disability type (permanent or temporary) and category
+- Browse all approved helpers, with helpers matching their disability category marked as "Recommended for you"
+- Filter helpers by service type, city, hourly rate, and rating
+- View any helper's full profile: services offered, weekly availability, ratings, reviews, hourly rate
+- Book a specific helper for a specific service at a specific date/time within that helper's availability
+- Pay upfront via secure checkout (held by platform until task completion)
+- Receive automatic refund if the booking is cancelled before the scheduled time
+- Track booking status (booked → active → completed)
 - Rate helpers after task completion
-- View payment history and download receipts
-- Receive in-app notifications for status and payment updates
+- View booking history and download receipts
 
 ### For Helpers (Authorized Caregivers)
 - Sign up and submit verification documents (national ID, training certifications, MoH authorization)
 - Wait for admin verification before going active
-- Set specialization areas (which disabilities they're trained to support)
-- Set personal hourly rate (adjustable anytime)
-- Browse open help requests by location and type
-- See estimated earnings per request before offering
-- Accept requests; receive payment after task completion
-- View earnings dashboard, completed task history, and payouts
+- Set specialization areas (which disability categories they're trained to support)
+- Choose which services they offer from a fixed list (Groceries, Mobility, Medical Appointments, Household, Other)
+- Set personal hourly rate (one rate, applied to all services)
+- Set recurring weekly availability (e.g. Mon–Wed 9am–5pm, Sat 2pm–8pm)
+- View incoming bookings and confirm/cancel
+- View earnings dashboard and completed task history
 - Receive ratings from seekers
 
 ### For Admins (Ministry of Health Representatives)
@@ -41,22 +41,20 @@ Sanad connects seekers (people needing help) with helpers who are authorized and
 - Verify uploaded documents
 - Approve or reject helper accounts with feedback notes
 - Suspend helpers based on poor ratings or complaints
-- View platform-wide analytics: active users, completed requests, total transaction volume, average ratings
-- Process refund disputes when needed
+- View platform-wide analytics
 
-## Payment Model
+## Booking & Payment Model
 
-Sanad uses an **upfront payment with refund** model:
+Sanad uses a **direct booking** model with **upfront payment**:
 
-1. Seeker creates a request and reviews helper offers
-2. When seeker accepts a helper, payment is processed for the estimated hours × hourly rate
-3. Funds are held by the platform (escrow) until task completion
-4. After completion, payment is released to the helper
-5. If the seeker cancels before the task starts, the payment is refunded automatically
-6. If the helper cancels, full refund + the helper's reliability score is impacted
+1. Seeker browses approved helpers, filtered by what they need
+2. Seeker views a helper's profile and picks a service + date + time slot from the helper's availability
+3. Seeker pays upfront — funds held by the platform (escrow)
+4. Helper sees the confirmed booking on their dashboard
+5. After the scheduled task is completed, payment is released to the helper
+6. If the seeker cancels before the scheduled time, the payment is fully refunded
 
-**For the MVP:** Payment is simulated with a realistic checkout flow. Production deployment would integrate **Moyasar** (Saudi-based payment gateway supporting Mada, Visa, Mastercard, and Apple Pay).
-
+**For the MVP:** Payment is simulated with a realistic checkout flow. Production would integrate Moyasar (Saudi-based payment gateway).
 
 ## Project Structure
 
@@ -64,9 +62,10 @@ Sanad uses an **upfront payment with refund** model:
 sanad/
 ├── accounts/         # User authentication, profiles, role management (seeker/helper/admin)
 ├── verification/     # Helper document upload, MoH approval workflow
-├── requests/         # Help request creation, acceptance, status tracking
+├── helpers/          # Helper profiles, services, availability, search & filtering
+├── bookings/         # Booking creation, status tracking, cancellations
 ├── payments/         # Mock payment processing, escrow, refunds, transaction history
-├── ratings/          # Two-way ratings after task completion
+├── ratings/          # Ratings after booking completion
 ├── notifications/    # In-app notifications for status changes
 ├── templates/        # Shared base templates
 ├── static/           # CSS, JS, images

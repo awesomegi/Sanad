@@ -70,10 +70,11 @@ Ghadi lives alone in a studio apartment near her university. She sprained her an
 Rimas trained as a caregiver and worked in a rehabilitation center for two years. She left to pursue a degree but wants flexible part-time income that uses her skills. She cares about doing meaningful work and feels good helping people maintain their independence.
 
 ### Goals
-- Earn flexible income on her own schedule at a rate she sets herself
+- Earn flexible income by setting her own weekly hours and hourly rate
 - Use her caregiving training in a respected, verified platform
 - Build a reputation through ratings she can show future employers
 - Get paid reliably without chasing clients for cash
+- Have control over her schedule — only get bookings within hours she chose
 
 ### Frustrations
 - Informal caregiving gigs through WhatsApp groups don't verify credentials, so trained helpers compete with anyone
