@@ -20,6 +20,24 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
+
+
+    
+    @property
+    def is_seeker(self):
+        return self.role == self.Role.SEEKER
+
+    @property
+    def is_helper(self):
+        return self.role == self.Role.HELPER
+
+    @property
+    def is_helper_approved(self):
+        if not self.is_helper:
+            return False
+        if not hasattr(self, 'helper_profile'):
+            return False
+        return self.helper_profile.verification_status == 'APPROVED'    
     
 
 
