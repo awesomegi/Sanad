@@ -33,11 +33,19 @@ class User(AbstractUser):
 
     @property
     def is_helper_approved(self):
-        if not self.is_helper:
+    
+        if self.role != 'HELPER':
             return False
-        if not hasattr(self, 'helper_profile'):
-            return False
-        return self.helper_profile.verification_status == 'APPROVED'    
+
+        signup_req = getattr(self, 'signup_request', None)
+        if signup_req and signup_req.status == 'APPROVED':
+            return True
+
+      
+        if hasattr(self, 'helper_profile'):
+            return self.helper_profile.verification_status == 'APPROVED'
+
+        return False
     
 
 
