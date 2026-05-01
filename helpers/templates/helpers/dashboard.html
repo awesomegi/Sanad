@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    {% if user.is_helper_approved %}
+        <!-- محتوى الداشبورد للمساعد المعتمد -->
+        <h2 style="color: #d4af37;">مرحباً، {{ user.first_name }}</h2>
+        <div class="row mt-4">
+            <!-- عرض الإحصائيات هنا -->
+            <div class="col-md-3">
+                <div class="card bg-dark border-secondary p-3 text-center">
+                    <h5 class="text-white-50 small">إجمالي الطلبات</h5>
+                    <h3 class="text-white">{{ stats.total_requests }}</h3>
+                </div>
+            </div>
+            <!-- زر إكمال الملف -->
+            <div class="mt-4">
+                <a href="{% url 'helpers:edit_profile' %}" class="btn" style="background-color: #d4af37; color: #1a1a1a; font-weight: bold;">تعديل الملف المهني</a>
+            </div>
+        </div>
+    {% else %}
+        <!-- رسالة الانتظار للمساعد غير المعتمد -->
+        <div class="card p-5 text-center shadow-lg" style="background-color: #1a1a1a; border: 1px solid #333; border-radius: 15px;">
+            <h2 style="color: #d4af37;">طلبك قيد المراجعة</h2>
+            <p class="text-white-50 mt-3">نحن نقوم حالياً بالتحقق من وثائقك الصحية. ستتمكن من إكمال ملفك فور الموافقة.</p>
+            <div class="spinner-border text-warning mt-3" role="status"></div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
