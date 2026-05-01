@@ -1,8 +1,30 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import User, SeekerProfile
+
+
+@login_required
+def seeker_dashboard(request):
+    if not request.user.is_seeker:
+        return redirect('home')
+    
+    seeker = request.user.seeker_profile
+
+    # Placeholder data for now — Rimas's bookings will plug in here on Day 4
+    context = {
+        'seeker': seeker,
+        'active_count': 0,
+        'completed_count': 0,
+        'total_spent': 0,
+        'active_bookings': [],
+        'history': [],
+
+    }
+    return render(request, 'accounts/seeker_dashboard.html', context)
+
 
 
 def signup_seeker(request):
@@ -51,9 +73,8 @@ def signup_seeker(request):
 
         # Log them in immediately
         login(request, user)
-
         messages.success(request, f'Welcome to Sanad, {first_name}!')
-        return redirect('home')
+        return redirect('seeker_dashboard')
 
     return render(request, 'accounts/signup_seeker.html')
 
@@ -61,15 +82,22 @@ def signup_seeker(request):
 
 def login_view(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            login(request, form.get_user())
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=email, password=password)
+
+        if user is not None:
+            login(request, user)
+            if user.is_seeker:
+                return redirect('seeker_dashboard')
+            elif user.is_helper:
+                return redirect('home')   
             return redirect('home')
         else:
-            messages.error(request, 'Invalid email or password.')
-    else:
-        form = AuthenticationForm()
-    return render(request, 'accounts/login.html', {'form': form})
+            messages.error(request, 'Invalid email or password')
+
+    return render(request, 'accounts/login.html')
 
 
 
