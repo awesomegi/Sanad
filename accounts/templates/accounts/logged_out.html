@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Logged Out — Sanad{% endblock %}
+
+{% block content %}
+<div class="container py-5 text-center">
+  <h2 class="mb-3">You've been logged out</h2>
+  <p class="text-muted mb-4">Thanks for using Sanad. See you soon!</p>
+  <a href="{% url 'login' %}" class="btn btn-dark">Log back in</a>
+</div>
+{% endblock %}
