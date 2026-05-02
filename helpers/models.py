@@ -74,6 +74,7 @@ class HelperProfile(models.Model):
     )
     
     bio = models.TextField(max_length=500, blank=True)
+    profile_photo = models.ImageField(upload_to='helpers/photos/', blank=True, null=True)
     city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True)
     specialty = models.ForeignKey(Specialty, on_delete=models.SET_NULL, null=True)
     services = models.ManyToManyField(Service, blank=True)

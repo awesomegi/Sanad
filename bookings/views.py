@@ -56,7 +56,7 @@ def helpers_list(request):
 # ── 2. بروفايل المساعد ─────────────────────
 @login_required
 @seeker_only
-def helper_profile(request, pk):
+def helper_detail(request, pk):
     helper = get_object_or_404(
         HelperProfile.objects.select_related('user', 'city', 'specialty')
                              .prefetch_related('services', 'experiences', 'availabilities'),

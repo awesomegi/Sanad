@@ -30,9 +30,10 @@ class HelperLoginForm(forms.Form):
 class HelperProfileForm(forms.ModelForm):
     class Meta:
         model = HelperProfile
-        fields = ['bio', 'city', 'specialty', 'services', 'hourly_rate']
+        fields = ['bio', 'profile_photo', 'city', 'specialty', 'services', 'hourly_rate']
         widgets = {
             'bio': forms.Textarea(attrs={'class': 'form-control bg-dark text-white', 'rows': 3, 'placeholder': 'نبذة عن مهاراتك...'}),
+            'profile_photo': forms.FileInput(attrs={'class': 'form-control bg-dark text-white'}),
             'city': forms.Select(attrs={'class': 'form-select bg-dark text-white'}),
             'specialty': forms.Select(attrs={'class': 'form-select bg-dark text-white'}),
             'services': forms.CheckboxSelectMultiple(attrs={'class': 'form-check-input'}),
