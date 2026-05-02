@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
+from django.utils.safestring import mark_safe
 from .models import SignupToHelpers, City, Specialty, Service, HelperProfile, Availability, Experience
 
 @admin.register(SignupToHelpers)
@@ -44,7 +45,7 @@ class SignupToHelpersAdmin(admin.ModelAdmin):
             html += f'<a href="{obj.national_id.url}" target="_blank" style="color: #d4af37; font-weight:bold; margin-right:15px;">ID View</a>'
         if obj.moh_authorization:
             html += f'<a href="{obj.moh_authorization.url}" target="_blank" style="color: #d4af37; font-weight:bold;">MOH Auth</a>'
-        return format_html(html) if html else "No Docs"
+        return mark_safe(html) if html else "No Docs"
     view_docs.short_description = "Verification Documents"
 
 
