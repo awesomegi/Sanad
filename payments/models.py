@@ -18,12 +18,13 @@ class Payment(models.Model):
         APPLE_PAY = 'APPLE_PAY', 'Apple Pay'
 
 
-    #TODO: Uncomment when Rimas's Booking model is committed
-    #booking = models.OneToOneField(
-        #'bookings.Booking',
-        #on_delete=models.PROTECT,
-        #related_name='payment'
-   # )
+    booking = models.OneToOneField(
+        'bookings.Booking',
+        on_delete=models.PROTECT,
+        related_name='payment',
+        null=True,          
+        blank=True, 
+   )
     seeker = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
