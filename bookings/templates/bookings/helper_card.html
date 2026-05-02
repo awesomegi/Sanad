@@ -1,0 +1,69 @@
+<!-- bookings/templates/bookings/helper_card.html -->
+<div class="card h-100 border-0" style="background:#1a1a1a; border-radius:16px; overflow:hidden;">
+ 
+    <!-- صورة المساعد -->
+    <div class="text-center pt-4">
+        {% if helper.user.profile_photo %}
+            <img src="{{ helper.user.profile_photo.url }}" alt=""
+                 style="width:90px; height:90px; border-radius:50%; object-fit:cover; border:3px solid #d4af37;">
+        {% else %}
+            <div style="width:90px; height:90px; border-radius:50%; background:#d4af37; display:flex; align-items:center; justify-content:center; font-size:2rem; font-weight:800; color:#1a1a1a; margin:0 auto;">
+                {{ helper.user.first_name|first|upper }}
+            </div>
+        {% endif %}
+    </div>
+ 
+    <div class="card-body text-center px-4 pb-4">
+ 
+        <!-- الاسم -->
+        <h5 class="mt-3 mb-1" style="color:#fff; font-weight:700;">
+            {{ helper.user.get_full_name }}
+        </h5>
+ 
+        <!-- التخصص -->
+        <p class="mb-1" style="color:#d4af37; font-size:0.85rem; font-weight:600;">
+            {{ helper.specialty.name|default:"—" }}
+        </p>
+ 
+        <!-- المدينة والسعر -->
+        <p class="mb-3" style="color:#888; font-size:0.82rem;">
+            📍 {{ helper.city.name|default:"—" }}
+            &nbsp;·&nbsp;
+            💰 {{ helper.hourly_rate|default:"—" }} ر.س/ساعة
+        </p>
+ 
+        <!-- الخبرات -->
+        {% if helper.experiences.exists %}
+        <div class="mb-3 text-start">
+            {% for exp in helper.experiences.all|slice:":2" %}
+            <div class="d-flex align-items-center gap-2 mb-1">
+                <span style="color:#d4af37; font-size:0.75rem;">✦</span>
+                <span style="color:#ccc; font-size:0.82rem;">{{ exp.title }} — {{ exp.years }} سنوات</span>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+ 
+        <!-- الخدمات -->
+        <div class="mb-3 d-flex flex-wrap justify-content-center gap-1">
+            {% for service in helper.services.all|slice:":3" %}
+            <span style="background:#252525; border:1px solid #333; color:#ccc; border-radius:20px; padding:3px 10px; font-size:0.75rem;">
+                {{ service.name }}
+            </span>
+            {% endfor %}
+        </div>
+ 
+        <!-- الأزرار -->
+        <div class="d-grid gap-2">
+            <a href="{% url 'bookings:helper_profile' helper.pk %}"
+               style="background:#252525; color:#fff; border:1px solid #d4af37; border-radius:10px; padding:10px; font-weight:600; text-decoration:none; font-size:0.9rem;">
+                👤 شوف البروفايل
+            </a>
+            <a href="{% url 'bookings:create' helper.pk %}"
+               style="background:#d4af37; color:#1a1a1a; border:none; border-radius:10px; padding:10px; font-weight:700; text-decoration:none; font-size:0.9rem;">
+                📅 احجز
+            </a>
+        </div>
+ 
+    </div>
+</div>

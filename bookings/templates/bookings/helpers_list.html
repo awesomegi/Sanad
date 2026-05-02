@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5 mb-5">
+
+    <!-- العنوان -->
+    <div class="mb-4">
+        <h2 style="color:#fff; font-weight:800;">🤝 ابحث عن مساعد</h2>
+        <p style="color:#888;">تصفح المساعدين المعتمدين من وزارة الصحة</p>
+    </div>
+
+    <!-- فلاتر البحث -->
+    <div class="p-4 mb-4" style="background:#1a1a1a; border-radius:16px; border:1px solid #333;">
+        <form method="get">
+            <div class="row g-2 align-items-end">
+                <div class="col-12 col-md-3">
+                    <input type="text" name="q" value="{{ query|default:'' }}"
+                           placeholder="ابحث بالاسم..."
+                           style="background:#2c2c2c; border:1px solid #444; color:#fff; border-radius:10px; padding:10px 14px; width:100%;">
+                </div>
+                <div class="col-6 col-md-2">
+                    <select name="city" style="background:#2c2c2c; border:1px solid #444; color:#fff; border-radius:10px; padding:10px; width:100%;">
+                        <option value="">كل المدن</option>
+                        {% for city in cities %}
+                        <option value="{{ city.id }}" {% if selected_city == city.id|stringformat:"s" %}selected{% endif %}>
+                            {{ city.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-6 col-md-2">
+                    <select name="specialty" style="background:#2c2c2c; border:1px solid #444; color:#fff; border-radius:10px; padding:10px; width:100%;">
+                        <option value="">كل التخصصات</option>
+                        {% for spec in specialties %}
+                        <option value="{{ spec.id }}" {% if selected_specialty == spec.id|stringformat:"s" %}selected{% endif %}>
+                            {{ spec.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-6 col-md-2">
+                    <input type="number" name="max_rate" value="{{ max_rate|default:'' }}"
+                           placeholder="أقصى سعر..."
+                           style="background:#2c2c2c; border:1px solid #444; color:#fff; border-radius:10px; padding:10px 14px; width:100%;">
+                </div>
+                <div class="col-6 col-md-2">
+                    <button type="submit"
+                            style="background:#d4af37; color:#1a1a1a; border:none; border-radius:10px; padding:10px 20px; font-weight:700; width:100%; cursor:pointer;">
+                        بحث
+                    </button>
+                </div>
+                <div class="col-12 col-md-1">
+                    <a href="{% url 'bookings:helpers_list' %}"
+                       style="background:#252525; color:#888; border:1px solid #333; border-radius:10px; padding:10px; display:block; text-align:center; text-decoration:none; font-size:0.85rem;">
+                        مسح
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- عدد النتائج -->
+    <div class="mb-3">
+        <span style="color:#888; font-size:0.88rem;">{{ helpers|length }} مساعد متاح</span>
+    </div>
+
+    <!-- قائمة المساعدين -->
+    {% if helpers %}
+    <div class="row g-4">
+        {% for helper in helpers %}
+        <div class="col-12 col-md-6 col-lg-4">
+            {% include 'bookings/helper_card.html' with helper=helper %}
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-5">
+        <div style="font-size:3rem; margin-bottom:1rem;">🔍</div>
+        <h5 style="color:#888;">لا يوجد مساعدون بهذه المعايير</h5>
+        <a href="{% url 'bookings:helpers_list' %}" style="color:#d4af37;">إعادة تعيين الفلاتر</a>
+    </div>
+    {% endif %}
+
+</div>
+
+<style>
+    body { background-color: #111; color: #fff; }
+    ::placeholder { color: #666 !important; }
+</style>
+
+{% endblock %}

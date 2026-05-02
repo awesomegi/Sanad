@@ -142,7 +142,7 @@ def edit_profile(request):
     availabilities = profile.availabilities.all()
 
     if request.method == 'POST':
-        form       = HelperProfileForm(request.POST, instance=profile)
+        form = HelperProfileForm(request.POST, request.FILES, instance=profile)
         exp_form   = ExperienceForm(request.POST)
         avail_form = AvailabilityForm(request.POST)
 
