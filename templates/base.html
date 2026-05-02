@@ -16,20 +16,37 @@
 
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="{% url 'home' %}">Sanad</a>
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="{% url 'home' %}">Sanad</a>
 
-      <div class="ms-auto">
-        {% if user.is_authenticated %}
-          <span class="me-3">Hi, {{ user.first_name }}</span>
-          <a href="{% url 'logout' %}" class="btn btn-outline-dark btn-sm">Logout</a>
-        {% else %}
-          <a href="{% url 'login' %}" class="btn btn-outline-dark btn-sm me-2">Log in</a>
-          <a href="{% url 'signup_seeker' %}" class="btn btn-dark btn-sm">Sign up</a>
+    <div class="ms-auto d-flex align-items-center gap-2">
+      {% if user.is_authenticated %}
+
+        {% if user.is_seeker %}
+          <a href="{% url 'seeker_dashboard' %}" class="text-decoration-none me-2">Dashboard</a>
+        {% elif user.is_helper_approved %}
+          <a href="#" class="text-decoration-none me-2">Dashboard</a>
         {% endif %}
-      </div>
+
+        <span>Hi, {{ user.first_name }}</span>
+
+        {% if user.is_seeker %}
+          <span class="badge bg-primary">Seeker</span>
+        {% elif user.is_helper_approved %}
+          <span class="badge bg-success">Helper</span>
+        {% elif user.is_helper %}
+          <span class="badge bg-warning text-dark">Pending Approval</span>
+        {% endif %}
+
+        <a href="{% url 'logout' %}" class="btn btn-outline-dark btn-sm">Logout</a>
+
+      {% else %}
+        <a href="{% url 'login' %}" class="btn btn-outline-dark btn-sm">Log in</a>
+        <a href="{% url 'signup_seeker' %}" class="btn btn-dark btn-sm">Sign up</a>
+      {% endif %}
     </div>
-  </nav>
+  </div>
+</nav>
 
   <!-- Page content -->
   <main>

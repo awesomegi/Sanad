@@ -4,39 +4,113 @@
 
 {% block content %}
 
-  <!-- Hero section -->
-  <section class="py-5 bg-light">
-    <div class="container text-center py-5">
-      <h1 class="display-4 fw-bold mb-3">Help, when you need it.</h1>
-      <p class="lead text-muted mb-4">
-        Connecting people with disabilities to verified, government-authorized helpers.
-      </p>
-      <div class="d-flex gap-2 justify-content-center">
-        <a href="#" class="btn btn-dark btn-lg">I need help</a>
-        <a href="#" class="btn btn-outline-dark btn-lg">I want to help</a>
-      </div>
+<!-- Hero section -->
+<section class="py-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+  <div class="container py-5 text-center">
+    <span class="badge bg-dark mb-3 px-3 py-2">Verified by Ministry of Health</span>
+    <h1 class="display-4 fw-bold mb-3">Help, when you need it.</h1>
+    <p class="lead text-muted mb-4 mx-auto" style="max-width: 600px;">
+      Connecting people with disabilities to verified, government-authorized helpers.
+      Trained, trustworthy, and just a booking away.
+    </p>
+    <div class="d-flex gap-2 justify-content-center flex-wrap">
+      <a href="{% url 'signup_seeker' %}" class="btn btn-dark btn-lg px-4">I need help</a>
+      <a href="#" class="btn btn-outline-dark btn-lg px-4">I want to help</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- How it works -->
-  <section class="py-5">
-    <div class="container">
-      <h2 class="text-center mb-5">How Sanad works</h2>
-      <div class="row g-4">
-        <div class="col-md-4 text-center">
-          <h5>Browse verified helpers</h5>
-          <p class="text-muted">Every helper is authorized by the Ministry of Health and trained in disability support.</p>
+<!-- How it works -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="text-center mb-5 fw-bold">How Sanad works</h2>
+    <div class="row g-4">
+
+      <div class="col-md-4">
+        <div class="text-center px-3">
+          <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
+            <span class="h3 mb-0">1</span>
+          </div>
+          <h5 class="fw-semibold">Browse verified helpers</h5>
+          <p class="text-muted small">Every helper is authorized by the Ministry of Health and trained in disability support.</p>
         </div>
-        <div class="col-md-4 text-center">
-          <h5>Book on your schedule</h5>
-          <p class="text-muted">Pick a helper, a service, and a time that works for you.</p>
+      </div>
+
+      <div class="col-md-4">
+        <div class="text-center px-3">
+          <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
+            <span class="h3 mb-0">2</span>
+          </div>
+          <h5 class="fw-semibold">Book on your schedule</h5>
+          <p class="text-muted small">Pick a helper, a service, and a time that works for you.</p>
         </div>
-        <div class="col-md-4 text-center">
-          <h5>Pay securely</h5>
-          <p class="text-muted">Mada, Visa, and Apple Pay accepted. Full refund if you cancel.</p>
+      </div>
+
+      <div class="col-md-4">
+        <div class="text-center px-3">
+          <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
+            <span class="h3 mb-0">3</span>
+          </div>
+          <h5 class="fw-semibold">Pay securely</h5>
+          <p class="text-muted small">Mada, Visa, and Apple Pay accepted. Full refund if you cancel.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Why Sanad -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <h2 class="fw-bold mb-3">Built for the moments that matter.</h2>
+        <p class="text-muted mb-3">
+          Whether your need is permanent or just temporary — a sprained ankle, recovery from surgery, or daily mobility support — Sanad gives you a network of trained helpers who understand exactly what you need.
+        </p>
+        <p class="text-muted">
+          No more depending on family who lives far away. No more guilt over asking friends. Just verified help, on your terms.
+        </p>
+      </div>
+      <div class="col-lg-6">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="card border-0 bg-white h-100">
+              <div class="card-body p-4">
+                <p class="h2 fw-bold mb-1">100%</p>
+                <p class="small text-muted mb-0">MoH verified helpers</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="card border-0 bg-white h-100">
+              <div class="card-body p-4">
+                <p class="h2 fw-bold mb-1">5</p>
+                <p class="small text-muted mb-0">Specialization areas</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="card border-0 bg-white h-100">
+              <div class="card-body p-4">
+                <p class="h2 fw-bold mb-1">24/7</p>
+                <p class="small text-muted mb-0">Booking availability</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="card border-0 bg-white h-100">
+              <div class="card-body p-4">
+                <p class="h2 fw-bold mb-1">SAR</p>
+                <p class="small text-muted mb-0">Secure Mada payments</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
 {% endblock %}

@@ -90,9 +90,7 @@ def login_view(request):
         if user is not None:
             login(request, user)
             if user.is_seeker:
-                return redirect('seeker_dashboard')
-            elif user.is_helper:
-                return redirect('home')   
+                return redirect('seeker_dashboard')   
             return redirect('home')
         else:
             messages.error(request, 'Invalid email or password')
