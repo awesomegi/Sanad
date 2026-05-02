@@ -57,7 +57,7 @@
       <div class="card border-dashed">
         <div class="card-body text-center text-muted py-4">
           <p class="mb-2">You don't have any active bookings yet.</p>
-          <a href="#" class="btn btn-dark btn-sm">Find a helper</a>
+          <a href="{% url 'bookings:helpers_list' %}" class="btn btn-dark btn-sm">Find a helper</a>
         </div>
       </div>
     {% endif %}
