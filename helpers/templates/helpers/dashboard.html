@@ -1,30 +1,104 @@
 {% extends 'base.html' %}
 
+{% block title %}Helper Dashboard — Sanad{% endblock %}
+
 {% block content %}
-<div class="container mt-4">
-    {% if user.is_helper_approved %}
-        <!-- محتوى الداشبورد للمساعد المعتمد -->
-        <h2 style="color: #d4af37;">مرحباً، {{ user.first_name }}</h2>
-        <div class="row mt-4">
-            <!-- عرض الإحصائيات هنا -->
-            <div class="col-md-3">
-                <div class="card bg-dark border-secondary p-3 text-center">
-                    <h5 class="text-white-50 small">إجمالي الطلبات</h5>
-                    <h3 class="text-white">{{ stats.total_requests }}</h3>
+<div class="container py-5">
+
+  {% if user.is_helper_approved %}
+    {# 1. الجزء العلوي للمساعد المعتمد #}
+    <div class="mb-4 d-flex justify-content-between align-items-center">
+      <div>
+        <h1 class="h3 mb-1">Hello, {{ user.first_name }}</h1>
+        <p class="text-muted small mb-0">
+          {% if helper %}
+            {{ open_requests|length }} open requests match your specializations
+          {% else %}
+            Complete your profile to start receiving bookings
+          {% endif %}
+        </p>
+      </div>
+      {# زر التعديل المهني بستايلك الذهبي #}
+      <a href="{% url 'helpers:edit_profile' %}" class="btn shadow-sm" style="background-color: #d4af37; color: #1a1a1a; font-weight: bold;">تعديل الملف المهني</a>
+    </div>
+
+    {# 2. الإحصائيات #}
+    <div class="row g-3 mb-4">
+      <div class="col-md-3">
+        <div class="card border-0 bg-light h-100">
+          <div class="card-body">
+            <p class="small text-muted mb-1">Pending</p>
+            <p class="h4 mb-0">{{ pending_count }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card border-0 bg-light h-100">
+          <div class="card-body">
+            <p class="small text-muted mb-1">Active</p>
+            <p class="h4 mb-0">{{ active_count }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card border-0 bg-light h-100">
+          <div class="card-body">
+            <p class="small text-muted mb-1">This month</p>
+            <p class="h4 mb-0">{{ monthly_earnings }} <span class="small text-muted fw-normal">SAR</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card border-0 bg-light h-100">
+          <div class="card-body">
+            <p class="small text-muted mb-1">Rating</p>
+            <p class="h4 mb-0">{{ rating }} <span class="small text-muted fw-normal">★</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {# 3. الحجوزات القادمة #}
+    <div class="mb-4">
+      <h2 class="h6 mb-3">Upcoming bookings</h2>
+      {% if upcoming_bookings %}
+        {% for booking in upcoming_bookings %}
+          <div class="card mb-2">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div>
+                  <p class="mb-1 fw-medium">{{ booking.service.name }}</p>
+                  <p class="small text-muted mb-0">
+                    {{ booking.scheduled_date }} · {{ booking.scheduled_start_time }} · {{ booking.hours }} hours
+                  </p>
                 </div>
+                <span class="badge bg-light text-dark">{{ booking.status }}</span>
+              </div>
+              <p class="small mb-0">Seeker: {{ booking.seeker.first_name }}</p>
             </div>
-            <!-- زر إكمال الملف -->
-            <div class="mt-4">
-                <a href="{% url 'helpers:edit_profile' %}" class="btn" style="background-color: #d4af37; color: #1a1a1a; font-weight: bold;">تعديل الملف المهني</a>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="card shadow-sm border-0">
+          <div class="card-body text-center text-muted py-5">
+            <p class="mb-0 italic">No upcoming bookings yet.</p>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+  {% else %}
+    {# 4. رسالة الانتظار بستايلك الفاخر #}
+    <div class="card p-5 text-center shadow-lg mx-auto" style="background-color: #1a1a1a; border: 1px solid #333; border-radius: 20px; max-width: 600px; margin-top: 50px;">
+        <h2 style="color: #d4af37; font-weight: bold;">طلبك قيد المراجعة</h2>
+        <p class="text-white-50 mt-3">نحن نقوم حالياً بالتحقق من وثائقك المهنية والصحية. ستتمكن من البدء واستقبال الطلبات فور الموافقة.</p>
+        <div class="d-flex justify-content-center mt-4">
+            <div class="spinner-border" style="color: #d4af37;" role="status">
+                <span class="visually-hidden">Loading...</span>
             </div>
         </div>
-    {% else %}
-        <!-- رسالة الانتظار للمساعد غير المعتمد -->
-        <div class="card p-5 text-center shadow-lg" style="background-color: #1a1a1a; border: 1px solid #333; border-radius: 15px;">
-            <h2 style="color: #d4af37;">طلبك قيد المراجعة</h2>
-            <p class="text-white-50 mt-3">نحن نقوم حالياً بالتحقق من وثائقك الصحية. ستتمكن من إكمال ملفك فور الموافقة.</p>
-            <div class="spinner-border text-warning mt-3" role="status"></div>
-        </div>
-    {% endif %}
+    </div>
+  {% endif %}
+
 </div>
 {% endblock %}
