@@ -28,41 +28,41 @@
           <p class="text-uppercase small text-muted fw-semibold mb-3" style="letter-spacing: 1px;">Order summary</p>
 
           <!-- Helper info row -->
-          <div class="d-flex align-items-center pb-3 mb-3 border-bottom">
-            <div class="rounded-circle bg-light d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
-              <span class="small fw-medium text-muted">{{ booking.helper_initials }}</span>
-            </div>
-            <div>
-              <p class="mb-0 fw-medium">{{ booking.helper_name }}</p>
-              <p class="small text-muted mb-0">★ {{ booking.helper_rating }} · {{ booking.helper_completed }} completed tasks</p>
-            </div>
-          </div>
+<div class="d-flex align-items-center pb-3 mb-3 border-bottom">
+  <div class="rounded-circle bg-light d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+    <span class="small fw-medium text-muted">{{ booking.helper.user.first_name|first }}{{ booking.helper.user.last_name|first }}</span>
+  </div>
+  <div>
+    <p class="mb-0 fw-medium">{{ booking.helper.user.first_name }} {{ booking.helper.user.last_name }}</p>
+    <p class="small text-muted mb-0">{{ booking.helper.specialty.name }}</p>
+  </div>
+</div>
 
-          <!-- Booking details -->
-          <table class="w-100 small">
-            <tr>
-              <td class="text-muted py-1">Task</td>
-              <td class="text-end py-1">{{ booking.service_name }}</td>
-            </tr>
-            <tr>
-              <td class="text-muted py-1">Date</td>
-              <td class="text-end py-1">{{ booking.scheduled_date }}, {{ booking.scheduled_time }}</td>
-            </tr>
-            <tr>
-              <td class="text-muted py-1">Hourly rate</td>
-              <td class="text-end py-1">{{ booking.hourly_rate }} SAR</td>
-            </tr>
-            <tr>
-              <td class="text-muted py-1">Estimated hours</td>
-              <td class="text-end py-1">{{ booking.hours }}</td>
-            </tr>
-            <tr class="border-top">
-              <td class="fw-medium pt-3">Total</td>
-              <td class="text-end pt-3 h5 mb-0 fw-bold">{{ booking.total }} SAR</td>
-            </tr>
-          </table>
+<!-- Booking details -->
+<table class="w-100 small">
+  <tr>
+    <td class="text-muted py-1">Task</td>
+    <td class="text-end py-1">{{ booking.service.name }}</td>
+  </tr>
+  <tr>
+    <td class="text-muted py-1">Date</td>
+    <td class="text-end py-1">{{ booking.scheduled_date }} · {{ booking.scheduled_start_time }}</td>
+  </tr>
+  <tr>
+    <td class="text-muted py-1">Hourly rate</td>
+    <td class="text-end py-1">{{ booking.helper.hourly_rate }} SAR</td>
+  </tr>
+  <tr>
+    <td class="text-muted py-1">Estimated hours</td>
+    <td class="text-end py-1">{{ booking.hours }}</td>
+  </tr>
+  <tr class="border-top">
+    <td class="fw-medium pt-3">Total</td>
+    <td class="text-end pt-3 h5 mb-0 fw-bold">{{ booking.total_amount }} SAR</td>
+  </tr>
+</table>
+
         </div>
-      </div>
 
       <!-- Payment method placeholder (Moyasar will replace this) -->
       <div class="card border-0 shadow-sm mb-4">
@@ -78,12 +78,12 @@
       </div>
 
       <!-- Total + pay button -->
-      <form method="post" action="{% url 'fake_pay' booking.id %}">
+      <form method="post" action="{% url 'payments:fake_pay' booking.id %}">
         {% csrf_token %}
         <div class="d-flex justify-content-between align-items-center pt-3 border-top">
           <div>
             <p class="small text-muted mb-0">Total to pay</p>
-            <p class="h4 mb-0 fw-bold">{{ booking.total }} SAR</p>
+            <p class="h4 mb-0 fw-bold">{{ booking.total_amount }} SAR</p>
           </div>
           <button type="submit" class="btn btn-dark px-4 py-2 fw-medium">Pay now</button>
         </div>
