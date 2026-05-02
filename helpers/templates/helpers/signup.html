@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block title %}Sanad — Join as a Helper{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- بطاقة التسجيل بستايل Dark / Minimalist -->
+            <div class="card shadow-lg border-0" style="background-color: #1a1a1a; color: #f8f9fa; border-radius: 15px;">
+                <div class="card-body p-5">
+                    <h2 class="text-center mb-4" style="color: #d4af37; font-weight: bold;">انضم لعائلة سند كـ Helper</h2>
+                    <p class="text-center text-muted mb-5">خطوتك الأولى لتقديم المساعدة تبدأ من هنا</p>
+
+                    <form method="post" enctype="multipart/form-data" class="needs-validation">
+                        {% csrf_token %}
+
+                        <!-- قسم المعلومات الشخصية -->
+                        <h5 class="mb-3" style="color: #d4af37; border-bottom: 1px solid #333; padding-bottom: 10px;">المعلومات الشخصية</h5>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">الاسم الأول</label>
+                                {{ form.first_name }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">الاسم الأخير</label>
+                                {{ form.last_name }}
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">البريد الإلكتروني</label>
+                            {{ form.email }}
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">كلمة المرور</label>
+                                {{ form.password }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">رقم الجوال</label>
+                                {{ form.phone_number }}
+                            </div>
+                        </div>
+
+                        <!-- قسم الوثائق الرسمية -->
+                        <h5 class="mt-4 mb-3" style="color: #d4af37; border-bottom: 1px solid #333; padding-bottom: 10px;">الوثائق الرسمية (Onboarding)</h5>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">نسخة من الهوية الوطنية</label>
+                            <div class="input-group">
+                                {{ form.national_id }}
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">ترخيص وزارة الصحة (MoH)</label>
+                            <div class="input-group">
+                                {{ form.moh_authorization }}
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">شهادات التدريب (اختياري)</label>
+                            <div class="input-group">
+                                {{ form.training_certificates }}
+                            </div>
+                        </div>
+
+                        {% if form.errors %}
+                          <div class="alert alert-danger border-0" style="background-color: #721c24; color: #f8d7da; border-radius: 10px;">
+                               <ul class="mb-0">
+                             {% for field, errors in form.errors.items %}
+                                {% for error in errors %}
+                                  <li>{{ error }}</li>
+                                {% endfor %}
+                             {% endfor %}
+                               </ul>
+                            </div>
+                        {% endif %}
+
+                        <!-- زر الإرسال -->
+                        <div class="d-grid gap-2 mt-5">
+                            <button type="submit" class="btn btn-lg" style="background-color: #d4af37; color: #1a1a1a; font-weight: bold; border-radius: 10px;">
+                                إرسال الطلب للمراجعة
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- تنسيق سريع للتأكد من أن حقول Django تظهر بشكل جميل مع Bootstrap -->
+<style>
+    input, select, textarea {
+        background-color: #2c2c2c !important;
+        border: 1px solid #444 !important;
+        color: #fff !important;
+        border-radius: 8px !important;
+        padding: 10px !important;
+        width: 100%;
+    }
+    input:focus {
+        border-color: #d4af37 !important;
+        box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25) !important;
+    }
+    .form-label {
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+</style>
+{% endblock %}

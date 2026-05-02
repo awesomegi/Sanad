@@ -1,0 +1,213 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-9">
+            <div class="card shadow-lg border-0" style="background-color: #1a1a1a; color: #fff; border-radius: 20px;">
+                <div class="card-body p-5">
+                    <h2 class="text-center mb-4" style="color: #d4af37;">الملف المهني</h2>
+
+                    <form method="post" id="profileForm">
+                        {% csrf_token %}
+
+                        <!-- نبذة عنك -->
+                        <div class="mb-4">
+                            <label class="form-label small" style="color: #d4af37;">نبذة عنك</label>
+                            {{ form.bio }}
+                        </div>
+
+                        <!-- المدينة والتخصص -->
+                        <div class="row mb-3">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label small" style="color: #d4af37;">المدينة</label>
+                                {{ form.city }}
+                                <input type="text" name="city_other"
+                                       class="form-control mt-2"
+                                       placeholder="أو اكتب مدينتك هنا إن لم تجدها..."
+                                       style="background:#2c2c2c; border:1px solid #444; color:#fff; border-radius:10px;">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label small" style="color: #d4af37;">التخصص</label>
+                                {{ form.specialty }}
+                                <input type="text" name="specialty_other"
+                                       class="form-control mt-2"
+                                       placeholder="أو اكتب تخصصك هنا إن لم تجده..."
+                                       style="background:#2c2c2c; border:1px solid #444; color:#fff; border-radius:10px;">
+                            </div>
+                        </div>
+
+                        <!-- الخدمات -->
+                        <div class="mb-4 pt-3 border-top border-secondary">
+                            <h5 style="color: #d4af37;"><i class="fas fa-tools"></i> الخدمات المقدمة</h5>
+                            <p class="small text-muted mb-3">أضف الخدمات التي تقدمها</p>
+
+                            <div class="d-flex gap-2 mb-3">
+                                <input type="text" id="serviceInput"
+                                       placeholder="اكتب اسم الخدمة... مثال: مساعدة في التسوق"
+                                       style="background:#2c2c2c; border:1px solid #444; color:#fff; border-radius:10px; padding:10px 14px; flex:1; outline:none;">
+                                <button type="button" onclick="addService()"
+                                        style="background:#d4af37; color:#1a1a1a; border:none; border-radius:10px; padding:0 1.4rem; font-weight:700; white-space:nowrap; cursor:pointer;">
+                                    + إضافة
+                                </button>
+                            </div>
+
+                            <div id="servicesList" class="d-flex flex-wrap gap-2 mb-2"></div>
+                            <div id="servicesInputs"></div>
+                        </div>
+
+                        <!-- الخبرات المسجلة -->
+                        <div class="mt-4 pt-3 border-top border-secondary">
+                            <h5 style="color: #d4af37;"><i class="fas fa-briefcase"></i> الخبرات المسجلة</h5>
+                            <div class="row mt-3 mb-3">
+                                {% for exp in experiences %}
+                                <div class="col-md-6 mb-2">
+                                    <div class="p-3" style="background:#252525; border-radius:12px; border-right:4px solid #d4af37;">
+                                        <h6 class="mb-1">{{ exp.title }}</h6>
+                                        <small class="text-muted">{{ exp.years }} سنوات خبرة</small>
+                                        <p class="small text-muted mb-0 mt-1">{{ exp.description }}</p>
+                                    </div>
+                                </div>
+                                {% empty %}
+                                <p class="small text-muted">لا توجد خبرات مضافة بعد.</p>
+                                {% endfor %}
+                            </div>
+
+                            <p class="small text-muted">إضافة خبرة جديدة:</p>
+                            <div class="row g-3">
+                                <div class="col-md-8">
+                                    {{ exp_form.title }}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ exp_form.years }}
+                                </div>
+                                <div class="col-12">
+                                    {{ exp_form.description }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- أوقات الإتاحة -->
+                        <div class="mt-4 pt-3 border-top border-secondary">
+                            <h5 style="color: #d4af37;"><i class="fas fa-clock"></i> جدول الإتاحة</h5>
+                            <div class="d-flex flex-wrap gap-2 mb-3 mt-2">
+                                {% for avail in availabilities %}
+                                <span class="badge p-2" style="background:#333; border:1px solid #d4af37;">
+                                    {{ avail.get_day_display }}: {{ avail.start_time|time:"H:i" }} - {{ avail.end_time|time:"H:i" }}
+                                </span>
+                                {% empty %}
+                                <p class="small text-muted">لا توجد أوقات مضافة بعد.</p>
+                                {% endfor %}
+                            </div>
+
+                            <p class="small text-muted">إضافة وقت جديد:</p>
+                            <div class="row g-3">
+                                <div class="col-md-4">{{ avail_form.day }}</div>
+                                <div class="col-md-4">{{ avail_form.start_time }}</div>
+                                <div class="col-md-4">{{ avail_form.end_time }}</div>
+                            </div>
+                        </div>
+
+                        <!-- السعر بالساعة -->
+                        <div class="mt-4 mb-4 pt-3 border-top border-secondary">
+                            <label class="form-label small" style="color: #d4af37;">السعر بالساعة (ريال)</label>
+                            {{ form.hourly_rate }}
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-lg"
+                                    style="background-color:#d4af37; color:#1a1a1a; font-weight:bold; border-radius:12px;">
+                                حفظ وتحديث الملف
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    input, textarea, select {
+        background-color: #2c2c2c !important;
+        border: 1px solid #444 !important;
+        color: #fff !important;
+        border-radius: 10px !important;
+        margin-bottom: 10px;
+        padding: 10px 14px;
+    }
+    input:focus, textarea:focus, select:focus {
+        border-color: #d4af37 !important;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(212,175,55,0.15) !important;
+    }
+    ::placeholder { color: #888 !important; }
+
+    .service-tag {
+        background: #252525;
+        border: 1px solid #d4af37;
+        color: #fff;
+        border-radius: 20px;
+        padding: 6px 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.9rem;
+    }
+    .service-tag .remove-btn {
+        background: none;
+        border: none;
+        color: #888;
+        font-size: 1rem;
+        cursor: pointer;
+        padding: 0;
+        line-height: 1;
+        transition: color 0.2s;
+    }
+    .service-tag .remove-btn:hover { color: #ff4444; }
+</style>
+
+<script>
+    let services = [];
+
+    function addService() {
+        const input = document.getElementById('serviceInput');
+        const name = input.value.trim();
+        if (!name || services.includes(name)) {
+            input.value = '';
+            return;
+        }
+        services.push(name);
+        renderServices();
+        input.value = '';
+        input.focus();
+    }
+
+    function removeService(index) {
+        services.splice(index, 1);
+        renderServices();
+    }
+
+    function renderServices() {
+        document.getElementById('servicesList').innerHTML = services.map((name, i) => `
+            <div class="service-tag">
+                <span>${name}</span>
+                <button type="button" class="remove-btn" onclick="removeService(${i})">✕</button>
+            </div>
+        `).join('');
+
+        document.getElementById('servicesInputs').innerHTML = services.map(name =>
+            `<input type="hidden" name="manual_services[]" value="${name}">`
+        ).join('');
+    }
+
+    document.getElementById('serviceInput').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            addService();
+        }
+    });
+</script>
+
+{% endblock %}
