@@ -23,7 +23,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('accounts/', include('accounts.urls')),
     path('helpers/', include('helpers.urls')),
-    #path('bookings/', include('bookings.urls')),
+    path('bookings/', include('bookings.urls')),
     #path('verification/', include('verification.urls')),
     #path('payments/', include('payments.urls')),
     #path('ratings/', include('ratings.urls')),
