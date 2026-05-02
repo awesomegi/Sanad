@@ -29,10 +29,10 @@ class SignupToHelpers(models.Model):
     # يفضل دائماً استخدام اللغة الإنجليزية للقيم المخزنة (اليسار) 
     # واللغة العربية للقيم المعروضة في الأدمن (اليمين)
     STATUS_CHOICES = [
-        ('PENDING', 'قيد المراجعة'),
-        ('APPROVED', 'مقبول'),
-        ('REJECTED', 'مرفوض'),
-    ]
+    ('PENDING', 'Pending'),
+    ('APPROVED', 'Approved'),
+    ('REJECTED', 'Rejected'),
+   ]
     
     # تأكدي من أن related_name هو 'signup_request' كما هو موجود لديكِ
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='signup_request')
