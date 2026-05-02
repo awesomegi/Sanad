@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block title %}Checkout — Sanad{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+
+      <div class="mb-4">
+        <a href="#" class="small text-muted text-decoration-none">← Back to helper offers</a>
+      </div>
+
+      <h1 class="h3 fw-bold mb-2">Confirm and pay</h1>
+      <p class="text-muted small mb-4">
+        Payment is held until the task is completed. Full refund if you cancel before it starts.
+      </p>
+
+      <!-- Order summary card -->
+      <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body p-4">
+          <p class="text-uppercase small text-muted fw-semibold mb-3" style="letter-spacing: 1px;">Order summary</p>
+
+          <!-- Helper info row -->
+          <div class="d-flex align-items-center pb-3 mb-3 border-bottom">
+            <div class="rounded-circle bg-light d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+              <span class="small fw-medium text-muted">??</span>
+            </div>
+            <div>
+              <p class="mb-0 fw-medium">Helper name</p>
+              <p class="small text-muted mb-0">★ -- · -- completed tasks</p>
+            </div>
+          </div>
+
+          <!-- Booking details -->
+          <table class="w-100 small">
+            <tr>
+              <td class="text-muted py-1">Task</td>
+              <td class="text-end py-1">--</td>
+            </tr>
+            <tr>
+              <td class="text-muted py-1">Date</td>
+              <td class="text-end py-1">--</td>
+            </tr>
+            <tr>
+              <td class="text-muted py-1">Hourly rate</td>
+              <td class="text-end py-1">-- SAR</td>
+            </tr>
+            <tr>
+              <td class="text-muted py-1">Estimated hours</td>
+              <td class="text-end py-1">--</td>
+            </tr>
+            <tr class="border-top">
+              <td class="fw-medium pt-3">Total</td>
+              <td class="text-end pt-3 h5 mb-0 fw-bold">-- SAR</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Payment method (Moyasar will replace this) -->
+      <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body p-4">
+          <p class="text-uppercase small text-muted fw-semibold mb-3" style="letter-spacing: 1px;">Payment method</p>
+          <p class="text-muted small mb-0">Moyasar payment form will be loaded here.</p>
+        </div>
+      </div>
+
+      <!-- Refund disclaimer -->
+      <div class="bg-light rounded p-3 mb-4 small text-muted">
+        Your payment will be held by Sanad and released to the helper after the task is marked complete. Cancel anytime before the task starts for a full refund.
+      </div>
+
+      <!-- Total + pay button -->
+      <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+        <div>
+          <p class="small text-muted mb-0">Total to pay</p>
+          <p class="h4 mb-0 fw-bold">-- SAR</p>
+        </div>
+        <button class="btn btn-dark px-4 py-2 fw-medium" disabled>Pay now</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

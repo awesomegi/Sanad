@@ -1,89 +1,104 @@
 {% extends 'base.html' %}
 
-{% block title %}Sign Up — Sanad{% endblock %}
+{% block title %}Sign up — Sanad{% endblock %}
 
 {% block content %}
 <div class="container py-5">
   <div class="row justify-content-center">
-    <div class="col-md-7">
+    <div class="col-md-8 col-lg-7">
 
-      <h2 class="mb-4">Create a Seeker account</h2>
+      <div class="text-center mb-4">
+        <h1 class="h3 fw-bold mb-2">Create your account</h1>
+        <p class="text-muted">Tell us about yourself so we can match you with the right helpers.</p>
+      </div>
 
-      {% for message in messages %}
-        <div class="alert alert-danger">{{ message }}</div>
-      {% endfor %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-danger small">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
 
-      <form method="post">
+      <form method="post" class="card border-0 shadow-sm">
         {% csrf_token %}
+        <div class="card-body p-4 p-md-5">
 
-        <div class="row mb-3">
-          <div class="col">
-            <label class="form-label">First Name</label>
-            <input type="text" name="first_name" class="form-control" required>
+          <p class="text-uppercase small text-muted fw-semibold mb-3" style="letter-spacing: 1px;">About you</p>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="first_name" class="form-label small fw-medium">First name</label>
+              <input type="text" name="first_name" id="first_name" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+              <label for="last_name" class="form-label small fw-medium">Last name</label>
+              <input type="text" name="last_name" id="last_name" class="form-control" required>
+            </div>
           </div>
-          <div class="col">
-            <label class="form-label">Last Name</label>
-            <input type="text" name="last_name" class="form-control" required>
+
+          <div class="mt-3">
+            <label for="email" class="form-label small fw-medium">Email</label>
+            <input type="email" name="email" id="email" class="form-control" required>
           </div>
-        </div>
 
-        <div class="mb-3">
-          <label class="form-label">Email</label>
-          <input type="email" name="email" class="form-control" required>
-        </div>
+          <div class="mt-3">
+            <label for="phone" class="form-label small fw-medium">Phone</label>
+            <input type="text" name="phone" id="phone" class="form-control" placeholder="+966..." required>
+          </div>
 
-        <div class="mb-3">
-          <label class="form-label">Phone</label>
-          <input type="text" name="phone" class="form-control">
-        </div>
+          <div class="row g-3 mt-1">
+            <div class="col-md-6">
+              <label for="password" class="form-label small fw-medium">Password</label>
+              <input type="password" name="password" id="password" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+              <label for="password_confirm" class="form-label small fw-medium">Confirm password</label>
+              <input type="password" name="password_confirm" id="password_confirm" class="form-control" required>
+            </div>
+          </div>
 
-        <div class="mb-3">
-          <label class="form-label">Password</label>
-          <input type="password" name="password" class="form-control" required>
-        </div>
+          <hr class="my-4">
 
-        <div class="mb-3">
-          <label class="form-label">Confirm Password</label>
-          <input type="password" name="password_confirm" class="form-control" required>
-        </div>
+          <p class="text-uppercase small text-muted fw-semibold mb-3" style="letter-spacing: 1px;">Your needs</p>
 
-        <div class="mb-3">
-          <label class="form-label">Disability Type</label>
-          <select name="disability_type" class="form-select" required>
-            <option value="">-- Select --</option>
-            <option value="PERMANENT">Permanent</option>
-            <option value="TEMPORARY">Temporary</option>
-          </select>
-        </div>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="disability_type" class="form-label small fw-medium">Type</label>
+              <select name="disability_type" id="disability_type" class="form-select" required>
+                <option value="">Select...</option>
+                <option value="PERMANENT">Permanent</option>
+                <option value="TEMPORARY">Temporary</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="disability_category" class="form-label small fw-medium">Category</label>
+              <select name="disability_category" id="disability_category" class="form-select" required>
+                <option value="">Select...</option>
+                <option value="MOBILITY">Mobility</option>
+                <option value="VISUAL">Visual</option>
+                <option value="HEARING">Hearing</option>
+                <option value="COGNITIVE">Cognitive</option>
+                <option value="TEMPORARY_INJURY">Temporary injury</option>
+              </select>
+            </div>
+          </div>
 
-        <div class="mb-3">
-          <label class="form-label">Disability Category</label>
-          <select name="disability_category" class="form-select" required>
-            <option value="">-- Select --</option>
-            <option value="MOBILITY">Mobility</option>
-            <option value="VISUAL">Visual</option>
-            <option value="HEARING">Hearing</option>
-            <option value="COGNITIVE">Cognitive</option>
-            <option value="TEMPORARY_INJURY">Temporary Injury</option>
-            <option value="OTHER">Other</option>
-          </select>
-        </div>
+          <div class="mt-3">
+            <label for="address" class="form-label small fw-medium">Address</label>
+            <input type="text" name="address" id="address" class="form-control" required>
+          </div>
 
-        <div class="mb-3">
-          <label class="form-label">Address</label>
-          <input type="text" name="address" class="form-control">
-        </div>
+          <div class="mt-3">
+            <label for="emergency_contact" class="form-label small fw-medium">Emergency contact</label>
+            <input type="text" name="emergency_contact" id="emergency_contact" class="form-control" placeholder="+966..." required>
+          </div>
 
-        <div class="mb-3">
-          <label class="form-label">Emergency Contact</label>
-          <input type="text" name="emergency_contact" class="form-control">
-        </div>
+          <button type="submit" class="btn btn-dark w-100 mt-4 py-2 fw-medium">Create account</button>
 
-        <button type="submit" class="btn btn-dark w-100 mt-2">Sign up</button>
+        </div>
       </form>
 
-      <p class="mt-3 text-center">
-        Already have an account? <a href="{% url 'login' %}">Log in</a>
+      <p class="text-center mt-3 small text-muted">
+        Already have an account? <a href="{% url 'login' %}" class="text-dark fw-medium">Log in</a>
       </p>
 
     </div>
