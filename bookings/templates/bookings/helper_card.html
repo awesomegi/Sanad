@@ -1,6 +1,6 @@
 <!-- bookings/templates/bookings/helper_card.html -->
 <div class="card h-100 border-0" style="background:#1a1a1a; border-radius:16px; overflow:hidden;">
- 
+
     <!-- صورة المساعد -->
     <div class="text-center pt-4">
         {% if helper.user.profile_photo %}
@@ -12,26 +12,26 @@
             </div>
         {% endif %}
     </div>
- 
+
     <div class="card-body text-center px-4 pb-4">
- 
+
         <!-- الاسم -->
         <h5 class="mt-3 mb-1" style="color:#fff; font-weight:700;">
             {{ helper.user.get_full_name }}
         </h5>
- 
+
         <!-- التخصص -->
         <p class="mb-1" style="color:#d4af37; font-size:0.85rem; font-weight:600;">
             {{ helper.specialty.name|default:"—" }}
         </p>
- 
+
         <!-- المدينة والسعر -->
         <p class="mb-3" style="color:#888; font-size:0.82rem;">
             📍 {{ helper.city.name|default:"—" }}
             &nbsp;·&nbsp;
             💰 {{ helper.hourly_rate|default:"—" }} ر.س/ساعة
         </p>
- 
+
         <!-- الخبرات -->
         {% if helper.experiences.exists %}
         <div class="mb-3 text-start">
@@ -43,7 +43,7 @@
             {% endfor %}
         </div>
         {% endif %}
- 
+
         <!-- الخدمات -->
         <div class="mb-3 d-flex flex-wrap justify-content-center gap-1">
             {% for service in helper.services.all|slice:":3" %}
@@ -52,18 +52,18 @@
             </span>
             {% endfor %}
         </div>
- 
+
         <!-- الأزرار -->
-        <div class="d-grid gap-2">
-            <a href="{% url 'bookings:helper_profile' helper.pk %}"
+        <div class="d-grid gap-2 mt-3">
+            <a href="{% url 'bookings:helper_detail' helper.pk %}"
                style="background:#252525; color:#fff; border:1px solid #d4af37; border-radius:10px; padding:10px; font-weight:600; text-decoration:none; font-size:0.9rem;">
                 👤 شوف البروفايل
             </a>
-            <a href="{% url 'bookings:create' helper.pk %}"
-               style="background:#d4af37; color:#1a1a1a; border:none; border-radius:10px; padding:10px; font-weight:700; text-decoration:none; font-size:0.9rem;">
+            <a href="#"
+               style="background:#d4af37; color:#1a1a1a; border-radius:10px; padding:10px; font-weight:700; text-decoration:none; font-size:0.9rem; display:block; text-align:center;">
                 📅 احجز
             </a>
         </div>
- 
+
     </div>
 </div>

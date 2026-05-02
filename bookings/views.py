@@ -39,7 +39,7 @@ def helpers_list(request):
     if max_rate:
         helpers = helpers.filter(hourly_rate__lte=max_rate)
 
-    helpers = helpers.annotate(avg_rating=Avg('orders__rating'))
+    # helpers = helpers.annotate(avg_rating=Avg('orders__rating'))
 
     context = {
         'helpers':            helpers,
@@ -65,7 +65,7 @@ def helper_detail(request, pk):
         verification_status='APPROVED'
     )
 
-    avg_rating      = helper.orders.aggregate(avg=Avg('rating'))['avg'] if hasattr(helper, 'orders') else None
+    avg_rating      =  None  # placeholder لحين إضافة Rating model
     completed_count = helper.orders.filter(status='COMPLETED').count() if hasattr(helper, 'orders') else 0
     availability    = helper.availabilities.filter(is_active=True).order_by('day')
 
@@ -75,4 +75,4 @@ def helper_detail(request, pk):
         'completed_count': completed_count,
         'availability':    availability,
     }
-    return render(request, 'bookings/helper_profile.html', context)
+    return render(request, 'bookings/helper_detail.html', context)
