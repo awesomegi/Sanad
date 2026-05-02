@@ -37,8 +37,13 @@
         </div>
       </form>
 
-      <p class="text-center mt-3 small text-muted">
-        Don't have an account? <a href="{% url 'signup_seeker' %}" class="text-dark fw-medium">Sign up</a>
+      <p class="text-center mt-3 small text-muted mb-0">
+         New to Sanad?
+      </p>
+      <p class="text-center small text-muted">
+         <a href="{% url 'signup_seeker' %}" class="text-dark fw-medium">Sign up as a Seeker</a>
+         ·
+         <a href="{% url 'helpers:signup_helper' %}" class="text-dark fw-medium">Sign up as a Helper</a>
       </p>
 
     </div>

@@ -98,7 +98,10 @@
       </form>
 
       <p class="text-center mt-3 small text-muted">
-        Already have an account? <a href="{% url 'login' %}" class="text-dark fw-medium">Log in</a>
+          Are you a helper instead? <a href="{% url 'helpers:signup_helper' %}" class="text-dark fw-medium">Sign up as a Helper</a>
+      </p>
+      <p class="text-center small text-muted">
+         Already have an account? <a href="{% url 'login' %}" class="text-dark fw-medium">Log in</a>
       </p>
 
     </div>
