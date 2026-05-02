@@ -113,27 +113,22 @@ def signin_helper(request):
 
 @login_required
 def helper_dashboard(request):
-    is_approved = request.user.is_helper_approved
-    context = {'is_approved': is_approved}
-
-    if is_approved:
-        profile = getattr(request.user, 'helper_profile', None)
-        if profile:
-            has_orders = hasattr(profile, 'orders')
-            stats = {
-                'total_requests':  profile.orders.count() if has_orders else 0,
-                'completed_tasks': profile.orders.filter(status='COMPLETED').count() if has_orders else 0,
-                'earnings':        profile.orders.filter(status='COMPLETED').aggregate(
-                                       Sum('total_price'))['total_price__sum'] or 0 if has_orders else 0,
-                'rating':          profile.orders.aggregate(
-                                       Avg('rating'))['rating__avg'] or 0 if has_orders else 0,
-            }
-            context.update({'profile': profile, 'stats': stats})
-    else:
-        context['signup_request'] = getattr(request.user, 'signup_request', None)
-
+    if not request.user.is_helper_approved:
+        return redirect('helpers:wait_review')
+    
+    helper = getattr(request.user, 'helper_profile', None)
+    
+    context = {
+        'helper': helper,
+        'is_approved': request.user.is_helper_approved,
+        'pending_count': 0,
+        'active_count': 0,
+        'monthly_earnings': 0,
+        'rating': helper.orders.aggregate(Avg('rating'))['rating__avg'] or 0 if helper and hasattr(helper, 'orders') else 0,
+        'open_requests': [],
+        'upcoming_bookings': [],
+    }
     return render(request, 'helpers/dashboard.html', context)
-
 
 # ─────────────────────────────────────────────
 #  5. تعديل الملف الشخصي (معتمدون فقط)
@@ -310,3 +305,22 @@ def helper_detail(request, pk):
         'completed_count': completed_count,
         'availability':    availability,
     })
+
+@login_required
+def helper_dashboard(request):
+    if not request.user.is_helper_approved:
+        return redirect('helpers:wait_review')
+    
+    helper = getattr(request.user, 'helper_profile', None)
+    
+    context = {
+        'helper': helper,
+        'is_approved': request.user.is_helper_approved,
+        'pending_count': 0,
+        'active_count': 0,
+        'monthly_earnings': 0,
+        'rating': helper.orders.aggregate(Avg('rating'))['rating__avg'] or 0 if helper and hasattr(helper, 'orders') else 0,
+        'open_requests': [],
+        'upcoming_bookings': [],
+    }
+    return render(request, 'helpers/dashboard.html', context)
