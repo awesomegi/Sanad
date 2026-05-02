@@ -306,21 +306,25 @@ def helper_detail(request, pk):
         'availability':    availability,
     })
 
-@login_required
-def helper_dashboard(request):
-    if not request.user.is_helper_approved:
-        return redirect('helpers:wait_review')
-    
-    helper = getattr(request.user, 'helper_profile', None)
-    
-    context = {
-        'helper': helper,
-        'is_approved': request.user.is_helper_approved,
-        'pending_count': 0,
-        'active_count': 0,
-        'monthly_earnings': 0,
-        'rating': helper.orders.aggregate(Avg('rating'))['rating__avg'] or 0 if helper and hasattr(helper, 'orders') else 0,
-        'open_requests': [],
-        'upcoming_bookings': [],
-    }
-    return render(request, 'helpers/dashboard.html', context)
+# ─────────────────────────────────────────────
+#  (duplicate - kept for reference only)
+# ─────────────────────────────────────────────
+
+# @login_required
+# def helper_dashboard(request):
+#     if not request.user.is_helper_approved:
+#         return redirect('helpers:wait_review')
+#     
+#     helper = getattr(request.user, 'helper_profile', None)
+#     
+#     context = {
+#         'helper': helper,
+#         'is_approved': request.user.is_helper_approved,
+#         'pending_count': 0,
+#         'active_count': 0,
+#         'monthly_earnings': 0,
+#         'rating': helper.orders.aggregate(Avg('rating'))['rating__avg'] or 0 if helper and hasattr(helper, 'orders') else 0,
+#         'open_requests': [],
+#         'upcoming_bookings': [],
+#     }
+#     return render(request, 'helpers/dashboard.html', context)

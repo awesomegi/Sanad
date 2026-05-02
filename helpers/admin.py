@@ -23,7 +23,7 @@ class SignupToHelpersAdmin(admin.ModelAdmin):
                 profile.verification_status = 'APPROVED'
                 profile.save()
 
-        self.message_user(request, f"تم اعتماد {queryset.count()} طلب بنجاح.")
+        self.message_user(request, f"Successfully approved {queryset.count()} applications.")
 
     @admin.action(description="Reject selected helper applications")
     def reject_helpers(self, request, queryset):
@@ -68,7 +68,7 @@ class HelperProfileAdmin(admin.ModelAdmin):
     fieldsets = (
         ('General Information', {
             'fields': ('user', 'city', 'bio', 'verification_status'),
-            'description': 'البيانات الشخصية والموقع الجغرافي للمساعد المعتمد'
+            'description': 'Personal information and location of the verified helper'
         }),
         ('Professional Details', {
             'fields': ('specialty', 'services', 'hourly_rate', 'is_active'),
