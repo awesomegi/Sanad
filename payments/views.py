@@ -130,3 +130,98 @@ def moyasar_callback(request):
     else:
         messages.error(request, f'Unexpected payment status: {status}')
         return redirect('payment_failed', booking_id=booking_id)
+
+
+@login_required
+def refund_confirm(request, booking_id):
+    if not request.user.is_seeker:
+        return redirect('home')
+
+    booking = get_object_or_404(
+        Booking,
+        id=booking_id,
+        seeker=request.user.seeker_profile,
+    )
+
+    if booking.status not in ['BOOKED', 'ACTIVE']:
+        messages.error(request, 'لا يمكن إلغاء هذا الحجز.')
+        return redirect('seeker_dashboard')
+
+    payment = getattr(booking, 'payment', None)
+
+    return render(request, 'payments/refund_confirm.html', {
+        'booking': booking,
+        'payment': payment,
+    })
+
+
+@login_required
+def process_refund(request, booking_id):
+    """
+    Processes a refund: calls Moyasar refund API, updates Payment + Booking status.
+    Only accepts POST.
+    """
+    if request.method != 'POST':
+        return redirect('refund_confirm', booking_id=booking_id)
+
+    if not request.user.is_seeker:
+        return redirect('home')
+
+    booking = get_object_or_404(
+        Booking,
+        id=booking_id,
+        seeker=request.user.seeker_profile,
+    )
+
+    # Only active bookings can be cancelled
+    if booking.status not in ['BOOKED', 'ACTIVE']:
+        messages.error(request, 'لا يمكن إلغاء هذا الحجز.')
+        return redirect('seeker_dashboard')
+
+    # Get the Payment record
+    payment = getattr(booking, 'payment', None)
+    if not payment:
+        messages.error(request, 'لم يتم العثور على سجل الدفع.')
+        return redirect('seeker_dashboard')
+
+    if payment.status != Payment.Status.PAID:
+        messages.error(request, 'لا يمكن استرداد دفعة غير مكتملة.')
+        return redirect('seeker_dashboard')
+
+    # Call Moyasar refund API (skip for FAKE payments)
+    if payment.transaction_id.startswith('FAKE-'):
+        # Fake payment — just mark as refunded without calling Moyasar
+        refund_succeeded = True
+    else:
+        secret_key = os.environ.get('MOYASAR_SECRET_KEY')
+        response = requests.post(
+            f'https://api.moyasar.com/v1/payments/{payment.transaction_id}/refund',
+            auth=(secret_key, ''),
+        )
+        refund_succeeded = (response.status_code == 200)
+
+        if not refund_succeeded:
+            messages.error(request, 'فشل الاسترداد. يرجى التواصل مع الدعم.')
+            return redirect('refund_confirm', booking_id=booking_id)
+
+    # Update Payment status
+    payment.status = Payment.Status.REFUNDED
+    payment.refunded_at = timezone.now()
+    payment.save()
+
+    # Update Booking status
+    booking.status = 'CANCELLED'
+    booking.save()
+
+    messages.success(request, 'تم إلغاء الحجز واسترداد المبلغ بنجاح.')
+    return redirect('refund_success', booking_id=booking_id)
+
+
+@login_required
+def refund_success(request, booking_id):
+    booking = get_object_or_404(
+        Booking,
+        id=booking_id,
+        seeker=request.user.seeker_profile,
+    )
+    return render(request, 'payments/refund_success.html', {'booking': booking})

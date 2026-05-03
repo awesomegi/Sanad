@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}تم إلغاء الحجز — سند{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5 text-center">
+
+      <div class="mb-4" style="font-size: 64px;">✅</div>
+
+      <h1 class="h3 fw-bold mb-2">تم إلغاء الحجز بنجاح</h1>
+      <p class="text-muted mb-4">
+        سيتم استرداد المبلغ كاملاً إلى بطاقتك خلال ٥-٧ أيام عمل.
+      </p>
+
+      <div class="card border-0 bg-light mb-4">
+        <div class="card-body p-4">
+          <p class="small text-muted mb-1">رقم الحجز</p>
+          <p class="h5 mb-2">#{{ booking.id }}</p>
+          <hr class="my-3">
+          <p class="small text-muted mb-1">المبلغ المسترد</p>
+          <p class="h5 mb-0 fw-bold">{{ booking.total_amount }} ر.س</p>
+        </div>
+      </div>
+
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-success small">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+
+      <a href="{% url 'seeker_dashboard' %}" class="btn btn-dark px-4 py-2 fw-medium">العودة للوحة التحكم</a>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
