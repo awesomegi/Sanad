@@ -28,6 +28,6 @@ urlpatterns = [
     #path('verification/', include('verification.urls')),
     path('payments/', include('payments.urls')),
     #path('ratings/', include('ratings.urls')),
-    #path('notifications/', include('notifications.urls')),
+    path('notifications/', include('notifications.urls')),
 
 ]

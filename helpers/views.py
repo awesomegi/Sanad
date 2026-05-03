@@ -110,7 +110,6 @@ def signin_helper(request):
 # ─────────────────────────────────────────────
 #  4. لوحة التحكم
 # ─────────────────────────────────────────────
-
 @login_required
 def helper_dashboard(request):
     if not request.user.is_helper_approved:
@@ -118,18 +117,53 @@ def helper_dashboard(request):
     
     helper = getattr(request.user, 'helper_profile', None)
     
+    # Real data from bookings
+    from bookings.models import Booking
+    from django.utils import timezone
+    from django.db.models import Sum, Avg
+    
+    upcoming_bookings = []
+    pending_count     = 0
+    active_count      = 0
+    monthly_earnings  = 0
+    rating            = 0
+
+    if helper:
+        upcoming_bookings = Booking.objects.filter(
+            helper=helper,
+            status__in=['BOOKED', 'ACTIVE']
+        ).order_by('scheduled_date', 'scheduled_start_time')
+
+        pending_count = Booking.objects.filter(helper=helper, status='BOOKED').count()
+        active_count  = Booking.objects.filter(helper=helper, status='ACTIVE').count()
+
+        # Monthly earnings
+        now = timezone.now()
+        monthly_earnings = Booking.objects.filter(
+            helper=helper,
+            status='COMPLETED',
+            scheduled_date__month=now.month,
+            scheduled_date__year=now.year,
+        ).aggregate(total=Sum('total_amount'))['total'] or 0
+
+        # Rating
+        rating = Booking.objects.filter(
+            helper=helper,
+            status='COMPLETED'
+        ).aggregate(avg=Avg('rating__score'))['avg'] or 0
+
     context = {
-        'helper': helper,
-        'is_approved': request.user.is_helper_approved,
-        'pending_count': 0,
-        'active_count': 0,
-        'monthly_earnings': 0,
-        'rating': 0,
-        'open_requests': [],
-        'upcoming_bookings': [],
+        'helper':            helper,
+        'is_approved':       request.user.is_helper_approved,
+        'pending_count':     pending_count,
+        'active_count':      active_count,
+        'monthly_earnings':  monthly_earnings,
+        'rating':            rating,
+        'open_requests':     [],
+        'upcoming_bookings': upcoming_bookings,
+        'unread_notifications':   request.user.notifications.filter(is_read=False).count(),
     }
     return render(request, 'helpers/dashboard.html', context)
-
 # ─────────────────────────────────────────────
 #  5. تعديل الملف الشخصي (معتمدون فقط)
 # ─────────────────────────────────────────────
