@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q, Avg
 from helpers.models import HelperProfile, City, Specialty
+from .models import Booking, Rating
 
 
 # ── Decorator: Seeker فقط ──────────────────
@@ -39,7 +40,7 @@ def helpers_list(request):
     if max_rate:
         helpers = helpers.filter(hourly_rate__lte=max_rate)
 
-    # helpers = helpers.annotate(avg_rating=Avg('orders__rating'))
+    helpers = helpers.annotate(avg_rating=Avg('orders__rating__score'))
 
     context = {
         'helpers':            helpers,
@@ -65,7 +66,7 @@ def helper_detail(request, pk):
         verification_status='APPROVED'
     )
 
-    avg_rating      =  None  # placeholder لحين إضافة Rating model
+    avg_rating = helper.orders.aggregate(avg=Avg('rating__score'))['avg']
     completed_count = helper.orders.filter(status='COMPLETED').count() if hasattr(helper, 'orders') else 0
     availability    = helper.availabilities.filter(is_active=True).order_by('day')
 
@@ -76,3 +77,34 @@ def helper_detail(request, pk):
         'availability':    availability,
     }
     return render(request, 'bookings/helper_detail.html', context)
+
+
+# ── 3. تقييم المساعد ─────────────────────
+@login_required
+@seeker_only
+def rate_helper(request, booking_id):
+    seeker  = request.user.seeker_profile
+    booking = get_object_or_404(
+        Booking,
+        pk=booking_id,
+        seeker=seeker,
+        status='COMPLETED'
+    )
+
+    # تأكد ما قيّم قبل
+    if hasattr(booking, 'rating'):
+        return redirect('seeker_dashboard')
+
+    if request.method == 'POST':
+        score   = request.POST.get('score')
+        comment = request.POST.get('comment', '')
+
+        if score and score.isdigit() and 1 <= int(score) <= 5:
+            Rating.objects.create(
+                booking=booking,
+                score=int(score),
+                comment=comment
+            )
+            return redirect('seeker_dashboard')
+
+    return render(request, 'bookings/rate_helper.html', {'booking': booking})
