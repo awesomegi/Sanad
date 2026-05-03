@@ -24,6 +24,17 @@
       {{ helper.hourly_rate|default:"—" }} ر.س/ساعة
     </p>
 
+     <!-- Rating -->
+            {% if helper.avg_rating %}
+              <p class="mb-2" style="color:#d4af37; font-size:0.9rem;">
+              ⭐ {{ helper.avg_rating|floatformat:1 }}
+               <span style="color:#888; font-size:0.8rem;">/ 5</span>
+              </p>
+            {% else %}
+                <p class="mb-2" style="color:#888; font-size:0.82rem;">لا يوجد تقييم بعد</p>
+            {% endif %}
+            
+
     {% if helper.experiences.exists %}
       <div class="mb-3 text-start">
         {% for exp in helper.experiences.all|slice:":2" %}
