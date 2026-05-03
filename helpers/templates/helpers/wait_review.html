@@ -1,23 +1,30 @@
 {% extends 'base.html' %}
 
-{% block title %}Sanad — Under Review{% endblock %}
+{% block title %}طلبك قيد المراجعة — سند{% endblock %}
 
 {% block content %}
-<div class="container text-center mt-5 mb-5">
-    <div class="card shadow-lg border-0 p-5" style="background-color: #1a1a1a; color: #fff; border-radius: 15px;">
-        <div class="card-body">
-            <div class="mb-4">
-                <!-- أيقونة ساعة أو علامة انتظار -->
-                <i class="fas fa-clock fa-4x" style="color: #d4af37;"></i>
-            </div>
-            <h2 style="color: #d4af37;">طلبك قيد المراجعة حالياً</h2>
-            <p class="mt-4 text-muted">
-                شكراً لانضمامك إلى <strong>سند</strong>. فريقنا يقوم حالياً بمراجعة الوثائق الرسمية التي أرفقتها.
-            </p>
-            <p class="text-muted">ستصلك رسالة عبر البريد الإلكتروني فور تحديث حالة طلبك.</p>
-            
-            <a href="{% url 'home' %}" class="btn mt-4" style="border: 1px solid #d4af37; color: #d4af37;">العودة للرئيسية</a>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-7 col-lg-6 text-center">
+
+      <div class="card border-0 shadow-sm p-5">
+        <div style="font-size:3.5rem; margin-bottom:1rem;"></div>
+        <h2 class="fw-bold mb-3">طلبك قيد المراجعة حالياً</h2>
+        <p class="text-muted mb-2">
+          شكراً لانضمامك إلى <strong>سند</strong>. فريقنا يقوم حالياً بمراجعة الوثائق الرسمية التي أرفقتها.
+        </p>
+        <p class="text-muted mb-4">ستصلك رسالة عبر البريد الإلكتروني فور تحديث حالة طلبك.</p>
+
+        <div class="d-flex justify-content-center mb-4">
+          <div class="spinner-border" style="color:#d4af37;" role="status">
+            <span class="visually-hidden">جاري التحميل...</span>
+          </div>
         </div>
+
+        <a href="{% url 'home' %}" class="btn btn-outline-dark">العودة للرئيسية</a>
+      </div>
+
     </div>
+  </div>
 </div>
 {% endblock %}

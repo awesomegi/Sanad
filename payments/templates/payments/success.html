@@ -1,27 +1,25 @@
 {% extends 'base.html' %}
 
-{% block title %}Payment successful — Sanad{% endblock %}
+{% block title %}تم الدفع بنجاح — سند{% endblock %}
 
 {% block content %}
 <div class="container py-5">
   <div class="row justify-content-center">
     <div class="col-md-6 col-lg-5 text-center">
 
-      <div class="mb-4" style="font-size: 64px;">✅</div>
+      <div class="mb-4" style="font-size:64px;">✅</div>
 
-      <h1 class="h3 fw-bold mb-2">Payment confirmed</h1>
-      <p class="text-muted mb-4">
-        Your booking is confirmed. We've sent a notification to your helper.
-      </p>
+      <h1 class="h3 fw-bold mb-2">تم تأكيد الدفع</h1>
+      <p class="text-muted mb-4">تم تأكيد حجزك. لقد أرسلنا إشعاراً للمساعد.</p>
 
-      <div class="card border-0 bg-light mb-4">
+      <div class="card border-0 shadow-sm mb-4">
         <div class="card-body p-4">
-          <p class="small text-muted mb-1">Booking ID</p>
-          <p class="h5 mb-0">#{{ booking.id }}</p>
+          <p class="small text-muted mb-1">رقم الحجز</p>
+          <p class="h5 mb-0 fw-bold">#{{ booking.id }}</p>
         </div>
       </div>
 
-      <a href="{% url 'seeker_dashboard' %}" class="btn btn-dark px-4 py-2 fw-medium">Go to dashboard</a>
+      <a href="{% url 'seeker_dashboard' %}" class="btn btn-dark px-4 py-2 fw-medium">الذهاب للوحة التحكم</a>
 
     </div>
   </div>

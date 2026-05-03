@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Checkout — Sanad{% endblock %}
+{% block title %}تأكيد الدفع — سند{% endblock %}
 
 {% block content %}
 <div class="container py-5">
@@ -8,12 +8,12 @@
     <div class="col-md-8 col-lg-6">
 
       <div class="mb-4">
-        <a href="javascript:history.back()" class="small text-muted text-decoration-none">← Back</a>
+        <a href="javascript:history.back()" class="small text-muted text-decoration-none">← رجوع</a>
       </div>
 
-      <h1 class="h3 fw-bold mb-2">Confirm and pay</h1>
+      <h1 class="h3 fw-bold mb-2">تأكيد الدفع</h1>
       <p class="text-muted small mb-4">
-        Payment is held until the task is completed. Full refund if you cancel before it starts.
+        يُحتجز الدفع حتى اكتمال المهمة. استرداد كامل في حال الإلغاء قبل البدء.
       </p>
 
       {% if messages %}
@@ -22,72 +22,83 @@
         {% endfor %}
       {% endif %}
 
-      <!-- Order summary card -->
+      <!-- ملخص الطلب -->
       <div class="card border-0 shadow-sm mb-4">
         <div class="card-body p-4">
-          <p class="text-uppercase small text-muted fw-semibold mb-3" style="letter-spacing: 1px;">Order summary</p>
+          <p class="text-uppercase small text-muted fw-semibold mb-3" style="letter-spacing:1px;">ملخص الطلب</p>
 
-          <!-- Helper info row -->
-<div class="d-flex align-items-center pb-3 mb-3 border-bottom">
-  <div class="rounded-circle bg-light d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
-    <span class="small fw-medium text-muted">{{ booking.helper.user.first_name|first }}{{ booking.helper.user.last_name|first }}</span>
-  </div>
-  <div>
-    <p class="mb-0 fw-medium">{{ booking.helper.user.first_name }} {{ booking.helper.user.last_name }}</p>
-    <p class="small text-muted mb-0">{{ booking.helper.specialty.name }}</p>
-  </div>
-</div>
-
-<!-- Booking details -->
-<table class="w-100 small">
-  <tr>
-    <td class="text-muted py-1">Task</td>
-    <td class="text-end py-1">{{ booking.service.name }}</td>
-  </tr>
-  <tr>
-    <td class="text-muted py-1">Date</td>
-    <td class="text-end py-1">{{ booking.scheduled_date }} · {{ booking.scheduled_start_time }}</td>
-  </tr>
-  <tr>
-    <td class="text-muted py-1">Hourly rate</td>
-    <td class="text-end py-1">{{ booking.helper.hourly_rate }} SAR</td>
-  </tr>
-  <tr>
-    <td class="text-muted py-1">Estimated hours</td>
-    <td class="text-end py-1">{{ booking.hours }}</td>
-  </tr>
-  <tr class="border-top">
-    <td class="fw-medium pt-3">Total</td>
-    <td class="text-end pt-3 h5 mb-0 fw-bold">{{ booking.total_amount }} SAR</td>
-  </tr>
-</table>
-
-        </div>
-
-      <!-- Payment method placeholder (Moyasar will replace this) -->
-      <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body p-4">
-          <p class="text-uppercase small text-muted fw-semibold mb-3" style="letter-spacing: 1px;">Payment method</p>
-          <p class="text-muted small mb-0">Moyasar payment form will load here once integrated.</p>
-        </div>
-      </div>
-
-      <!-- Refund disclaimer -->
-      <div class="bg-light rounded p-3 mb-4 small text-muted">
-        Your payment will be held by Sanad and released to the helper after the task is marked complete. Cancel anytime before the task starts for a full refund.
-      </div>
-
-      <!-- Total + pay button -->
-      <form method="post" action="{% url 'payments:fake_pay' booking.id %}">
-        {% csrf_token %}
-        <div class="d-flex justify-content-between align-items-center pt-3 border-top">
-          <div>
-            <p class="small text-muted mb-0">Total to pay</p>
-            <p class="h4 mb-0 fw-bold">{{ booking.total_amount }} SAR</p>
+          <div class="d-flex align-items-center pb-3 mb-3 border-bottom">
+            <div class="rounded-circle bg-light d-flex align-items-center justify-content-center me-3"
+                 style="width:40px;height:40px;background:linear-gradient(135deg,#d4af37,#c09b28) !important;">
+              <span class="small fw-bold text-white">{{ booking.helper.user.first_name|first }}{{ booking.helper.user.last_name|first }}</span>
+            </div>
+            <div>
+              <p class="mb-0 fw-medium">{{ booking.helper.user.first_name }} {{ booking.helper.user.last_name }}</p>
+              <p class="small text-muted mb-0">{{ booking.helper.specialty.name }}</p>
+            </div>
           </div>
-          <button type="submit" class="btn btn-dark px-4 py-2 fw-medium">Pay now</button>
+
+          <table class="w-100 small">
+            <tr>
+              <td class="text-muted py-1">الخدمة</td>
+              <td class="text-end py-1">{{ booking.service.name }}</td>
+            </tr>
+            <tr>
+              <td class="text-muted py-1">التاريخ</td>
+              <td class="text-end py-1">{{ booking.scheduled_date }} · {{ booking.scheduled_start_time }}</td>
+            </tr>
+            <tr>
+              <td class="text-muted py-1">السعر بالساعة</td>
+              <td class="text-end py-1">{{ booking.helper.hourly_rate }} ر.س</td>
+            </tr>
+            <tr>
+              <td class="text-muted py-1">الساعات المقدرة</td>
+              <td class="text-end py-1">{{ booking.hours }}</td>
+            </tr>
+            <tr class="border-top">
+              <td class="fw-medium pt-3">الإجمالي</td>
+              <td class="text-end pt-3 h5 mb-0 fw-bold">{{ booking.total_amount }} ر.س</td>
+            </tr>
+          </table>
         </div>
-      </form>
+      </div>
+
+      <!-- طريقة الدفع (Moyasar) -->
+      <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body p-4">
+          <p class="text-uppercase small text-muted fw-semibold mb-3" style="letter-spacing:1px;">طريقة الدفع</p>
+          <div class="mysr-form"></div>
+        </div>
+      </div>
+
+      <!-- إخلاء مسؤولية -->
+      <div class="bg-light rounded p-3 mb-4 small text-muted">
+        سيُحتجز دفعك من قِبل سند ويُحرَّر للمساعد بعد اكتمال المهمة. يمكنك الإلغاء في أي وقت قبل بدء المهمة للحصول على استرداد كامل.
+      </div>
+
+      <!-- دفع وهمي للتجربة -->
+      <details class="mb-4">
+        <summary class="small text-muted" style="cursor:pointer;">تجريبي: استخدام دفع وهمي</summary>
+        <form method="post" action="{% url 'payments:fake_pay' booking.id %}" class="mt-2">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-outline-secondary btn-sm">تخطي مويسر (دفع وهمي)</button>
+        </form>
+      </details>
+
+      <!-- Moyasar.js -->
+      <link rel="stylesheet" href="https://cdn.moyasar.com/mpf/1.15.0/moyasar.css" />
+      <script src="https://cdn.moyasar.com/mpf/1.15.0/moyasar.js"></script>
+      <script>
+        Moyasar.init({
+          element: '.mysr-form',
+          amount: {{ amount_in_halalas }},
+          currency: 'SAR',
+          description: 'حجز سند #{{ booking.id }}',
+          publishable_api_key: '{{ moyasar_publishable_key }}',
+          callback_url: '{{ request.scheme }}://{{ request.get_host }}{% url "payments:moyasar_callback" %}?booking_id={{ booking.id }}',
+          methods: ['creditcard'],
+        });
+      </script>
 
     </div>
   </div>

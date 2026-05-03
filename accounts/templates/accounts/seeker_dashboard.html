@@ -1,90 +1,190 @@
 {% extends 'base.html' %}
 
-{% block title %}Dashboard — Sanad{% endblock %}
+{% block title %}لوحة التحكم — سند{% endblock %}
+
+{% block extra_css %}
+<style>
+  .booking-helper-avatar {
+    width: 42px; height: 42px; border-radius: 50%; object-fit: cover;
+    border: 2px solid #d4af37; flex-shrink: 0;
+  }
+  .booking-helper-placeholder {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: linear-gradient(135deg, #d4af37, #c09b28);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; color: #fff; font-size: .9rem; flex-shrink: 0;
+  }
+</style>
+{% endblock %}
 
 {% block content %}
-<div class="container py-5">
 
-  <div class="mb-4">
-    <h1 class="h3 mb-1">Welcome back, {{ user.first_name }}</h1>
-    <p class="text-muted small">Here's what's happening today</p>
-  </div>
-
-  <!-- Stats row -->
-  <div class="row g-3 mb-4">
-    <div class="col-md-4">
-      <div class="card border-0 bg-light h-100">
-        <div class="card-body">
-          <p class="small text-muted mb-1">Active</p>
-          <p class="h4 mb-0">{{ active_count }}</p>
-        </div>
+<!-- Header -->
+<div class="border-bottom py-4">
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+      <div>
+        <h1 class="h3 fw-bold mb-1">مرحباً، {{ user.first_name }} 👋</h1>
+        <p class="text-muted small mb-0">إليك ملخص حجوزاتك</p>
       </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card border-0 bg-light h-100">
-        <div class="card-body">
-          <p class="small text-muted mb-1">Completed</p>
-          <p class="h4 mb-0">{{ completed_count }}</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card border-0 bg-light h-100">
-        <div class="card-body">
-          <p class="small text-muted mb-1">Total spent</p>
-          <p class="h4 mb-0">{{ total_spent }} <span class="small text-muted fw-normal">SAR</span></p>
-        </div>
-      </div>
+      <a href="{% url 'bookings:helpers_list' %}" class="btn btn-dark px-4 fw-medium">
+        + ابحث عن مساعد
+      </a>
     </div>
   </div>
+</div>
 
-  <!-- Active requests section -->
-  <div class="mb-4">
-    <h2 class="h6 mb-3">Active bookings</h2>
+<div class="container py-4">
 
-    {% if active_bookings %}
-      {% for booking in active_bookings %}
-        <div class="card mb-2">
-          <div class="card-body">
-            <p class="mb-1 fw-medium">{{ booking.service.name }}</p>
-            <p class="small text-muted mb-0">
-              {{ booking.scheduled_date }} · {{ booking.scheduled_start_time }} · {{ booking.hours }} hours
+  <!-- إحصائيات سريعة -->
+  <div class="row g-3 mb-5">
+
+    <div class="col-6 col-lg-4">
+      <div class="card stat-card shadow-sm h-100">
+        <div class="card-body d-flex align-items-center gap-3">
+          <div class="stat-icon" style="background:#dbeafe;">📋</div>
+          <div>
+            <p class="text-muted small mb-0">حجوزات نشطة</p>
+            <p class="h3 fw-bold mb-0 h-display">{{ active_count }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6 col-lg-4">
+      <div class="card stat-card shadow-sm h-100">
+        <div class="card-body d-flex align-items-center gap-3">
+          <div class="stat-icon" style="background:#dcfce7;">✅</div>
+          <div>
+            <p class="text-muted small mb-0">مكتملة</p>
+            <p class="h3 fw-bold mb-0 h-display">{{ completed_count }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-4">
+      <div class="card stat-card shadow-sm h-100">
+        <div class="card-body d-flex align-items-center gap-3">
+          <div class="stat-icon" style="background:#fef9c3;"></div>
+          <div>
+            <p class="text-muted small mb-0">إجمالي الإنفاق</p>
+            <p class="h3 fw-bold mb-0 h-display">
+              {{ total_spent }}
+              <span class="small fw-normal text-muted">ر.س</span>
             </p>
           </div>
         </div>
-      {% endfor %}
-    {% else %}
-      <div class="card border-dashed">
-        <div class="card-body text-center text-muted py-4">
-          <p class="mb-2">You don't have any active bookings yet.</p>
-          <a href="{% url 'bookings:helpers_list' %}" class="btn btn-dark btn-sm">Find a helper</a>
-        </div>
       </div>
-    {% endif %}
+    </div>
+
   </div>
 
-  <!-- History section -->
-  <div>
-    <h2 class="h6 mb-3">Recent history</h2>
+  <div class="row g-4">
 
-    {% if history %}
-      {% for booking in history %}
-        <div class="card mb-2">
-          <div class="card-body d-flex justify-content-between align-items-center">
-            <div>
-              <p class="mb-1 fw-medium">{{ booking.service.name }}</p>
-              <p class="small text-muted mb-0">{{ booking.scheduled_date }} · {{ booking.helper.user.first_name }}</p>
+    <!-- الحجوزات النشطة -->
+    <div class="col-12 col-lg-7">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <h2 class="h5 fw-bold mb-0">الحجوزات النشطة</h2>
+        {% if active_bookings %}
+          <span class="badge badge-gold">{{ active_count }}</span>
+        {% endif %}
+      </div>
+
+      {% if active_bookings %}
+        <div class="d-flex flex-column gap-3">
+          {% for booking in active_bookings %}
+            <div class="card booking-card shadow-sm">
+              <div class="card-body p-3">
+                <div class="d-flex align-items-center gap-3">
+
+                  {% if booking.helper.user.profile_photo %}
+                    <img src="{{ booking.helper.user.profile_photo.url }}" class="booking-helper-avatar" alt="">
+                  {% else %}
+                    <div class="booking-helper-placeholder">
+                      {{ booking.helper.user.first_name|first|upper }}
+                    </div>
+                  {% endif %}
+
+                  <div class="flex-grow-1 min-width-0">
+                    <div class="d-flex align-items-start justify-content-between gap-2 flex-wrap">
+                      <div>
+                        <p class="fw-semibold mb-0">{{ booking.service.name }}</p>
+                        <p class="small text-muted mb-0">
+                          {{ booking.helper.user.get_full_name }}
+                          · {{ booking.helper.specialty.name }}
+                        </p>
+                      </div>
+                      <span class="badge rounded-pill
+                        {% if booking.status == 'BOOKED' %}status-booked
+                        {% elif booking.status == 'ACTIVE' %}status-active
+                        {% endif %} small">
+                        {% if booking.status == 'BOOKED' %}محجوز{% elif booking.status == 'ACTIVE' %}جارٍ{% endif %}
+                      </span>
+                    </div>
+                    <div class="mt-2 d-flex align-items-center gap-3 flex-wrap">
+                      <span class="small text-muted"> {{ booking.scheduled_date }}</span>
+                      <span class="small text-muted"> {{ booking.scheduled_start_time }}</span>
+                      <span class="small text-muted"> {{ booking.hours }} ساعة</span>
+                      <span class="small fw-semibold text-gold">{{ booking.total_amount }} ر.س</span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
             </div>
-            <div class="text-end">
-              <p class="mb-1 fw-medium">{{ booking.total_amount }} SAR</p>
-              <span class="small text-muted">Completed</span>
-            </div>
+          {% endfor %}
+        </div>
+
+      {% else %}
+        <div class="card border-0 shadow-sm">
+          <div class="card-body empty-state">
+            <div class="empty-icon"></div>
+            <h6 class="fw-semibold mb-2">لا توجد حجوزات نشطة</h6>
+            <p class="text-muted small mb-3">ابحث عن مساعد وابدأ حجزك الأول</p>
+            <a href="{% url 'bookings:helpers_list' %}" class="btn btn-dark btn-sm px-4">ابحث عن مساعد</a>
           </div>
         </div>
-      {% endfor %}
-    {% else %}
-      <p class="text-muted small">No past bookings yet.</p>
-    {% endif %}
+      {% endif %}
+    </div>
+
+    <!-- السجل الأخير -->
+    <div class="col-12 col-lg-5">
+      <h2 class="h5 fw-bold mb-3">السجل الأخير</h2>
+
+      {% if history %}
+        <div class="d-flex flex-column gap-2">
+          {% for booking in history %}
+            <div class="card booking-card shadow-sm">
+              <div class="card-body p-3">
+                <div class="d-flex align-items-center justify-content-between gap-2">
+                  <div class="flex-grow-1 min-width-0">
+                    <p class="fw-semibold mb-0 text-truncate">{{ booking.service.name }}</p>
+                    <p class="small text-muted mb-1">
+                      {{ booking.helper.user.first_name }} · {{ booking.scheduled_date }}
+                    </p>
+                    <span class="badge rounded-pill small
+                      {% if booking.status == 'COMPLETED' %}status-completed
+                      {% else %}status-cancelled{% endif %}">
+                      {% if booking.status == 'COMPLETED' %}مكتملة{% else %}ملغاة{% endif %}
+                    </span>
+                  </div>
+                  <p class="fw-bold mb-0 small text-nowrap">{{ booking.total_amount }} ر.س</p>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="card border-0 shadow-sm">
+          <div class="card-body empty-state py-4">
+            <div class="empty-icon"></div>
+            <p class="text-muted small mb-0">لا توجد حجوزات سابقة بعد.</p>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
   </div>
 
 </div>

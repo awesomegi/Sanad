@@ -1,91 +1,91 @@
 {% extends 'base.html' %}
+
+{% block title %}ابحث عن مساعد — سند{% endblock %}
+
+{% block extra_css %}
+<style>
+  .helper-card {
+    background: #fff; border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(0,0,0,.06);
+    border: 1.5px solid #e9ecef;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .helper-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,.1); }
+</style>
+{% endblock %}
+
 {% block content %}
 
-<div class="container mt-5 mb-5">
-
-    <!-- العنوان -->
-    <div class="mb-4">
-        <h2 style="color:#fff; font-weight:800;">🤝 ابحث عن مساعد</h2>
-        <p style="color:#888;">تصفح المساعدين المعتمدين من وزارة الصحة</p>
-    </div>
-
-    <!-- فلاتر البحث -->
-    <div class="p-4 mb-4" style="background:#1a1a1a; border-radius:16px; border:1px solid #333;">
-        <form method="get">
-            <div class="row g-2 align-items-end">
-                <div class="col-12 col-md-3">
-                    <input type="text" name="q" value="{{ query|default:'' }}"
-                           placeholder="ابحث بالاسم..."
-                           style="background:#2c2c2c; border:1px solid #444; color:#fff; border-radius:10px; padding:10px 14px; width:100%;">
-                </div>
-                <div class="col-6 col-md-2">
-                    <select name="city" style="background:#2c2c2c; border:1px solid #444; color:#fff; border-radius:10px; padding:10px; width:100%;">
-                        <option value="">كل المدن</option>
-                        {% for city in cities %}
-                        <option value="{{ city.id }}" {% if selected_city == city.id|stringformat:"s" %}selected{% endif %}>
-                            {{ city.name }}
-                        </option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-6 col-md-2">
-                    <select name="specialty" style="background:#2c2c2c; border:1px solid #444; color:#fff; border-radius:10px; padding:10px; width:100%;">
-                        <option value="">كل التخصصات</option>
-                        {% for spec in specialties %}
-                        <option value="{{ spec.id }}" {% if selected_specialty == spec.id|stringformat:"s" %}selected{% endif %}>
-                            {{ spec.name }}
-                        </option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-6 col-md-2">
-                    <input type="number" name="max_rate" value="{{ max_rate|default:'' }}"
-                           placeholder="أقصى سعر..."
-                           style="background:#2c2c2c; border:1px solid #444; color:#fff; border-radius:10px; padding:10px 14px; width:100%;">
-                </div>
-                <div class="col-6 col-md-2">
-                    <button type="submit"
-                            style="background:#d4af37; color:#1a1a1a; border:none; border-radius:10px; padding:10px 20px; font-weight:700; width:100%; cursor:pointer;">
-                        بحث
-                    </button>
-                </div>
-                <div class="col-12 col-md-1">
-                    <a href="{% url 'bookings:helpers_list' %}"
-                       style="background:#252525; color:#888; border:1px solid #333; border-radius:10px; padding:10px; display:block; text-align:center; text-decoration:none; font-size:0.85rem;">
-                        مسح
-                    </a>
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <!-- عدد النتائج -->
-    <div class="mb-3">
-        <span style="color:#888; font-size:0.88rem;">{{ helpers|length }} مساعد متاح</span>
-    </div>
-
-    <!-- قائمة المساعدين -->
-    {% if helpers %}
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        {% for helper in helpers %}
-        <div class="col">
-            {% include 'bookings/helper_card.html' with helper=helper %}
-        </div>
-        {% endfor %}
-    </div>
-    {% else %}
-    <div class="text-center py-5">
-        <div style="font-size:3rem; margin-bottom:1rem;">🔍</div>
-        <h5 style="color:#888;">لا يوجد مساعدون بهذه المعايير</h5>
-        <a href="{% url 'bookings:helpers_list' %}" style="color:#d4af37;">إعادة تعيين الفلاتر</a>
-    </div>
-    {% endif %}
-
+<div class="py-4" style="background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);">
+  <div class="container text-center py-3">
+    <h1 class="fw-bold text-white mb-2">ابحث عن مساعد</h1>
+    <p class="mb-0" style="color:#d4af37;">تصفح المساعدين المعتمدين من وزارة الصحة</p>
+  </div>
 </div>
 
-<style>
-    body { background-color: #111; color: #fff; }
-    ::placeholder { color: #666 !important; }
-</style>
+<div class="container py-4">
 
+  <!-- فلاتر البحث -->
+  <div class="card border-0 shadow-sm mb-4">
+    <div class="card-body p-4">
+      <form method="get">
+        <div class="row g-2 align-items-end">
+          <div class="col-12 col-md-3">
+            <label class="form-label small fw-medium mb-1">بحث بالاسم</label>
+            <input type="text" name="q" value="{{ query|default:'' }}" class="form-control" placeholder="ابحث بالاسم...">
+          </div>
+          <div class="col-6 col-md-2">
+            <label class="form-label small fw-medium mb-1">المدينة</label>
+            <select name="city" class="form-select">
+              <option value="">كل المدن</option>
+              {% for city in cities %}
+                <option value="{{ city.id }}" {% if selected_city == city.id|stringformat:"s" %}selected{% endif %}>{{ city.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-6 col-md-2">
+            <label class="form-label small fw-medium mb-1">التخصص</label>
+            <select name="specialty" class="form-select">
+              <option value="">كل التخصصات</option>
+              {% for spec in specialties %}
+                <option value="{{ spec.id }}" {% if selected_specialty == spec.id|stringformat:"s" %}selected{% endif %}>{{ spec.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-6 col-md-2">
+            <label class="form-label small fw-medium mb-1">أقصى سعر</label>
+            <input type="number" name="max_rate" value="{{ max_rate|default:'' }}" class="form-control" placeholder="ريال">
+          </div>
+          <div class="col-6 col-md-2">
+            <button type="submit" class="btn btn-dark w-100">بحث</button>
+          </div>
+          <div class="col-12 col-md-1">
+            <a href="{% url 'bookings:helpers_list' %}" class="btn btn-outline-secondary w-100 small">مسح</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <span class="small text-muted">{{ helpers|length }} مساعد متاح</span>
+  </div>
+
+  {% if helpers %}
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      {% for helper in helpers %}
+        <div class="col">
+          {% include 'bookings/helper_card.html' with helper=helper %}
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="text-center py-5 text-muted">
+      <div style="font-size:3rem; margin-bottom:1rem;"></div>
+      <h5>لا يوجد مساعدون بهذه المعايير</h5>
+      <a href="{% url 'bookings:helpers_list' %}" class="btn btn-outline-dark mt-2">إعادة تعيين الفلاتر</a>
+    </div>
+  {% endif %}
+
+</div>
 {% endblock %}

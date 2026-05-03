@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Sign up — Sanad{% endblock %}
+{% block title %}إنشاء حساب — سند{% endblock %}
 
 {% block content %}
 <div class="container py-5">
@@ -8,8 +8,8 @@
     <div class="col-md-8 col-lg-7">
 
       <div class="text-center mb-4">
-        <h1 class="h3 fw-bold mb-2">Create your account</h1>
-        <p class="text-muted">Tell us about yourself so we can match you with the right helpers.</p>
+        <h1 class="h3 fw-bold mb-2">إنشاء حساب</h1>
+        <p class="text-muted">أخبرنا عنك حتى نتمكن من مطابقتك مع المساعد المناسب.</p>
       </div>
 
       {% if messages %}
@@ -22,86 +22,86 @@
         {% csrf_token %}
         <div class="card-body p-4 p-md-5">
 
-          <p class="text-uppercase small text-muted fw-semibold mb-3" style="letter-spacing: 1px;">About you</p>
+          <p class="text-uppercase small text-muted fw-semibold mb-3" style="letter-spacing: 1px;">معلوماتك الشخصية</p>
 
           <div class="row g-3">
             <div class="col-md-6">
-              <label for="first_name" class="form-label small fw-medium">First name</label>
+              <label for="first_name" class="form-label small fw-medium">الاسم الأول</label>
               <input type="text" name="first_name" id="first_name" class="form-control" required>
             </div>
             <div class="col-md-6">
-              <label for="last_name" class="form-label small fw-medium">Last name</label>
+              <label for="last_name" class="form-label small fw-medium">الاسم الأخير</label>
               <input type="text" name="last_name" id="last_name" class="form-control" required>
             </div>
           </div>
 
           <div class="mt-3">
-            <label for="email" class="form-label small fw-medium">Email</label>
+            <label for="email" class="form-label small fw-medium">البريد الإلكتروني</label>
             <input type="email" name="email" id="email" class="form-control" required>
           </div>
 
           <div class="mt-3">
-            <label for="phone" class="form-label small fw-medium">Phone</label>
+            <label for="phone" class="form-label small fw-medium">رقم الجوال</label>
             <input type="text" name="phone" id="phone" class="form-control" placeholder="+966..." required>
           </div>
 
           <div class="row g-3 mt-1">
             <div class="col-md-6">
-              <label for="password" class="form-label small fw-medium">Password</label>
+              <label for="password" class="form-label small fw-medium">كلمة المرور</label>
               <input type="password" name="password" id="password" class="form-control" required>
             </div>
             <div class="col-md-6">
-              <label for="password_confirm" class="form-label small fw-medium">Confirm password</label>
+              <label for="password_confirm" class="form-label small fw-medium">تأكيد كلمة المرور</label>
               <input type="password" name="password_confirm" id="password_confirm" class="form-control" required>
             </div>
           </div>
 
           <hr class="my-4">
 
-          <p class="text-uppercase small text-muted fw-semibold mb-3" style="letter-spacing: 1px;">Your needs</p>
+          <p class="text-uppercase small text-muted fw-semibold mb-3" style="letter-spacing: 1px;">احتياجاتك</p>
 
           <div class="row g-3">
             <div class="col-md-6">
-              <label for="disability_type" class="form-label small fw-medium">Type</label>
+              <label for="disability_type" class="form-label small fw-medium">النوع</label>
               <select name="disability_type" id="disability_type" class="form-select" required>
-                <option value="">Select...</option>
-                <option value="PERMANENT">Permanent</option>
-                <option value="TEMPORARY">Temporary</option>
+                <option value="">اختر...</option>
+                <option value="PERMANENT">دائم</option>
+                <option value="TEMPORARY">مؤقت</option>
               </select>
             </div>
             <div class="col-md-6">
-              <label for="disability_category" class="form-label small fw-medium">Category</label>
+              <label for="disability_category" class="form-label small fw-medium">الفئة</label>
               <select name="disability_category" id="disability_category" class="form-select" required>
-                <option value="">Select...</option>
-                <option value="MOBILITY">Mobility</option>
-                <option value="VISUAL">Visual</option>
-                <option value="HEARING">Hearing</option>
-                <option value="COGNITIVE">Cognitive</option>
-                <option value="TEMPORARY_INJURY">Temporary injury</option>
+                <option value="">اختر...</option>
+                <option value="MOBILITY">حركة</option>
+                <option value="VISUAL">بصري</option>
+                <option value="HEARING">سمعي</option>
+                <option value="COGNITIVE">إدراكي</option>
+                <option value="TEMPORARY_INJURY">إصابة مؤقتة</option>
               </select>
             </div>
           </div>
 
           <div class="mt-3">
-            <label for="address" class="form-label small fw-medium">Address</label>
+            <label for="address" class="form-label small fw-medium">العنوان</label>
             <input type="text" name="address" id="address" class="form-control" required>
           </div>
 
           <div class="mt-3">
-            <label for="emergency_contact" class="form-label small fw-medium">Emergency contact</label>
+            <label for="emergency_contact" class="form-label small fw-medium">جهة الاتصال في الطوارئ</label>
             <input type="text" name="emergency_contact" id="emergency_contact" class="form-control" placeholder="+966..." required>
           </div>
 
-          <button type="submit" class="btn btn-dark w-100 mt-4 py-2 fw-medium">Create account</button>
+          <button type="submit" class="btn btn-dark w-100 mt-4 py-2 fw-medium">إنشاء الحساب</button>
 
         </div>
       </form>
 
       <p class="text-center mt-3 small text-muted">
-          Are you a helper instead? <a href="{% url 'helpers:signup_helper' %}" class="text-dark fw-medium">Sign up as a Helper</a>
+        هل أنت مساعد؟ <a href="{% url 'helpers:signup_helper' %}" class="text-dark fw-medium">إنشاء حساب مساعد</a>
       </p>
       <p class="text-center small text-muted">
-         Already have an account? <a href="{% url 'login' %}" class="text-dark fw-medium">Log in</a>
+        لديك حساب بالفعل؟ <a href="{% url 'login' %}" class="text-dark fw-medium">تسجيل الدخول</a>
       </p>
 
     </div>

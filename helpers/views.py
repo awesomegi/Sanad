@@ -124,7 +124,7 @@ def helper_dashboard(request):
         'pending_count': 0,
         'active_count': 0,
         'monthly_earnings': 0,
-        'rating': helper.orders.aggregate(Avg('rating'))['rating__avg'] or 0 if helper and hasattr(helper, 'orders') else 0,
+        'rating': 0,
         'open_requests': [],
         'upcoming_bookings': [],
     }
@@ -323,7 +323,7 @@ def helper_detail(request, pk):
 #         'pending_count': 0,
 #         'active_count': 0,
 #         'monthly_earnings': 0,
-#         'rating': helper.orders.aggregate(Avg('rating'))['rating__avg'] or 0 if helper and hasattr(helper, 'orders') else 0,
+#         'rating': 0,
 #         'open_requests': [],
 #         'upcoming_bookings': [],
 #     }

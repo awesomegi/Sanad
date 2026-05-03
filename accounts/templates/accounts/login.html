@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Log In — Sanad{% endblock %}
+{% block title %}تسجيل الدخول — سند{% endblock %}
 
 {% block content %}
 <div class="container py-5">
@@ -8,8 +8,8 @@
     <div class="col-md-6 col-lg-5">
 
       <div class="text-center mb-4">
-        <h1 class="h3 fw-bold mb-2">Welcome back</h1>
-        <p class="text-muted">Log in to your Sanad account.</p>
+        <h1 class="h3 fw-bold mb-2">مرحباً بعودتك</h1>
+        <p class="text-muted">سجّل دخولك إلى حسابك في سند.</p>
       </div>
 
       {% if messages %}
@@ -23,27 +23,25 @@
         <div class="card-body p-4 p-md-5">
 
           <div class="mb-3">
-            <label for="email" class="form-label small fw-medium">Email</label>
+            <label for="email" class="form-label small fw-medium">البريد الإلكتروني</label>
             <input type="email" name="email" id="email" class="form-control" required autofocus>
           </div>
 
           <div class="mb-3">
-            <label for="password" class="form-label small fw-medium">Password</label>
+            <label for="password" class="form-label small fw-medium">كلمة المرور</label>
             <input type="password" name="password" id="password" class="form-control" required>
           </div>
 
-          <button type="submit" class="btn btn-dark w-100 mt-3 py-2 fw-medium">Log in</button>
+          <button type="submit" class="btn btn-dark w-100 mt-3 py-2 fw-medium">دخول</button>
 
         </div>
       </form>
 
-      <p class="text-center mt-3 small text-muted mb-0">
-         New to Sanad?
-      </p>
+      <p class="text-center mt-3 small text-muted mb-0">جديد على سند؟</p>
       <p class="text-center small text-muted">
-         <a href="{% url 'signup_seeker' %}" class="text-dark fw-medium">Sign up as a Seeker</a>
-         ·
-         <a href="{% url 'helpers:signup_helper' %}" class="text-dark fw-medium">Sign up as a Helper</a>
+        <a href="{% url 'signup_seeker' %}" class="text-dark fw-medium">إنشاء حساب باحث</a>
+        ·
+        <a href="{% url 'helpers:signup_helper' %}" class="text-dark fw-medium">إنشاء حساب مساعد</a>
       </p>
 
     </div>

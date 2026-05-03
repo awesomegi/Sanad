@@ -1,109 +1,104 @@
 {% extends 'base.html' %}
 
-{% block title %}Sanad — Help, when you need it{% endblock %}
+{% block title %}سند — المساعدة، حين تحتاجها{% endblock %}
 
 {% block content %}
 
-<!-- Hero section -->
+<!-- Hero -->
 <section class="py-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
   <div class="container py-5 text-center">
-    <span class="badge bg-dark mb-3 px-3 py-2">Verified by Ministry of Health</span>
-    <h1 class="display-4 fw-bold mb-3">Help, when you need it.</h1>
+    <span class="badge mb-3 px-3 py-2 badge-gold">معتمد من وزارة الصحة</span>
+    <h1 class="display-4 fw-bold mb-3">المساعدة، حين تحتاجها.</h1>
     <p class="lead text-muted mb-4 mx-auto" style="max-width: 600px;">
-      Connecting people with disabilities to verified, government-authorized helpers.
-      Trained, trustworthy, and just a booking away.
+      نربط ذوي الإعاقة بمساعدين موثوقين معتمدين من الجهات الحكومية. مدربون، آمنون، وعلى بُعد حجز واحد.
     </p>
     <div class="d-flex gap-2 justify-content-center flex-wrap">
-      <a href="{% url 'signup_seeker' %}" class="btn btn-dark btn-lg px-4">I need help</a>
-      <a href="{% url 'helpers:signup_helper' %}" class="btn btn-outline-dark btn-lg px-4">I want to help</a>
+      <a href="{% url 'signup_seeker' %}" class="btn btn-dark btn-lg px-4">أحتاج مساعدة</a>
+      <a href="{% url 'helpers:signup_helper' %}" class="btn btn-outline-dark btn-lg px-4">أريد المساعدة</a>
     </div>
   </div>
 </section>
 
-<!-- How it works -->
+<!-- كيف يعمل -->
 <section class="py-5">
   <div class="container">
-    <h2 class="text-center mb-5 fw-bold">How Sanad works</h2>
+    <h2 class="text-center mb-5 fw-bold">كيف يعمل سند</h2>
     <div class="row g-4">
-
       <div class="col-md-4">
         <div class="text-center px-3">
-          <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
-            <span class="h3 mb-0">1</span>
+          <div class="d-inline-flex align-items-center justify-content-center mb-3 rounded-circle bg-white shadow-sm" style="width:64px;height:64px;">
+            <span class="h3 mb-0" style="color:#d4af37;">١</span>
           </div>
-          <h5 class="fw-semibold">Browse verified helpers</h5>
-          <p class="text-muted small">Every helper is authorized by the Ministry of Health and trained in disability support.</p>
+          <h5 class="fw-semibold">تصفح المساعدين المعتمدين</h5>
+          <p class="text-muted small">جميع المساعدين معتمدون من وزارة الصحة ومدربون على دعم ذوي الإعاقة.</p>
         </div>
       </div>
-
       <div class="col-md-4">
         <div class="text-center px-3">
-          <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
-            <span class="h3 mb-0">2</span>
+          <div class="d-inline-flex align-items-center justify-content-center mb-3 rounded-circle bg-white shadow-sm" style="width:64px;height:64px;">
+            <span class="h3 mb-0" style="color:#d4af37;">٢</span>
           </div>
-          <h5 class="fw-semibold">Book on your schedule</h5>
-          <p class="text-muted small">Pick a helper, a service, and a time that works for you.</p>
+          <h5 class="fw-semibold">احجز حسب جدولك</h5>
+          <p class="text-muted small">اختر مساعداً، خدمةً، ووقتاً يناسبك.</p>
         </div>
       </div>
-
       <div class="col-md-4">
         <div class="text-center px-3">
-          <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
-            <span class="h3 mb-0">3</span>
+          <div class="d-inline-flex align-items-center justify-content-center mb-3 rounded-circle bg-white shadow-sm" style="width:64px;height:64px;">
+            <span class="h3 mb-0" style="color:#d4af37;">٣</span>
           </div>
-          <h5 class="fw-semibold">Pay securely</h5>
-          <p class="text-muted small">Mada, Visa, and Apple Pay accepted. Full refund if you cancel.</p>
+          <h5 class="fw-semibold">ادفع بأمان</h5>
+          <p class="text-muted small">نقبل مدى وفيزا وآبل باي. استرداد كامل عند الإلغاء.</p>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- Why Sanad -->
-<section class="py-5 bg-light">
+<!-- لماذا سند -->
+<section class="py-5 bg-white">
   <div class="container">
     <div class="row align-items-center">
       <div class="col-lg-6 mb-4 mb-lg-0">
-        <h2 class="fw-bold mb-3">Built for the moments that matter.</h2>
+        <h2 class="fw-bold mb-3">مصمم للحظات التي تهم.</h2>
         <p class="text-muted mb-3">
-          Whether your need is permanent or just temporary — a sprained ankle, recovery from surgery, or daily mobility support — Sanad gives you a network of trained helpers who understand exactly what you need.
+          سواء كانت حاجتك دائمة أو مؤقتة — التواء كاحل، تعافٍ من عملية، أو دعم يومي للحركة — يمنحك سند شبكة من المساعدين المدربين الذين يفهمون احتياجاتك تماماً.
         </p>
         <p class="text-muted">
-          No more depending on family who lives far away. No more guilt over asking friends. Just verified help, on your terms.
+          لا داعي للاعتماد على عائلة بعيدة. ولا حرج من طلب المساعدة من الأصدقاء. فقط مساعدة موثوقة، بشروطك أنت.
         </p>
       </div>
       <div class="col-lg-6">
         <div class="row g-3">
           <div class="col-6">
-            <div class="card border-0 bg-white h-100">
+            <div class="card border-0 shadow-sm h-100">
               <div class="card-body p-4">
-                <p class="h2 fw-bold mb-1">100%</p>
-                <p class="small text-muted mb-0">MoH verified helpers</p>
+                <p class="h2 fw-bold mb-1" style="color:#d4af37;">١٠٠٪</p>
+                <p class="small text-muted mb-0">مساعدون معتمدون</p>
               </div>
             </div>
           </div>
           <div class="col-6">
-            <div class="card border-0 bg-white h-100">
+            <div class="card border-0 shadow-sm h-100">
               <div class="card-body p-4">
-                <p class="h2 fw-bold mb-1">5</p>
-                <p class="small text-muted mb-0">Specialization areas</p>
+                <p class="h2 fw-bold mb-1" style="color:#d4af37;">٥</p>
+                <p class="small text-muted mb-0">مجالات تخصص</p>
               </div>
             </div>
           </div>
           <div class="col-6">
-            <div class="card border-0 bg-white h-100">
+            <div class="card border-0 shadow-sm h-100">
               <div class="card-body p-4">
-                <p class="h2 fw-bold mb-1">24/7</p>
-                <p class="small text-muted mb-0">Booking availability</p>
+                <p class="h2 fw-bold mb-1" style="color:#d4af37;">٢٤/٧</p>
+                <p class="small text-muted mb-0">حجز متاح دائماً</p>
               </div>
             </div>
           </div>
           <div class="col-6">
-            <div class="card border-0 bg-white h-100">
+            <div class="card border-0 shadow-sm h-100">
               <div class="card-body p-4">
-                <p class="h2 fw-bold mb-1">SAR</p>
-                <p class="small text-muted mb-0">Secure Mada payments</p>
+                <p class="h2 fw-bold mb-1" style="color:#d4af37;">ر.س</p>
+                <p class="small text-muted mb-0">دفع آمن عبر مدى</p>
               </div>
             </div>
           </div>

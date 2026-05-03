@@ -54,16 +54,18 @@ def fake_pay(request, booking_id):
         seeker=request.user.seeker_profile,
     )
 
-    Payment.objects.create(
-        booking=booking,
-        seeker=request.user,
-        helper=booking.helper,
-        amount=booking.total_amount,
-        status=Payment.Status.PAID,
-        transaction_id=f'FAKE-{booking.id}-{int(timezone.now().timestamp())}',
-        payment_method=Payment.PaymentMethod.MADA,
-        paid_at=timezone.now(),
-    )
+    Payment.objects.update_or_create(
+    booking=booking,
+    defaults={
+        'seeker': request.user,
+        'helper': booking.helper,
+        'amount': booking.total_amount,
+        'status': Payment.Status.PAID,
+        'transaction_id': f'FAKE-{booking.id}-{int(timezone.now().timestamp())}',
+        'payment_method': Payment.PaymentMethod.MADA,
+        'paid_at': timezone.now(),
+    }
+)
 
     messages.success(request, 'Payment processed successfully!')
     return redirect('payments:payment_success', booking_id=booking_id)

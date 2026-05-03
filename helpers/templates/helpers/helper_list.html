@@ -5,308 +5,165 @@
 
 {% block extra_css %}
 <style>
-  :root {
-    --primary:   #1B6CA8;
-    --accent:    #27AE60;
-    --gold:      #F39C12;
-    --soft-bg:   #F4F7FB;
-    --card-bg:   #FFFFFF;
-    --text-dark: #1A1A2E;
-    --text-muted:#6B7280;
-    --border:    #E5E9F2;
-    --radius:    14px;
-    --shadow:    0 4px 24px rgba(27,108,168,.08);
-  }
-
-  body { background: var(--soft-bg); font-family: 'Tajawal', sans-serif; }
-
-  /* ── Page Header ── */
-  .page-header {
-    background: linear-gradient(135deg, var(--primary) 0%, #0d4f8a 100%);
-    color: #fff;
-    padding: 3rem 0 4rem;
-    clip-path: ellipse(110% 100% at 50% 0%);
-    margin-bottom: -2rem;
-  }
-  .page-header h1 { font-size: 2rem; font-weight: 800; }
-  .page-header p  { opacity: .85; font-size: 1.05rem; }
-
-  /* ── Filter Card ── */
-  .filter-card {
-    background: var(--card-bg);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-  }
-  .filter-card .form-control,
-  .filter-card .form-select {
-    border-radius: 10px;
-    border: 1.5px solid var(--border);
-    font-size: .92rem;
-  }
-  .filter-card .form-control:focus,
-  .filter-card .form-select:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(27,108,168,.12);
-  }
-  .btn-filter {
-    background: var(--primary);
-    color: #fff;
-    border-radius: 10px;
-    padding: .5rem 1.4rem;
-    font-weight: 600;
-    border: none;
-  }
-  .btn-filter:hover { background: #0d4f8a; color: #fff; }
-
-  /* ── Helper Card ── */
   .helper-card {
-    background: var(--card-bg);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    border: 1.5px solid var(--border);
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(0,0,0,.06);
+    border: 1.5px solid #e9ecef;
     transition: transform .2s, box-shadow .2s;
-    overflow: hidden;
     height: 100%;
   }
-  .helper-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(27,108,168,.13);
-  }
-  .helper-card .card-body { padding: 1.4rem; }
-
-  .helper-avatar {
-    width: 68px; height: 68px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid var(--primary);
-  }
+  .helper-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,0,0,.1); }
   .helper-avatar-placeholder {
-    width: 68px; height: 68px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary), #27AE60);
+    width: 64px; height: 64px; border-radius: 50%;
+    background: linear-gradient(135deg, #d4af37, #c09b28);
     display: flex; align-items: center; justify-content: center;
-    font-size: 1.6rem; color: #fff; font-weight: 700;
-    border: 3px solid var(--primary);
-    flex-shrink: 0;
+    font-size: 1.5rem; color: #fff; font-weight: 700; flex-shrink: 0;
   }
-
-  .helper-name { font-size: 1.05rem; font-weight: 700; color: var(--text-dark); }
-  .helper-city { font-size: .82rem; color: var(--text-muted); }
-
-  .badge-recommended {
-    background: linear-gradient(90deg, #27AE60, #1e8f4e);
-    color: #fff;
-    font-size: .72rem;
-    padding: .28rem .7rem;
-    border-radius: 20px;
-    font-weight: 600;
-  }
-
-  .rating-stars { color: var(--gold); font-size: .9rem; }
-  .rating-count { font-size: .8rem; color: var(--text-muted); }
-
+  .helper-avatar { width:64px; height:64px; border-radius:50%; object-fit:cover; border:3px solid #d4af37; }
   .service-tag {
-    background: #EBF4FF;
-    color: var(--primary);
-    border-radius: 20px;
-    padding: .22rem .65rem;
-    font-size: .75rem;
-    font-weight: 600;
-    display: inline-block;
-    margin: .15rem .1rem;
+    background: #fff8e8; color: #b8860b;
+    border-radius: 20px; padding: .2rem .65rem;
+    font-size: .75rem; font-weight: 600; display: inline-block; margin: .1rem;
   }
-
   .rate-badge {
-    background: var(--soft-bg);
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    padding: .3rem .8rem;
-    font-size: .85rem;
-    font-weight: 700;
-    color: var(--primary);
+    background: #f8f9fa; border: 1.5px solid #dee2e6;
+    border-radius: 8px; padding: .3rem .8rem;
+    font-size: .85rem; font-weight: 700; color: #1a1a1a;
   }
-
-  .btn-view {
-    background: var(--primary);
-    color: #fff;
-    border-radius: 10px;
-    padding: .45rem 1.2rem;
-    font-weight: 600;
-    font-size: .9rem;
-    text-decoration: none;
-    border: none;
-    transition: background .2s;
+  .badge-recommended {
+    background: linear-gradient(90deg, #28a745, #1e8f4e);
+    color: #fff; font-size: .72rem; padding: .28rem .7rem;
+    border-radius: 20px; font-weight: 600;
   }
-  .btn-view:hover { background: #0d4f8a; color: #fff; }
-
-  /* ── Empty State ── */
-  .empty-state {
-    text-align: center;
-    padding: 4rem 2rem;
-    color: var(--text-muted);
-  }
-  .empty-state i { font-size: 3rem; margin-bottom: 1rem; opacity: .4; }
 </style>
 {% endblock %}
 
 {% block content %}
 
 <!-- Page Header -->
-<div class="page-header text-center">
-  <div class="container">
-    <h1>🤝 ابحث عن مساعد</h1>
-    <p>تصفح المساعدين المعتمدين من وزارة الصحة في مدينتك</p>
+<div class="py-4" style="background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);">
+  <div class="container text-center py-3">
+    <h1 class="fw-bold text-white mb-2">ابحث عن مساعد</h1>
+    <p class="mb-0" style="color:#d4af37;">تصفح المساعدين المعتمدين من وزارة الصحة في مدينتك</p>
   </div>
 </div>
 
-<div class="container py-4" style="position:relative; z-index:1;">
+<div class="container py-4">
 
-  <!-- Filter Card -->
-  <div class="filter-card">
-    <form method="get" action="">
-      <div class="row g-2 align-items-end">
-
-        <div class="col-12 col-md-3">
-          <label class="form-label fw-semibold mb-1" style="font-size:.85rem;">بحث بالاسم</label>
-          <input type="text" name="q" class="form-control" placeholder="اسم المساعد..."
-                 value="{{ query|default:'' }}">
+  <!-- فلاتر البحث -->
+  <div class="card border-0 shadow-sm mb-4">
+    <div class="card-body p-4">
+      <form method="get">
+        <div class="row g-2 align-items-end">
+          <div class="col-12 col-md-3">
+            <label class="form-label small fw-medium mb-1">بحث بالاسم</label>
+            <input type="text" name="q" class="form-control" placeholder="اسم المساعد..."
+                   value="{{ query|default:'' }}">
+          </div>
+          <div class="col-6 col-md-2">
+            <label class="form-label small fw-medium mb-1">نوع الخدمة</label>
+            <select name="service" class="form-select">
+              <option value="">الكل</option>
+              {% for s in services %}
+                <option value="{{ s.id }}" {% if selected_service == s.id|stringformat:"s" %}selected{% endif %}>{{ s.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-6 col-md-2">
+            <label class="form-label small fw-medium mb-1">المدينة</label>
+            <select name="city" class="form-select">
+              <option value="">الكل</option>
+              {% for c in cities %}
+                <option value="{{ c.id }}" {% if selected_city == c.id|stringformat:"s" %}selected{% endif %}>{{ c.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-6 col-md-2">
+            <label class="form-label small fw-medium mb-1">أقصى سعر/ساعة</label>
+            <input type="number" name="max_rate" class="form-control" placeholder="ريال"
+                   value="{{ max_rate|default:'' }}" min="0">
+          </div>
+          <div class="col-6 col-md-2">
+            <label class="form-label small fw-medium mb-1">أدنى تقييم</label>
+            <select name="min_rating" class="form-select">
+              <option value="">الكل</option>
+              <option value="4" {% if min_rating == '4' %}selected{% endif %}>4+ ⭐</option>
+              <option value="3" {% if min_rating == '3' %}selected{% endif %}>3+ ⭐</option>
+            </select>
+          </div>
+          <div class="col-12 col-md-1">
+            <button type="submit" class="btn btn-dark w-100">بحث</button>
+          </div>
         </div>
-
-        <div class="col-6 col-md-2">
-          <label class="form-label fw-semibold mb-1" style="font-size:.85rem;">نوع الخدمة</label>
-          <select name="service" class="form-select">
-            <option value="">الكل</option>
-            {% for s in services %}
-              <option value="{{ s.id }}" {% if selected_service == s.id|stringformat:"s" %}selected{% endif %}>
-                {{ s.name }}
-              </option>
-            {% endfor %}
-          </select>
-        </div>
-
-        <div class="col-6 col-md-2">
-          <label class="form-label fw-semibold mb-1" style="font-size:.85rem;">المدينة</label>
-          <select name="city" class="form-select">
-            <option value="">الكل</option>
-            {% for c in cities %}
-              <option value="{{ c.id }}" {% if selected_city == c.id|stringformat:"s" %}selected{% endif %}>
-                {{ c.name }}
-              </option>
-            {% endfor %}
-          </select>
-        </div>
-
-        <div class="col-6 col-md-2">
-          <label class="form-label fw-semibold mb-1" style="font-size:.85rem;">أقصى سعر/ساعة</label>
-          <input type="number" name="max_rate" class="form-control" placeholder="ريال"
-                 value="{{ max_rate|default:'' }}" min="0">
-        </div>
-
-        <div class="col-6 col-md-2">
-          <label class="form-label fw-semibold mb-1" style="font-size:.85rem;">أدنى تقييم</label>
-          <select name="min_rating" class="form-select">
-            <option value="">الكل</option>
-            <option value="4" {% if min_rating == '4' %}selected{% endif %}>4+ ⭐</option>
-            <option value="3" {% if min_rating == '3' %}selected{% endif %}>3+ ⭐</option>
-          </select>
-        </div>
-
-        <div class="col-12 col-md-1">
-          <button type="submit" class="btn btn-filter w-100">بحث</button>
-        </div>
-
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 
-  <!-- Results Count -->
+  <!-- عدد النتائج -->
   <div class="d-flex justify-content-between align-items-center mb-3">
-    <span style="font-size:.9rem; color:var(--text-muted);">
-      {{ helpers|length }} مساعد متاح
-    </span>
+    <span class="small text-muted">{{ helpers|length }} مساعد متاح</span>
     {% if recommended_ids %}
-      <span class="badge-recommended">✨ المميز بـ "موصى لك" يناسب احتياجك تحديداً</span>
+      <span class="badge-recommended"> المميز بـ "موصى لك" يناسب احتياجك تحديداً</span>
     {% endif %}
   </div>
 
-  <!-- Helper Cards Grid -->
+  <!-- بطاقات المساعدين -->
   {% if helpers %}
     <div class="row g-3">
       {% for helper in helpers %}
-      <div class="col-12 col-md-6 col-lg-4">
-        <div class="helper-card">
-          <div class="card-body">
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="helper-card">
+            <div class="card-body p-4">
 
-            <!-- Top Row -->
-            <div class="d-flex align-items-start gap-3 mb-3">
-              {% if helper.user.profile_photo %}
-                <img src="{{ helper.user.profile_photo.url }}" class="helper-avatar" alt="">
-              {% else %}
-                <div class="helper-avatar-placeholder">
-                  {{ helper.user.first_name|first|upper }}
-                </div>
-              {% endif %}
-
-              <div class="flex-grow-1">
-                <div class="d-flex align-items-center gap-2 flex-wrap">
-                  <span class="helper-name">{{ helper.user.get_full_name }}</span>
-                  {% if helper.id in recommended_ids %}
-                    <span class="badge-recommended">✨ موصى لك</span>
-                  {% endif %}
-                </div>
-                <div class="helper-city">
-                  📍 {{ helper.city.name|default:"—" }} &nbsp;·&nbsp; {{ helper.specialty.name|default:"" }}
-                </div>
-                <!-- Rating -->
-                <div class="d-flex align-items-center gap-1 mt-1">
-                  <span class="rating-stars">
-                    {% with avg=helper.avg_rating|default:0 %}
-                      {% for i in "12345" %}
-                        {% if forloop.counter <= avg %}⭐{% else %}☆{% endif %}
-                      {% endfor %}
-                    {% endwith %}
-                  </span>
-                  <span class="rating-count">
-                    ({{ helper.avg_rating|floatformat:1|default:"لا يوجد" }})
-                  </span>
+              <div class="d-flex align-items-start gap-3 mb-3">
+                {% if helper.user.profile_photo %}
+                  <img src="{{ helper.user.profile_photo.url }}" class="helper-avatar" alt="">
+                {% else %}
+                  <div class="helper-avatar-placeholder">{{ helper.user.first_name|first|upper }}</div>
+                {% endif %}
+                <div class="flex-grow-1">
+                  <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <span class="fw-bold">{{ helper.user.get_full_name }}</span>
+                    {% if helper.id in recommended_ids %}
+                      <span class="badge-recommended"> موصى لك</span>
+                    {% endif %}
+                  </div>
+                  <div class="small text-muted mt-1">
+                     {{ helper.city.name|default:"—" }} &nbsp;·&nbsp; {{ helper.specialty.name|default:"" }}
+                  </div>
+                  <div class="small text-muted">
+                     {{ helper.avg_rating|floatformat:1|default:"لا يوجد" }}
+                  </div>
                 </div>
               </div>
+
+              {% if helper.bio %}
+                <p class="small text-muted mb-3" style="line-height:1.6;">{{ helper.bio|truncatechars:100 }}</p>
+              {% endif %}
+
+              <div class="mb-3">
+                {% for service in helper.services.all|slice:":4" %}
+                  <span class="service-tag">{{ service.name }}</span>
+                {% endfor %}
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="rate-badge">{{ helper.hourly_rate|default:"—" }} ر.س / ساعة</span>
+                <a href="{% url 'helpers:detail' helper.pk %}" class="btn btn-dark btn-sm">عرض الملف</a>
+              </div>
+
             </div>
-
-            <!-- Bio -->
-            {% if helper.bio %}
-              <p style="font-size:.88rem; color:var(--text-muted); margin-bottom:.8rem; line-height:1.6;">
-                {{ helper.bio|truncatechars:100 }}
-              </p>
-            {% endif %}
-
-            <!-- Services -->
-            <div class="mb-3">
-              {% for service in helper.services.all|slice:":4" %}
-                <span class="service-tag">{{ service.name }}</span>
-              {% endfor %}
-            </div>
-
-            <!-- Footer -->
-            <div class="d-flex justify-content-between align-items-center">
-              <span class="rate-badge">{{ helper.hourly_rate|default:"—" }} ر.س / ساعة</span>
-              <a href="{% url 'helpers:detail' helper.pk %}" class="btn-view">عرض الملف</a>
-            </div>
-
           </div>
         </div>
-      </div>
       {% endfor %}
     </div>
-
   {% else %}
-    <div class="empty-state">
-      <div><i>🔍</i></div>
+    <div class="text-center py-5 text-muted">
+      <div style="font-size:3rem; margin-bottom:1rem;"></div>
       <h5>لا يوجد مساعدون بهذه المعايير</h5>
       <p>جرب تغيير الفلاتر أو البحث بكلمات مختلفة</p>
-      <a href="{% url 'helpers:list' %}" class="btn btn-outline-primary mt-2">إعادة تعيين الفلاتر</a>
+      <a href="{% url 'helpers:list' %}" class="btn btn-outline-dark mt-2">إعادة تعيين الفلاتر</a>
     </div>
   {% endif %}
 
