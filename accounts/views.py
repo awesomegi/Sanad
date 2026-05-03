@@ -4,27 +4,49 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import User, SeekerProfile
+from django.db import models
 
 
 @login_required
 def seeker_dashboard(request):
     if not request.user.is_seeker:
         return redirect('home')
-    
+
     seeker = request.user.seeker_profile
 
-    # Placeholder data for now — Rimas's bookings will plug in here on Day 4
+    # Pull all bookings for this seeker
+    all_bookings = seeker.bookings.select_related(
+        'helper__user',
+        'service',
+    ).order_by('-scheduled_date', '-scheduled_start_time')
+
+    # Active = BOOKED or ACTIVE
+    active_bookings = all_bookings.filter(status__in=['BOOKED', 'ACTIVE'])
+
+    # History = COMPLETED or CANCELLED
+    history = all_bookings.filter(status__in=['COMPLETED', 'CANCELLED'])
+
+    # Stats
+    active_count = active_bookings.count()
+    completed_count = all_bookings.filter(status='COMPLETED').count()
+
+    # Total spent = sum of total_amount across all PAID payments
+    from payments.models import Payment
+    total_spent = Payment.objects.filter(
+        seeker=request.user,
+        status='PAID',
+    ).aggregate(total=models.Sum('amount'))['total'] or 0
+
     context = {
         'seeker': seeker,
-        'active_count': 0,
-        'completed_count': 0,
-        'total_spent': 0,
-        'active_bookings': [],
-        'history': [],
-
+        'active_count': active_count,
+        'completed_count': completed_count,
+        'total_spent': total_spent,
+        'active_bookings': active_bookings,
+        'history': history,
     }
-    return render(request, 'accounts/seeker_dashboard.html', context)
 
+    return render(request, 'accounts/seeker_dashboard.html', context)
 
 
 def signup_seeker(request):
@@ -92,7 +114,7 @@ def login_view(request):
             if user.is_seeker:
                 return redirect('seeker_dashboard')  
             elif user.is_helper:
-                return redirect('helpers:dashboard') 
+                return redirect('helpers:helper_dashboard')
         return redirect('home')
         
     else:
