@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q, Avg
 from helpers.models import HelperProfile, City, Specialty
 from .models import Booking, Rating
+from notifications.services import notify_booking_confirmed, notify_booking_cancelled, notify_rating_received
 
 
 # ── Decorator: Seeker فقط ──────────────────
@@ -105,6 +106,9 @@ def rate_helper(request, booking_id):
                 score=int(score),
                 comment=comment
             )
+            
+            notify_rating_received(booking)
+
             return redirect('seeker_dashboard')
 
     return render(request, 'bookings/rate_helper.html', {'booking': booking})
