@@ -108,7 +108,7 @@
             <span class="fw-bold" style="font-size:2rem;color:#d4af37;">{{ helper.hourly_rate|default:"—" }}</span>
             <span class="text-muted small"> ر.س / ساعة</span>
           </div>
-          <a href="#" class="btn btn-dark w-100 py-2 fw-medium mb-3">احجز الآن</a>
+          <a href="{% url 'bookings:book_helper' helper.pk %}" class="btn btn-dark w-100 py-2 fw-medium mb-3">احجز الآن</a>
           <p class="small text-muted mb-0">✅ دفع آمن · استرداد كامل عند الإلغاء</p>
         </div>
       </div>

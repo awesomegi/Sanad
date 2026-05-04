@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.db.models import Q, Avg
 from helpers.models import HelperProfile, City, Specialty
 from .models import Booking, Rating
@@ -55,7 +56,51 @@ def helpers_list(request):
     return render(request, 'bookings/helpers_list.html', context)
 
 
-# ── 2. بروفايل المساعد ─────────────────────
+# ── 2. حجز مساعد ─────────────────────────
+@login_required
+@seeker_only
+def book_helper(request, pk):
+    helper = get_object_or_404(
+        HelperProfile,
+        pk=pk,
+        is_active=True,
+        verification_status='APPROVED'
+    )
+
+    if request.method == 'POST':
+        service_id           = request.POST.get('service')
+        scheduled_date       = request.POST.get('scheduled_date')
+        scheduled_start_time = request.POST.get('scheduled_start_time')
+        hours                = request.POST.get('hours')
+        notes                = request.POST.get('notes', '')
+
+        if not all([service_id, scheduled_date, scheduled_start_time, hours]):
+            messages.error(request, 'يرجى ملء جميع الحقول المطلوبة.')
+            return render(request, 'bookings/book_helper.html', {'helper': helper})
+
+        try:
+            service = helper.services.get(id=service_id)
+        except Exception:
+            messages.error(request, 'الخدمة المختارة غير صحيحة.')
+            return render(request, 'bookings/book_helper.html', {'helper': helper})
+
+        booking = Booking.objects.create(
+            seeker               = request.user.seeker_profile,
+            helper               = helper,
+            service              = service,
+            scheduled_date       = scheduled_date,
+            scheduled_start_time = scheduled_start_time,
+            hours                = hours,
+            notes                = notes,
+            total_amount         = 0,  # overwritten by model.save()
+        )
+
+        return redirect('payments:checkout', booking_id=booking.id)
+
+    return render(request, 'bookings/book_helper.html', {'helper': helper})
+
+
+# ── 3. بروفايل المساعد ─────────────────────
 @login_required
 @seeker_only
 def helper_detail(request, pk):
