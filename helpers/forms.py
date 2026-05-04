@@ -7,54 +7,54 @@ from .models import (
 
 User = get_user_model()
 
-# --- 1. فورم تسجيل المساعد (المرحلة الأولى) ---
+# --- 1. Helper Signup Form ---
 class HelperSignupForm(forms.ModelForm):
-    first_name = forms.CharField(label="الاسم الأول", widget=forms.TextInput(attrs={'class': 'form-control bg-dark text-white'}))
-    last_name = forms.CharField(label="اسم العائلة", widget=forms.TextInput(attrs={'class': 'form-control bg-dark text-white'}))
-    email = forms.EmailField(label="البريد الإلكتروني", widget=forms.EmailInput(attrs={'class': 'form-control bg-dark text-white'}))
-    password = forms.CharField(label="كلمة المرور", widget=forms.PasswordInput(attrs={'class': 'form-control bg-dark text-white'}))
+    first_name = forms.CharField(label="الاسم الأول", widget=forms.TextInput(attrs={'class': 'form-control'}))
+    last_name  = forms.CharField(label="اسم العائلة", widget=forms.TextInput(attrs={'class': 'form-control'}))
+    email      = forms.EmailField(label="البريد الإلكتروني", widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    password   = forms.CharField(label="كلمة المرور", widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
     class Meta:
-        model = SignupToHelpers
+        model  = SignupToHelpers
         fields = ['phone_number', 'national_id', 'moh_authorization', 'training_certificates']
         widgets = {
-            'phone_number': forms.TextInput(attrs={'class': 'form-control bg-dark text-white', 'placeholder': '05xxxxxxxx'}),
+            'phone_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '05xxxxxxxx'}),
         }
 
-# --- 2. فورم تسجيل الدخول (الذي كان ينقصكِ) ---
+# --- 2. Helper Login Form ---
 class HelperLoginForm(forms.Form):
-    email = forms.EmailField(label="البريد الإلكتروني", widget=forms.EmailInput(attrs={'class': 'form-control bg-dark text-white', 'placeholder': 'example@mail.com'}))
-    password = forms.CharField(label="كلمة المرور", widget=forms.PasswordInput(attrs={'class': 'form-control bg-dark text-white'}))
+    email    = forms.EmailField(label="البريد الإلكتروني", widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'example@mail.com'}))
+    password = forms.CharField(label="كلمة المرور", widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
-# --- 3. فورم ملف المساعد الشخصي ---
+# --- 3. Helper Profile Form ---
 class HelperProfileForm(forms.ModelForm):
     class Meta:
-        model = HelperProfile
+        model  = HelperProfile
         fields = ['bio', 'profile_photo', 'city', 'specialty', 'services', 'hourly_rate']
         widgets = {
-            'bio': forms.Textarea(attrs={'class': 'form-control bg-dark text-white', 'rows': 3, 'placeholder': 'نبذة عن مهاراتك...'}),
-            'profile_photo': forms.FileInput(attrs={'class': 'form-control bg-dark text-white'}),
-            'city': forms.Select(attrs={'class': 'form-select bg-dark text-white'}),
-            'specialty': forms.Select(attrs={'class': 'form-select bg-dark text-white'}),
-            'services': forms.CheckboxSelectMultiple(attrs={'class': 'form-check-input'}),
-            'hourly_rate': forms.NumberInput(attrs={'class': 'form-control bg-dark text-white'}),
+            'bio':           forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'نبذة عن مهاراتك...'}),
+            'profile_photo': forms.FileInput(attrs={'class': 'form-control'}),
+            'city':          forms.Select(attrs={'class': 'form-select'}),
+            'specialty':     forms.Select(attrs={'class': 'form-select'}),
+            'services':      forms.CheckboxSelectMultiple(attrs={'class': 'form-check-input'}),
+            'hourly_rate':   forms.NumberInput(attrs={'class': 'form-control'}),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['city'].required = False
+        self.fields['city'].required      = False
         self.fields['specialty'].required = False
-        self.fields['services'].required = False
+        self.fields['services'].required  = False
 
-# --- 4. فورم الخبرة (مطابق للموديل الخاص بكِ) ---
+# --- 4. Experience Form ---
 class ExperienceForm(forms.ModelForm):
     class Meta:
-        model = Experience
+        model  = Experience
         fields = ['title', 'years', 'description']
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control bg-dark text-white', 'placeholder': 'المسمى الوظيفي'}),
-            'years': forms.NumberInput(attrs={'class': 'form-control bg-dark text-white', 'placeholder': 'سنوات الخبرة'}),
-            'description': forms.Textarea(attrs={'class': 'form-control bg-dark text-white', 'rows': 2, 'placeholder': 'وصف مختصر لخبراتك'}),
+            'title':       forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'المسمى الوظيفي'}),
+            'years':       forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'سنوات الخبرة'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 2, 'placeholder': 'وصف مختصر لخبراتك'}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -62,15 +62,15 @@ class ExperienceForm(forms.ModelForm):
         for field in self.fields:
             self.fields[field].required = False
 
-# --- 5. فورم أوقات الإتاحة ---
+# --- 5. Availability Form ---
 class AvailabilityForm(forms.ModelForm):
     class Meta:
-        model = Availability
+        model  = Availability
         fields = ['day', 'start_time', 'end_time']
         widgets = {
-            'day': forms.Select(attrs={'class': 'form-select bg-dark text-white'}),
-            'start_time': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control bg-dark text-white'}),
-            'end_time': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control bg-dark text-white'}),
+            'day':        forms.Select(attrs={'class': 'form-select'}),
+            'start_time': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control'}),
+            'end_time':   forms.TimeInput(attrs={'type': 'time', 'class': 'form-control'}),
         }
 
     def __init__(self, *args, **kwargs):

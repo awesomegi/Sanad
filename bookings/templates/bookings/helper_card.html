@@ -1,65 +1,66 @@
 <!-- bookings/templates/bookings/helper_card.html -->
 <div class="card h-100 border-0 shadow-sm" style="border-radius:14px; overflow:hidden;">
 
-  <div class="text-center pt-4">
-    {% if helper.user.profile_photo %}
-      <img src="{{ helper.user.profile_photo.url }}" alt=""
-           style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid #d4af37;">
-    {% else %}
-      <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#d4af37,#c09b28);display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:800;color:#fff;margin:0 auto;">
-        {{ helper.user.first_name|first|upper }}
-      </div>
-    {% endif %}
-  </div>
-
-  <div class="card-body text-center px-4 pb-4 d-flex flex-column">
-
-    <h5 class="mt-3 mb-1 fw-bold">{{ helper.user.get_full_name }}</h5>
-
-    <p class="mb-1 small fw-semibold" style="color:#d4af37;">{{ helper.specialty.name|default:"—" }}</p>
-
-    <p class="mb-3 small text-muted">
-      {{ helper.city.name|default:"—" }}
-      &nbsp;·&nbsp;
-      {{ helper.hourly_rate|default:"—" }} ر.س/ساعة
-    </p>
-
-    <!-- Rating -->
-    {% if helper.avg_rating %}
-      <p class="mb-2" style="color:#d4af37; font-size:0.9rem;">
-        ⭐ {{ helper.avg_rating|floatformat:1 }}
-        <span style="color:#888; font-size:0.8rem;">/ 5</span>
-      </p>
-    {% else %}
-      <p class="mb-2" style="color:#888; font-size:0.82rem;">لا يوجد تقييم بعد</p>
-    {% endif %}
-
-    {% if helper.experiences.exists %}
-      <div class="mb-3 text-start">
-        {% for exp in helper.experiences.all|slice:":2" %}
-          <div class="d-flex align-items-center gap-2 mb-1">
-            <span style="color:#d4af37; font-size:.75rem;">✦</span>
-            <span class="small text-muted">{{ exp.title }} — {{ exp.years }} سنوات</span>
-          </div>
-        {% endfor %}
-      </div>
-    {% endif %}
-
-    <div class="mb-3 d-flex flex-wrap justify-content-center gap-1">
-      {% for service in helper.services.all|slice:":3" %}
-        <span style="background:#fff8e8;color:#b8860b;border-radius:20px;padding:3px 10px;font-size:.75rem;font-weight:600;">
-          {{ service.name }}
-        </span>
-      {% endfor %}
+    <div class="text-center pt-4">
+        {% if helper.profile_photo and helper.profile_photo.name %}
+        <img src="{{ helper.profile_photo.url }}" alt=""
+            style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid var(--color-primary);">
+        {% else %}
+        <div
+            style="width:80px;height:80px;border-radius:50%;background: var(--color-primary);display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:800;color:#fff;margin:0 auto;">
+            {{ helper.user.first_name|first|upper }}
+        </div>
+        {% endif %}
     </div>
 
-    <!-- mt-auto pushes buttons to bottom -->
-    <div class="d-grid gap-2 mt-auto pt-3">
-      <a href="{% url 'bookings:helper_detail' helper.pk %}"
-         class="btn btn-outline-dark btn-sm fw-medium">عرض الملف الشخصي</a>
-      <a href="#"
-         class="btn btn-dark btn-sm fw-medium">احجز الآن</a>
-    </div>
+    <div class="card-body text-center px-4 pb-4 d-flex flex-column">
 
-  </div>
+        <h5 class="mt-3 mb-1 fw-bold">{{ helper.user.get_full_name }}</h5>
+
+        <p class="mb-1 small fw-semibold">{{ helper.specialty.name|default:"—" }}</p>
+
+        <p class="mb-3 small text-muted">
+            {{ helper.city.name|default:"—" }}
+            &nbsp;·&nbsp;
+            {{ helper.hourly_rate|default:"—" }} ر.س/ساعة
+        </p>
+
+        <!-- Rating -->
+        {% if helper.avg_rating %}
+        <p class="mb-2">
+            ⭐ {{ helper.avg_rating|floatformat:1 }}
+            <span style="color:#888; font-size:0.8rem;">/ 5</span>
+        </p>
+        {% else %}
+        <p class="mb-2">لا يوجد تقييم بعد</p>
+        {% endif %}
+
+        {% if helper.experiences.exists %}
+        <div class="mb-3 text-start">
+            {% for exp in helper.experiences.all|slice:":2" %}
+            <div class="d-flex align-items-center gap-2 mb-1">
+                <span style="color:#d4af37; font-size:.75rem;">✦</span>
+                <span class="small text-muted">{{ exp.title }} — {{ exp.years }} سنوات</span>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="mb-3 d-flex flex-wrap justify-content-center gap-1">
+            {% for service in helper.services.all|slice:":3" %}
+            <span
+                style="background:#fff8e8;color:#b8860b;border-radius:20px;padding:3px 10px;font-size:.75rem;font-weight:600;">
+                {{ service.name }}
+            </span>
+            {% endfor %}
+        </div>
+
+        <!-- mt-auto pushes buttons to bottom -->
+        <div class="d-grid gap-2 mt-auto pt-3">
+            <a href="{% url 'bookings:helper_detail' helper.pk %}" class="btn btn-outline-dark btn-sm fw-medium">عرض
+                الملف الشخصي</a>
+            <a href="#" class="btn btn-dark btn-sm fw-medium">احجز الآن</a>
+        </div>
+
+    </div>
 </div>

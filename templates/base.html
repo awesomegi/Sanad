@@ -8,154 +8,23 @@
   <title>{% block title %}سند{% endblock %}</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   {% block extra_css %}{% endblock %}
-  <style>
-    body {
-      font-family: 'Tajawal', sans-serif;
-    }
 
-    /* Gold accent - works in both modes */
-    .brand-color {
-      color: #d4af37 !important;
-    }
-
-    .btn-gold {
-      background-color: #d4af37;
-      color: #1a1a1a;
-      font-weight: 700;
-      border: none;
-    }
-
-    .btn-gold:hover {
-      background-color: #c09b28;
-      color: #1a1a1a;
-    }
-
-    .badge-gold {
-      background-color: #d4af37 !important;
-      color: #1a1a1a !important;
-    }
-
-    .border-gold {
-      border-color: #d4af37 !important;
-    }
-
-    .text-gold {
-      color: #d4af37 !important;
-    }
-
-    /* Stat cards */
-    .stat-card {
-      border-radius: 14px;
-      border: none;
-      transition: transform .15s;
-    }
-
-    .stat-card:hover {
-      transform: translateY(-2px);
-    }
-
-    .stat-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      flex-shrink: 0;
-    }
-
-    /* Booking cards */
-    .booking-card {
-      border-radius: 12px;
-      border: none;
-      transition: box-shadow .15s;
-    }
-
-    .booking-card:hover {
-      box-shadow: 0 6px 20px rgba(0, 0, 0, .1) !important;
-    }
-
-    /* Status badges */
-    .status-booked {
-      background: #dbeafe;
-      color: #1d4ed8;
-    }
-
-    .status-active {
-      background: #dcfce7;
-      color: #15803d;
-    }
-
-    .status-completed {
-      background: #f3f4f6;
-      color: #6b7280;
-    }
-
-    .status-cancelled {
-      background: #fee2e2;
-      color: #dc2626;
-    }
-
-    [data-bs-theme="dark"] .status-booked {
-      background: #1e3a5f;
-      color: #93c5fd;
-    }
-
-    [data-bs-theme="dark"] .status-active {
-      background: #14402a;
-      color: #86efac;
-    }
-
-    [data-bs-theme="dark"] .status-completed {
-      background: #1f2937;
-      color: #9ca3af;
-    }
-
-    [data-bs-theme="dark"] .status-cancelled {
-      background: #450a0a;
-      color: #fca5a5;
-    }
-
-    /* Navbar */
-    .navbar {
-      box-shadow: 0 1px 8px rgba(0, 0, 0, .06);
-    }
-
-    /* Empty state */
-    .empty-state {
-      padding: 3rem 1rem;
-      text-align: center;
-      opacity: .8;
-    }
-
-    .empty-state .empty-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-
-    /* Mobile tweaks */
-    @media (max-width: 576px) {
-      .stat-card .card-body {
-        padding: 1rem;
-      }
-
-      .h-display {
-        font-size: 1.6rem !important;
-      }
-    }
-  </style>
 </head>
 
 {% with current_theme=request.COOKIES.sanad_theme|default:"light" %}
 
 <body>
 
+  
+
   <nav class="navbar navbar-expand-lg">
     <div class="container">
-      <a class="navbar-brand fw-bold brand-color fs-4" href="{% url 'home' %}">سند</a>
+      <a class="navbar-brand" href="{% url 'home' %}">
+        <img src="{% static 'imges/sanad_logo.png' %}" alt="سند" height="40">
+      </a>
 
       <!-- Mobile: theme toggle + hamburger -->
       <div class="d-flex align-items-center gap-2 d-lg-none">
