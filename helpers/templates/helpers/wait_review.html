@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}طلبك قيد المراجعة — سند{% endblock %}
+{% block title %}{% trans "طلبك قيد المراجعة — سند" %}{% endblock %}
 
 {% block content %}
 <div class="container py-5">
@@ -9,19 +10,19 @@
 
       <div class="card border-0 shadow-sm p-5">
         <div style="font-size:3.5rem; margin-bottom:1rem;"></div>
-        <h2 class="fw-bold mb-3">طلبك قيد المراجعة حالياً</h2>
+        <h2 class="fw-bold mb-3">{% trans "طلبك قيد المراجعة حالياً" %}</h2>
         <p class="text-muted mb-2">
-          شكراً لانضمامك إلى <strong>سند</strong>. فريقنا يقوم حالياً بمراجعة الوثائق الرسمية التي أرفقتها.
+          {% blocktrans with brand="سند" %}شكراً لانضمامك إلى {{ brand }}. فريقنا يقوم حالياً بمراجعة الوثائق الرسمية التي أرفقتها.{% endblocktrans %}
         </p>
-        <p class="text-muted mb-4">ستصلك رسالة عبر البريد الإلكتروني فور تحديث حالة طلبك.</p>
+        <p class="text-muted mb-4">{% trans "ستصلك رسالة عبر البريد الإلكتروني فور تحديث حالة طلبك." %}</p>
 
         <div class="d-flex justify-content-center mb-4">
           <div class="spinner-border" style="color:#d4af37;" role="status">
-            <span class="visually-hidden">جاري التحميل...</span>
+            <span class="visually-hidden">{% trans "جاري التحميل..." %}</span>
           </div>
         </div>
 
-        <a href="{% url 'home' %}" class="btn btn-outline-dark">العودة للرئيسية</a>
+        <a href="{% url 'home' %}" class="btn btn-outline-dark">{% trans "العودة للرئيسية" %}</a>
       </div>
 
     </div>

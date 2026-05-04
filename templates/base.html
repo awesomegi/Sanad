@@ -1,12 +1,17 @@
-{% load static %}
+{% load i18n static %}
+{% get_current_language as LANG %}
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" data-bs-theme="{{ request.COOKIES.sanad_theme|default:'light' }}">
+<html lang="{{ LANG }}" dir="{% if LANG == 'ar' %}rtl{% else %}ltr{% endif %}" data-bs-theme="{{ request.COOKIES.sanad_theme|default:'light' }}">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}سند{% endblock %}</title>
+  <title>{% block title %}{% trans "سند" %}{% endblock %}</title>
+  {% if LANG == 'ar' %}
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  {% else %}
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  {% endif %}
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet"
@@ -32,6 +37,7 @@
       <div class="d-flex align-items-center gap-2 d-lg-none">
         {% if current_theme == "dark" %}
         <a href="{% url 'set_theme' %}?theme=light&next={{ request.get_full_path|urlencode }}"
+<<<<<<< HEAD
           class="btn btn-sm btn-outline-secondary" title="وضع فاتح">
           <span class="material-symbols-outlined" style="font-size:18px;">light_mode</span>
         </a>
@@ -40,9 +46,15 @@
           class="btn btn-sm btn-outline-secondary" title="وضع داكن">
           <span class="material-symbols-outlined" style="font-size:18px;">dark_mode</span>
         </a>
+=======
+          class="btn btn-sm btn-outline-secondary" title="{% trans "وضع فاتح" %}">☀️</a>
+        {% else %}
+        <a href="{% url 'set_theme' %}?theme=dark&next={{ request.get_full_path|urlencode }}"
+          class="btn btn-sm btn-outline-secondary" title="{% trans "وضع داكن" %}">🌙</a>
+>>>>>>> 50ec9fff0d25e300418646a387948d6c758ee7f0
         {% endif %}
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
-          aria-controls="navMenu" aria-expanded="false" aria-label="القائمة">
+          aria-controls="navMenu" aria-expanded="false" aria-label="{% trans "القائمة" %}">
           <span class="navbar-toggler-icon"></span>
         </button>
       </div>
@@ -52,32 +64,33 @@
           {% if user.is_authenticated %}
 
           {% if user.is_seeker %}
-          <a href="{% url 'seeker_dashboard' %}" class="nav-link px-2">لوحة التحكم</a>
+          <a href="{% url 'seeker_dashboard' %}" class="nav-link px-2">{% trans "لوحة التحكم" %}</a>
           {% elif user.is_helper_approved %}
-          <a href="{% url 'helpers:helper_dashboard' %}" class="nav-link px-2">لوحة التحكم</a>
+          <a href="{% url 'helpers:helper_dashboard' %}" class="nav-link px-2">{% trans "لوحة التحكم" %}</a>
           {% endif %}
 
-          <span class="text-muted small d-none d-lg-inline">مرحباً، {{ user.first_name }}</span>
+          <span class="text-muted small d-none d-lg-inline">{% blocktrans with name=user.first_name %}مرحباً، {{ name }}{% endblocktrans %}</span>
 
           {% if user.is_seeker %}
-          <span class="badge badge-gold">باحث</span>
+          <span class="badge badge-gold">{% trans "باحث" %}</span>
           {% elif user.is_helper_approved %}
-          <span class="badge bg-success">مساعد</span>
+          <span class="badge bg-success">{% trans "مساعد" %}</span>
           {% elif user.is_helper %}
-          <span class="badge bg-warning text-dark">قيد المراجعة</span>
+          <span class="badge bg-warning text-dark">{% trans "قيد المراجعة" %}</span>
           {% endif %}
 
-          <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm">خروج</a>
+          <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm">{% trans "خروج" %}</a>
 
           {% else %}
-          <a href="{% url 'login' %}" class="btn btn-outline-secondary btn-sm">دخول</a>
-          <a href="{% url 'signup_seeker' %}" class="btn btn-dark btn-sm">إنشاء حساب</a>
+          <a href="{% url 'login' %}" class="btn btn-outline-secondary btn-sm">{% trans "دخول" %}</a>
+          <a href="{% url 'signup_seeker' %}" class="btn btn-dark btn-sm">{% trans "إنشاء حساب" %}</a>
           {% endif %}
 
           <!-- Desktop theme toggle -->
           <div class="d-none d-lg-block">
             {% if current_theme == "dark" %}
             <a href="{% url 'set_theme' %}?theme=light&next={{ request.get_full_path|urlencode }}"
+<<<<<<< HEAD
               class="btn btn-sm btn-outline-secondary" title="وضع فاتح">
               <span class="material-symbols-outlined" style="font-size:18px;">light_mode</span> فاتح
             </a>
@@ -86,8 +99,27 @@
               class="btn btn-sm btn-outline-secondary" title="وضع داكن">
               <span class="material-symbols-outlined" style="font-size:18px;">dark_mode</span> داكن
             </a>
+=======
+              class="btn btn-sm btn-outline-secondary" title="{% trans "وضع فاتح" %}">☀️ {% trans "فاتح" %}</a>
+            {% else %}
+            <a href="{% url 'set_theme' %}?theme=dark&next={{ request.get_full_path|urlencode }}"
+              class="btn btn-sm btn-outline-secondary" title="{% trans "وضع داكن" %}">🌙 {% trans "داكن" %}</a>
+>>>>>>> 50ec9fff0d25e300418646a387948d6c758ee7f0
             {% endif %}
           </div>
+
+          <!-- Language switcher -->
+          <form method="post" action="{% url 'set_language' %}" class="d-inline m-0">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ request.get_full_path }}">
+            {% if LANG == 'ar' %}
+            <input name="language" type="hidden" value="en">
+            <button type="submit" class="btn btn-sm btn-outline-secondary">🌐 EN</button>
+            {% else %}
+            <input name="language" type="hidden" value="ar">
+            <button type="submit" class="btn btn-sm btn-outline-secondary">🌐 عربي</button>
+            {% endif %}
+          </form>
 
         </div>
       </div>
@@ -100,7 +132,7 @@
 
   <footer class="border-top mt-5 py-4">
     <div class="container text-center text-muted small">
-      <p class="mb-0">© 2026 سند — المساعدة، حين تحتاجها.</p>
+      <p class="mb-0">{% trans "© 2026 سند — المساعدة، حين تحتاجها." %}</p>
     </div>
   </footer>
 

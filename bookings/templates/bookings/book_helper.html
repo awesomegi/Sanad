@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% blocktrans with name=helper.user.get_full_name %}حجز {{ name }} — سند{% endblocktrans %}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+
+      <div class="mb-4">
+        <a href="{% url 'bookings:helper_detail' helper.pk %}" class="small text-muted text-decoration-none">{% trans "← رجوع للملف الشخصي" %}</a>
+      </div>
+
+      <h1 class="h3 fw-bold mb-1">{% trans "حجز مساعد" %}</h1>
+      <p class="text-muted small mb-4">{{ helper.user.get_full_name }} · {{ helper.specialty.name }}</p>
+
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-warning small">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+
+          <form method="post">
+            {% csrf_token %}
+
+            <!-- Service -->
+            <div class="mb-3">
+              <label class="form-label fw-medium">{% trans "الخدمة" %} <span class="text-danger">*</span></label>
+              <select name="service" class="form-select" required>
+                <option value="">{% trans "اختر الخدمة" %}</option>
+                {% for service in helper.services.all %}
+                  <option value="{{ service.id }}">{{ service.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <!-- Date -->
+            <div class="mb-3">
+              <label class="form-label fw-medium">{% trans "تاريخ الموعد" %} <span class="text-danger">*</span></label>
+              <input type="date" name="scheduled_date" class="form-control" required>
+            </div>
+
+            <!-- Time -->
+            <div class="mb-3">
+              <label class="form-label fw-medium">{% trans "وقت البدء" %} <span class="text-danger">*</span></label>
+              <input type="time" name="scheduled_start_time" class="form-control" required>
+            </div>
+
+            <!-- Hours -->
+            <div class="mb-3">
+              <label class="form-label fw-medium">{% trans "عدد الساعات" %} <span class="text-danger">*</span></label>
+              <input type="number" name="hours" class="form-control" min="1" max="12" step="0.5" placeholder="{% trans "مثال: 2" %}" required>
+              <div class="form-text">{% blocktrans with rate=helper.hourly_rate %}السعر: {{ rate }} ر.س / ساعة{% endblocktrans %}</div>
+            </div>
+
+            <!-- Notes -->
+            <div class="mb-4">
+              <label class="form-label fw-medium">{% trans "ملاحظات" %} <span class="text-muted small">{% trans "(اختياري)" %}</span></label>
+              <textarea name="notes" class="form-control" rows="3" placeholder="{% trans "أي تفاصيل إضافية تود إخبار المساعد بها..." %}"></textarea>
+            </div>
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-dark py-2 fw-medium">{% trans "متابعة للدفع" %}</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

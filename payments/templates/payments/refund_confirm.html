@@ -69,7 +69,7 @@
       </div>
 
       <!-- Action buttons -->
-      <form method="post" action="{% url 'process_refund' booking.id %}" class="d-flex gap-2 justify-content-end pt-3 border-top">
+      <form method="post" action="{% url 'payments:process_refund' booking.id %}" class="d-flex gap-2 justify-content-end pt-3 border-top">
        {% csrf_token %}
           <a href="{% url 'seeker_dashboard' %}" class="btn btn-outline-secondary px-4 py-2">العودة</a>
            <button type="submit" class="btn btn-danger px-4 py-2 fw-medium">تأكيد الإلغاء</button>
