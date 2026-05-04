@@ -88,7 +88,7 @@ def moyasar_callback(request):
 
     if response.status_code != 200:
         messages.error(request, 'Could not verify payment with Moyasar.')
-        return redirect('payment_failed', booking_id=booking_id)
+        return redirect('payments:payment_failed', booking_id=booking_id)
 
     moyasar_data = response.json()
     status = moyasar_data.get('status')
@@ -121,15 +121,15 @@ def moyasar_callback(request):
         )
 
         messages.success(request, 'Payment confirmed!')
-        return redirect('payment_success', booking_id=booking_id)
+        return redirect('payments:payment_success', booking_id=booking_id)
 
     elif status == 'failed':
         messages.error(request, 'Payment was declined.')
-        return redirect('payment_failed', booking_id=booking_id)
+        return redirect('payments:payment_failed', booking_id=booking_id)
 
     else:
         messages.error(request, f'Unexpected payment status: {status}')
-        return redirect('payment_failed', booking_id=booking_id)
+        return redirect('payments:payment_failed', booking_id=booking_id)
 
 
 @login_required
@@ -162,7 +162,7 @@ def process_refund(request, booking_id):
     Only accepts POST.
     """
     if request.method != 'POST':
-        return redirect('refund_confirm', booking_id=booking_id)
+        return redirect('payments:refund_confirm', booking_id=booking_id)
 
     if not request.user.is_seeker:
         return redirect('home')
@@ -202,7 +202,7 @@ def process_refund(request, booking_id):
 
         if not refund_succeeded:
             messages.error(request, 'فشل الاسترداد. يرجى التواصل مع الدعم.')
-            return redirect('refund_confirm', booking_id=booking_id)
+            return redirect('payments:refund_confirm', booking_id=booking_id)
 
     # Update Payment status
     payment.status = Payment.Status.REFUNDED
@@ -214,7 +214,7 @@ def process_refund(request, booking_id):
     booking.save()
 
     messages.success(request, 'تم إلغاء الحجز واسترداد المبلغ بنجاح.')
-    return redirect('refund_success', booking_id=booking_id)
+    return redirect('payments:refund_success', booking_id=booking_id)
 
 
 @login_required
