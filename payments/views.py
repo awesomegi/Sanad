@@ -5,8 +5,13 @@ from django.contrib import messages
 from django.utils import timezone
 from .models import Payment
 from bookings.models import Booking
-from django.contrib.auth.decorators import login_required
 import requests
+from notifications.services import (
+    notify_new_booking,
+    notify_seeker_payment_success,
+    notify_helper_booking_cancelled_by_seeker,
+    notify_seeker_refund_processed,
+)
 
 
 
@@ -67,7 +72,10 @@ def fake_pay(request, booking_id):
     }
 )
 
-    messages.success(request, 'Payment processed successfully!')
+    notify_new_booking(booking)
+    notify_seeker_payment_success(booking)
+
+    messages.success(request, 'تمت عملية الدفع بنجاح!')
     return redirect('payments:payment_success', booking_id=booking_id)
 
 
@@ -120,7 +128,10 @@ def moyasar_callback(request):
             }
         )
 
-        messages.success(request, 'Payment confirmed!')
+        notify_new_booking(booking)
+        notify_seeker_payment_success(booking)
+
+        messages.success(request, 'تم تأكيد الدفع!')
         return redirect('payments:payment_success', booking_id=booking_id)
 
     elif status == 'failed':
@@ -212,6 +223,9 @@ def process_refund(request, booking_id):
     # Update Booking status
     booking.status = 'CANCELLED'
     booking.save()
+
+    notify_helper_booking_cancelled_by_seeker(booking)
+    notify_seeker_refund_processed(booking)
 
     messages.success(request, 'تم إلغاء الحجز واسترداد المبلغ بنجاح.')
     return redirect('payments:refund_success', booking_id=booking_id)

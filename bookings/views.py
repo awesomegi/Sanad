@@ -87,7 +87,7 @@ def book_helper(request, pk):
         booking = Booking.objects.create(
             seeker               = request.user.seeker_profile,
             helper               = helper,
-            service              = service,
+            service                 = service,
             scheduled_date       = scheduled_date,
             scheduled_start_time = scheduled_start_time,
             hours                = hours,

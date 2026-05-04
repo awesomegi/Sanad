@@ -74,3 +74,20 @@ class Rating(models.Model):
 
     def __str__(self):
         return f"{self.booking.seeker.user.get_full_name()} → {self.score}⭐"
+
+
+class SeekerRating(models.Model):
+    """Helper rates the seeker after a completed session."""
+    booking = models.OneToOneField(
+        Booking,
+        on_delete=models.CASCADE,
+        related_name='seeker_rating'
+    )
+    score = models.PositiveSmallIntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(5)]
+    )
+    comment    = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.booking.helper.user.get_full_name()} → {self.booking.seeker.user.get_full_name()} {self.score}⭐"

@@ -9,17 +9,38 @@
 
       <div class="mb-4" style="font-size:64px;">✅</div>
 
-      <h1 class="h3 fw-bold mb-2">تم تأكيد الدفع</h1>
-      <p class="text-muted mb-4">تم تأكيد حجزك. لقد أرسلنا إشعاراً للمساعد.</p>
+      <h1 class="h3 fw-bold mb-2">تم استلام دفعتك</h1>
+      <p class="text-muted mb-4">
+        تم الدفع بنجاح وأُرسل إشعار للمساعد.<br>
+        <span class="small">سيتم تأكيد الحجز بعد موافقة المساعد — ستصلك إشعاراً فور القبول.</span>
+      </p>
 
       <div class="card border-0 shadow-sm mb-4">
         <div class="card-body p-4">
-          <p class="small text-muted mb-1">رقم الحجز</p>
-          <p class="h5 mb-0 fw-bold">#{{ booking.id }}</p>
+          <div class="row g-3 text-start">
+            <div class="col-6">
+              <p class="small text-muted mb-1">رقم الحجز</p>
+              <p class="fw-bold mb-0">#{{ booking.id }}</p>
+            </div>
+            <div class="col-6">
+              <p class="small text-muted mb-1">المبلغ</p>
+              <p class="fw-bold mb-0 text-gold">{{ booking.total_amount }} ر.س</p>
+            </div>
+            <div class="col-6">
+              <p class="small text-muted mb-1">التاريخ</p>
+              <p class="fw-bold mb-0">{{ booking.scheduled_date }}</p>
+            </div>
+            <div class="col-6">
+              <p class="small text-muted mb-1">الخدمة</p>
+              <p class="fw-bold mb-0">{{ booking.service.name }}</p>
+            </div>
+          </div>
         </div>
       </div>
 
-      <a href="{% url 'seeker_dashboard' %}" class="btn btn-dark px-4 py-2 fw-medium">الذهاب للوحة التحكم</a>
+      <div class="d-flex gap-2 justify-content-center flex-wrap">
+        <a href="{% url 'seeker_dashboard' %}" class="btn btn-dark px-4 py-2 fw-medium">الذهاب للوحة التحكم</a>
+      </div>
 
     </div>
   </div>

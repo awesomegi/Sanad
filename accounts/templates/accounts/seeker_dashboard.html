@@ -40,9 +40,20 @@
         <h1 class="h3 fw-bold mb-1">مرحباً، {{ user.first_name }}</h1>
         <p class="text-muted small mb-0">إليك ملخص حجوزاتك</p>
       </div>
-      <a href="{% url 'bookings:helpers_list' %}" class="btn btn-dark px-4 fw-medium">
-        {% trans "+ ابحث عن مساعد" %}
-      </a>
+      <div class="d-flex gap-2">
+        <a href="{% url 'notifications:list' %}" class="btn btn-outline-secondary px-3 position-relative">
+          <span class="material-symbols-outlined" style="font-size:18px; vertical-align:middle;">notifications</span>
+          الإشعارات
+          {% if unread_notifications > 0 %}
+          <span class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-danger" style="font-size:0.65rem;">
+            {{ unread_notifications }}
+          </span>
+          {% endif %}
+        </a>
+        <a href="{% url 'bookings:helpers_list' %}" class="btn btn-dark px-4 fw-medium">
+          {% trans "+ ابحث عن مساعد" %}
+        </a>
+      </div>
     </div>
   </div>
 </div>
@@ -139,7 +150,7 @@
                         {% if booking.status == 'BOOKED' %}status-booked
                         {% elif booking.status == 'ACTIVE' %}status-active
                         {% endif %} small">
-                    {% if booking.status == 'BOOKED' %}{% trans "محجوز" %}{% elif booking.status == 'ACTIVE' %}{% trans "جارٍ" %}{% endif %}
+                    {% if booking.status == 'BOOKED' %}{% trans "بانتظار تأكيد المساعد" %}{% elif booking.status == 'ACTIVE' %}{% trans "مؤكد" %}{% endif %}
                   </span>
                 </div>
               </div>

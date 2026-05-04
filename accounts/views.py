@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import User, SeekerProfile
@@ -38,12 +37,13 @@ def seeker_dashboard(request):
     ).aggregate(total=models.Sum('amount'))['total'] or 0
 
     context = {
-        'seeker': seeker,
-        'active_count': active_count,
-        'completed_count': completed_count,
-        'total_spent': total_spent,
-        'active_bookings': active_bookings,
-        'history': history,
+        'seeker':               seeker,
+        'active_count':         active_count,
+        'completed_count':      completed_count,
+        'total_spent':          total_spent,
+        'active_bookings':      active_bookings,
+        'history':              history,
+        'unread_notifications': request.user.notifications.filter(is_read=False).count(),
     }
 
     return render(request, 'accounts/seeker_dashboard.html', context)
@@ -112,19 +112,22 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
+            messages.success(request, f'مرحباً مجدداً، {user.first_name}!')
             if user.is_seeker:
                 return redirect('seeker_dashboard')
             elif user.is_helper:
                 return redirect('helpers:helper_dashboard')
             return redirect('home')
         else:
-            messages.error(request, 'Invalid email or password')
+            messages.error(request, 'البريد الإلكتروني أو كلمة المرور غير صحيحة.')
 
     return render(request, 'accounts/login.html')
 
 
 def logout_view(request):
+    name = request.user.first_name if request.user.is_authenticated else ''
     logout(request)
+    messages.success(request, f'وداعاً{", " + name if name else ""}! تم تسجيل الخروج بنجاح.')
     return redirect('home')
 
 

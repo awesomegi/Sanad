@@ -5,11 +5,14 @@ from django.conf import settings
 class Notification(models.Model):
 
     class Type(models.TextChoices):
-        BOOKING_CONFIRMED = 'BOOKING_CONFIRMED', 'Booking Confirmed'
-        BOOKING_CANCELLED = 'BOOKING_CANCELLED', 'Booking Cancelled'
-        PAYMENT_SUCCESS   = 'PAYMENT_SUCCESS',   'Payment Success'
-        PAYMENT_FAILED    = 'PAYMENT_FAILED',     'Payment Failed'
-        RATING_RECEIVED   = 'RATING_RECEIVED',   'Rating Received'
+        BOOKING_CONFIRMED = 'BOOKING_CONFIRMED', 'Booking Confirmed'       # helper: new booking arrived
+        BOOKING_ACCEPTED  = 'BOOKING_ACCEPTED',  'Booking Accepted'        # seeker: helper confirmed
+        BOOKING_CANCELLED = 'BOOKING_CANCELLED', 'Booking Cancelled'       # both parties
+        BOOKING_COMPLETED = 'BOOKING_COMPLETED', 'Booking Completed'       # seeker: session done
+        PAYMENT_SUCCESS   = 'PAYMENT_SUCCESS',   'Payment Success'         # seeker: payment received
+        PAYMENT_FAILED    = 'PAYMENT_FAILED',    'Payment Failed'          # seeker: payment failed
+        REFUND_PROCESSED  = 'REFUND_PROCESSED',  'Refund Processed'        # seeker: money returned
+        RATING_RECEIVED   = 'RATING_RECEIVED',   'Rating Received'         # helper: got rated
 
     user       = models.ForeignKey(
         settings.AUTH_USER_MODEL,
