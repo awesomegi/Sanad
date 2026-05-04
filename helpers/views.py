@@ -165,7 +165,7 @@ def helper_dashboard(request):
     }
     return render(request, 'helpers/dashboard.html', context)
 # ─────────────────────────────────────────────
-#  5. تعديل الملف الشخصي (معتمدون فقط)
+#  5. Edit profile (approved only)
 # ─────────────────────────────────────────────
 
 @login_required
@@ -176,7 +176,7 @@ def edit_profile(request):
     availabilities = profile.availabilities.all()
 
     if request.method == 'POST':
-        form = HelperProfileForm(request.POST, request.FILES, instance=profile)
+        form       = HelperProfileForm(request.POST, request.FILES, instance=profile)
         exp_form   = ExperienceForm(request.POST)
         avail_form = AvailabilityForm(request.POST)
 
@@ -207,15 +207,19 @@ def edit_profile(request):
                     new_avail.helper = profile
                     new_avail.save()
 
-                for s_name in request.POST.getlist('manual_services[]'):
-                    if s_name.strip():
-                        unique_code = f"{slugify(s_name)}_{secrets.token_hex(3)}"
-                        service, _ = Service.objects.get_or_create(
-                            name=s_name,
-                            specialty=updated_profile.specialty,
-                            defaults={'code': unique_code}
-                        )
-                        updated_profile.services.add(service)
+                updated_profile.services.clear()
+                if updated_profile.specialty:
+                    for s_name in request.POST.getlist('manual_services[]'):
+                        if s_name.strip():
+                            unique_code = f"{slugify(s_name)}_{secrets.token_hex(3)}"
+                            service, _ = Service.objects.get_or_create(
+                                name=s_name,
+                                specialty=updated_profile.specialty,
+                                defaults={'code': unique_code}
+                            )
+                            updated_profile.services.add(service)
+                else:
+                    messages.warning(request, 'يرجى اختيار التخصص أولاً لحفظ الخدمات.')
 
             messages.success(request, 'تم تحديث ملفك الشخصي بنجاح.')
             return redirect('helpers:helper_dashboard')

@@ -1,3 +1,4 @@
+from decimal import Decimal
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from helpers.models import HelperProfile, Service
@@ -55,7 +56,7 @@ class Booking(models.Model):
     def save(self, *args, **kwargs):
         # Auto-calculate total amount
         if self.helper.hourly_rate and self.hours:
-            self.total_amount = self.helper.hourly_rate * self.hours
+            self.total_amount = self.helper.hourly_rate * Decimal(str(self.hours))
         super().save(*args, **kwargs)
 
 
