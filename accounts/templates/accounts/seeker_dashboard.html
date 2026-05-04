@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}لوحة التحكم — سند{% endblock %}
+{% block title %}{% trans "لوحة التحكم — سند" %}{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -36,11 +37,11 @@
   <div class="container">
     <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
       <div>
-        <h1 class="h3 fw-bold mb-1">مرحباً، {{ user.first_name }} 👋</h1>
-        <p class="text-muted small mb-0">إليك ملخص حجوزاتك</p>
+        <h1 class="h3 fw-bold mb-1">{% blocktrans with name=user.first_name %}مرحباً، {{ name }} 👋{% endblocktrans %}</h1>
+        <p class="text-muted small mb-0">{% trans "إليك ملخص حجوزاتك" %}</p>
       </div>
       <a href="{% url 'bookings:helpers_list' %}" class="btn btn-dark px-4 fw-medium">
-        + ابحث عن مساعد
+        {% trans "+ ابحث عن مساعد" %}
       </a>
     </div>
   </div>
@@ -56,7 +57,7 @@
         <div class="card-body d-flex align-items-center gap-3">
           <div class="stat-icon" style="background:#dbeafe;">📋</div>
           <div>
-            <p class="text-muted small mb-0">حجوزات نشطة</p>
+            <p class="text-muted small mb-0">{% trans "حجوزات نشطة" %}</p>
             <p class="h3 fw-bold mb-0 h-display">{{ active_count }}</p>
           </div>
         </div>
@@ -68,7 +69,7 @@
         <div class="card-body d-flex align-items-center gap-3">
           <div class="stat-icon" style="background:#dcfce7;">✅</div>
           <div>
-            <p class="text-muted small mb-0">مكتملة</p>
+            <p class="text-muted small mb-0">{% trans "مكتملة" %}</p>
             <p class="h3 fw-bold mb-0 h-display">{{ completed_count }}</p>
           </div>
         </div>
@@ -80,10 +81,10 @@
         <div class="card-body d-flex align-items-center gap-3">
           <div class="stat-icon" style="background:#fef9c3;"></div>
           <div>
-            <p class="text-muted small mb-0">إجمالي الإنفاق</p>
+            <p class="text-muted small mb-0">{% trans "إجمالي الإنفاق" %}</p>
             <p class="h3 fw-bold mb-0 h-display">
               {{ total_spent }}
-              <span class="small fw-normal text-muted">ر.س</span>
+              <span class="small fw-normal text-muted">{% trans "ر.س" %}</span>
             </p>
           </div>
         </div>
@@ -97,7 +98,7 @@
     <!-- الحجوزات النشطة -->
     <div class="col-12 col-lg-7">
       <div class="d-flex align-items-center justify-content-between mb-3">
-        <h2 class="h5 fw-bold mb-0">الحجوزات النشطة</h2>
+        <h2 class="h5 fw-bold mb-0">{% trans "الحجوزات النشطة" %}</h2>
         {% if active_bookings %}
         <span class="badge badge-gold">{{ active_count }}</span>
         {% endif %}
@@ -132,7 +133,7 @@
                         {% if booking.status == 'BOOKED' %}status-booked
                         {% elif booking.status == 'ACTIVE' %}status-active
                         {% endif %} small">
-                    {% if booking.status == 'BOOKED' %}محجوز{% elif booking.status == 'ACTIVE' %}جارٍ{% endif %}
+                    {% if booking.status == 'BOOKED' %}{% trans "محجوز" %}{% elif booking.status == 'ACTIVE' %}{% trans "جارٍ" %}{% endif %}
                   </span>
                 </div>
               </div>
@@ -142,24 +143,24 @@
             <div class="bg-light rounded p-3 mb-3 small">
               <div class="row g-2">
                 <div class="col-6">
-                  <p class="text-muted mb-1" style="font-size: 0.75rem;">📅 التاريخ</p>
+                  <p class="text-muted mb-1" style="font-size: 0.75rem;">{% trans "📅 التاريخ" %}</p>
                   <p class="fw-medium mb-0">{{ booking.scheduled_date }}</p>
                 </div>
                 <div class="col-6">
-                  <p class="text-muted mb-1" style="font-size: 0.75rem;">🕐 الوقت</p>
+                  <p class="text-muted mb-1" style="font-size: 0.75rem;">{% trans "🕐 الوقت" %}</p>
                   <p class="fw-medium mb-0">{{ booking.scheduled_start_time }}</p>
                 </div>
                 <div class="col-6">
-                  <p class="text-muted mb-1" style="font-size: 0.75rem;">⏱️ المدة</p>
-                  <p class="fw-medium mb-0">{{ booking.hours }} ساعة</p>
+                  <p class="text-muted mb-1" style="font-size: 0.75rem;">{% trans "⏱️ المدة" %}</p>
+                  <p class="fw-medium mb-0">{% blocktrans with hours=booking.hours %}{{ hours }} ساعة{% endblocktrans %}</p>
                 </div>
                 <div class="col-6">
-                  <p class="text-muted mb-1" style="font-size: 0.75rem;">💰 المبلغ</p>
-                  <p class="fw-medium mb-0 text-gold">{{ booking.total_amount }} ر.س</p>
+                  <p class="text-muted mb-1" style="font-size: 0.75rem;">{% trans "💰 المبلغ" %}</p>
+                  <p class="fw-medium mb-0 text-gold">{% blocktrans with amount=booking.total_amount %}{{ amount }} ر.س{% endblocktrans %}</p>
                 </div>
                 {% if booking.notes %}
                 <div class="col-12 mt-2 pt-2 border-top">
-                  <p class="text-muted mb-1" style="font-size: 0.75rem;">📝 ملاحظات</p>
+                  <p class="text-muted mb-1" style="font-size: 0.75rem;">{% trans "📝 ملاحظات" %}</p>
                   <p class="mb-0 small">{{ booking.notes }}</p>
                 </div>
                 {% endif %}
@@ -182,9 +183,9 @@
       <div class="card border-0 shadow-sm">
         <div class="card-body empty-state">
           <div class="empty-icon"></div>
-          <h6 class="fw-semibold mb-2">لا توجد حجوزات نشطة</h6>
-          <p class="text-muted small mb-3">ابحث عن مساعد وابدأ حجزك الأول</p>
-          <a href="{% url 'bookings:helpers_list' %}" class="btn btn-dark btn-sm px-4">ابحث عن مساعد</a>
+          <h6 class="fw-semibold mb-2">{% trans "لا توجد حجوزات نشطة" %}</h6>
+          <p class="text-muted small mb-3">{% trans "ابحث عن مساعد وابدأ حجزك الأول" %}</p>
+          <a href="{% url 'bookings:helpers_list' %}" class="btn btn-dark btn-sm px-4">{% trans "ابحث عن مساعد" %}</a>
         </div>
       </div>
       {% endif %}
@@ -192,7 +193,7 @@
 
     <!-- السجل الأخير -->
     <div class="col-12 col-lg-5">
-      <h2 class="h5 fw-bold mb-3">السجل الأخير</h2>
+      <h2 class="h5 fw-bold mb-3">{% trans "السجل الأخير" %}</h2>
 
       {% if history %}
       <div class="d-flex flex-column gap-2">
@@ -208,19 +209,19 @@
                 <span class="badge rounded-pill small
                       {% if booking.status == 'COMPLETED' %}status-completed
                       {% else %}status-cancelled{% endif %}">
-                  {% if booking.status == 'COMPLETED' %}مكتملة{% else %}ملغاة{% endif %}
+                  {% if booking.status == 'COMPLETED' %}{% trans "مكتملة" %}{% else %}{% trans "ملغاة" %}{% endif %}
                 </span>
                 {# Rating link — added by Rimas #}
                 {% if booking.status == 'COMPLETED' and not booking.rating %}
                 <a href="{% url 'bookings:rate_helper' booking.id %}" class="btn btn-sm btn-outline-warning mt-1"
                   style="font-size:0.75rem;">
-                  ⭐ قيّم المساعد
+                  {% trans "⭐ قيّم المساعد" %}
                 </a>
                 {% elif booking.status == 'COMPLETED' and booking.rating %}
                 <span style="color:#d4af37; font-size:0.78rem;">⭐ {{ booking.rating.score }}/5</span>
                 {% endif %}
               </div>
-              <p class="fw-bold mb-0 small text-nowrap">{{ booking.total_amount }} ر.س</p>
+              <p class="fw-bold mb-0 small text-nowrap">{% blocktrans with amount=booking.total_amount %}{{ amount }} ر.س{% endblocktrans %}</p>
             </div>
           </div>
         </div>
@@ -230,7 +231,7 @@
       <div class="card border-0 shadow-sm">
         <div class="card-body empty-state py-4">
           <div class="empty-icon"></div>
-          <p class="text-muted small mb-0">لا توجد حجوزات سابقة بعد.</p>
+          <p class="text-muted small mb-0">{% trans "لا توجد حجوزات سابقة بعد." %}</p>
         </div>
       </div>
       {% endif %}

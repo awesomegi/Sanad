@@ -1,17 +1,12 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}{{ helper.user.get_full_name }} — سند{% endblock %}
+{% block title %}{{ helper.user.get_full_name }} — {% trans "سند" %}{% endblock %}
 
 {% block content %}
 <div class="container py-5">
 
-<div class="mb-4">
-  <a href="{% url 'bookings:helpers_list' %}"
-     class="btn btn-outline-secondary btn-sm">
-    ← رجوع للقائمة
-  </a>
-</div>
-    <div class="row g-4 mt-1">
+  <a href="{% url 'bookings:helpers_list' %}" class="small text-muted text-decoration-none">{% trans "← رجوع للقائمة" %}</a>
 
         <!-- العمود الرئيسي -->
         <div class="col-12 col-lg-8">

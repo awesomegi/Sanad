@@ -1,0 +1,833 @@
+# English translations for Sanad project
+msgid ""
+msgstr ""
+"Project-Id-Version: sanad\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-04 00:00+0000\n"
+"PO-Revision-Date: 2026-05-04 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# ── Brand / Global ──────────────────────────────────────────────────────────
+msgid "سند"
+msgstr "Sanad"
+
+msgid "المساعدة، حين تحتاجها."
+msgstr "Help, when you need it."
+
+msgid "© 2026 سند — المساعدة، حين تحتاجها."
+msgstr "© 2026 Sanad — Help, when you need it."
+
+# ── Base nav ────────────────────────────────────────────────────────────────
+msgid "وضع فاتح"
+msgstr "Light mode"
+
+msgid "وضع داكن"
+msgstr "Dark mode"
+
+msgid "فاتح"
+msgstr "Light"
+
+msgid "داكن"
+msgstr "Dark"
+
+msgid "القائمة"
+msgstr "Menu"
+
+msgid "لوحة التحكم"
+msgstr "Dashboard"
+
+msgid "مرحباً، %(name)s"
+msgstr "Hello, %(name)s"
+
+msgid "باحث"
+msgstr "Seeker"
+
+msgid "قيد المراجعة"
+msgstr "Under Review"
+
+msgid "خروج"
+msgstr "Sign Out"
+
+msgid "دخول"
+msgstr "Sign In"
+
+msgid "إنشاء حساب"
+msgstr "Sign Up"
+
+msgid "تغيير اللغة"
+msgstr "Change Language"
+
+# ── home.html ───────────────────────────────────────────────────────────────
+msgid "سند — المساعدة، حين تحتاجها"
+msgstr "Sanad — Help, when you need it"
+
+msgid "معتمد من وزارة الصحة"
+msgstr "Certified by the Ministry of Health"
+
+msgid "نربط ذوي الإعاقة بمساعدين موثوقين معتمدين من الجهات الحكومية. مدربون، آمنون، وعلى بُعد حجز واحد."
+msgstr "We connect people with disabilities to trusted helpers certified by government authorities. Trained, safe, and just one booking away."
+
+msgid "أحتاج مساعدة"
+msgstr "I Need Help"
+
+msgid "أريد المساعدة"
+msgstr "I Want to Help"
+
+msgid "كيف يعمل سند"
+msgstr "How Sanad Works"
+
+msgid "تصفح المساعدين المعتمدين"
+msgstr "Browse Certified Helpers"
+
+msgid "جميع المساعدين معتمدون من وزارة الصحة ومدربون على دعم ذوي الإعاقة."
+msgstr "All helpers are certified by the Ministry of Health and trained to support people with disabilities."
+
+msgid "احجز حسب جدولك"
+msgstr "Book on Your Schedule"
+
+msgid "اختر مساعداً، خدمةً، ووقتاً يناسبك."
+msgstr "Choose a helper, a service, and a time that works for you."
+
+msgid "ادفع بأمان"
+msgstr "Pay Securely"
+
+msgid "نقبل مدى وفيزا وآبل باي. استرداد كامل عند الإلغاء."
+msgstr "We accept Mada, Visa, and Apple Pay. Full refund upon cancellation."
+
+msgid "مصمم للحظات التي تهم."
+msgstr "Designed for the Moments That Matter."
+
+msgid "سواء كانت حاجتك دائمة أو مؤقتة — التواء كاحل، تعافٍ من عملية، أو دعم يومي للحركة — يمنحك سند شبكة من المساعدين المدربين الذين يفهمون احتياجاتك تماماً."
+msgstr "Whether your need is permanent or temporary — a sprained ankle, post-surgery recovery, or daily mobility support — Sanad gives you a network of trained helpers who understand your needs completely."
+
+msgid "لا داعي للاعتماد على عائلة بعيدة. ولا حرج من طلب المساعدة من الأصدقاء. فقط مساعدة موثوقة، بشروطك أنت."
+msgstr "No need to rely on distant family. No awkwardness asking friends. Just reliable support, on your own terms."
+
+msgid "مساعدون معتمدون"
+msgstr "Certified Helpers"
+
+msgid "مجالات تخصص"
+msgstr "Specialty Areas"
+
+msgid "حجز متاح دائماً"
+msgstr "Booking Always Available"
+
+msgid "دفع آمن عبر مدى"
+msgstr "Secure Payment via Mada"
+
+# ── login.html ───────────────────────────────────────────────────────────────
+msgid "تسجيل الدخول — سند"
+msgstr "Sign In — Sanad"
+
+msgid "مرحباً بعودتك"
+msgstr "Welcome Back"
+
+msgid "سجّل دخولك إلى حسابك في سند."
+msgstr "Sign in to your Sanad account."
+
+msgid "البريد الإلكتروني"
+msgstr "Email"
+
+msgid "كلمة المرور"
+msgstr "Password"
+
+msgid "جديد على سند؟"
+msgstr "New to Sanad?"
+
+msgid "إنشاء حساب باحث"
+msgstr "Create a Seeker Account"
+
+msgid "إنشاء حساب مساعد"
+msgstr "Create a Helper Account"
+
+# ── signup_seeker.html ───────────────────────────────────────────────────────
+msgid "إنشاء حساب — سند"
+msgstr "Sign Up — Sanad"
+
+msgid "أخبرنا عنك حتى نتمكن من مطابقتك مع المساعد المناسب."
+msgstr "Tell us about yourself so we can match you with the right helper."
+
+msgid "معلوماتك الشخصية"
+msgstr "Your Personal Information"
+
+msgid "الاسم الأول"
+msgstr "First Name"
+
+msgid "الاسم الأخير"
+msgstr "Last Name"
+
+msgid "رقم الجوال"
+msgstr "Phone Number"
+
+msgid "تأكيد كلمة المرور"
+msgstr "Confirm Password"
+
+msgid "احتياجاتك"
+msgstr "Your Needs"
+
+msgid "النوع"
+msgstr "Type"
+
+msgid "اختر..."
+msgstr "Choose..."
+
+msgid "دائم"
+msgstr "Permanent"
+
+msgid "مؤقت"
+msgstr "Temporary"
+
+msgid "الفئة"
+msgstr "Category"
+
+msgid "حركة"
+msgstr "Mobility"
+
+msgid "بصري"
+msgstr "Visual"
+
+msgid "سمعي"
+msgstr "Hearing"
+
+msgid "إدراكي"
+msgstr "Cognitive"
+
+msgid "إصابة مؤقتة"
+msgstr "Temporary Injury"
+
+msgid "العنوان"
+msgstr "Address"
+
+msgid "جهة الاتصال في الطوارئ"
+msgstr "Emergency Contact"
+
+msgid "إنشاء الحساب"
+msgstr "Create Account"
+
+msgid "هل أنت مساعد؟"
+msgstr "Are you a helper?"
+
+msgid "لديك حساب بالفعل؟"
+msgstr "Already have an account?"
+
+msgid "تسجيل الدخول"
+msgstr "Sign In"
+
+# ── logged_out.html ───────────────────────────────────────────────────────────
+msgid "تم تسجيل الخروج — سند"
+msgstr "Signed Out — Sanad"
+
+msgid "تم تسجيل خروجك"
+msgstr "You've been signed out"
+
+msgid "شكراً لاستخدامك سند. نراك قريباً!"
+msgstr "Thank you for using Sanad. See you soon!"
+
+msgid "تسجيل الدخول مجدداً"
+msgstr "Sign In Again"
+
+# ── seeker_dashboard.html ─────────────────────────────────────────────────────
+msgid "لوحة التحكم — سند"
+msgstr "Dashboard — Sanad"
+
+msgid "مرحباً، %(name)s 👋"
+msgstr "Hello, %(name)s 👋"
+
+msgid "إليك ملخص حجوزاتك"
+msgstr "Here's a summary of your bookings"
+
+msgid "+ ابحث عن مساعد"
+msgstr "+ Find a Helper"
+
+msgid "حجوزات نشطة"
+msgstr "Active Bookings"
+
+msgid "مكتملة"
+msgstr "Completed"
+
+msgid "إجمالي الإنفاق"
+msgstr "Total Spent"
+
+msgid "الحجوزات النشطة"
+msgstr "Active Bookings"
+
+msgid "محجوز"
+msgstr "Booked"
+
+msgid "جارٍ"
+msgstr "Ongoing"
+
+msgid "📅 التاريخ"
+msgstr "📅 Date"
+
+msgid "🕐 الوقت"
+msgstr "🕐 Time"
+
+msgid "⏱️ المدة"
+msgstr "⏱️ Duration"
+
+msgid "💰 المبلغ"
+msgstr "💰 Amount"
+
+msgid "📝 ملاحظات"
+msgstr "📝 Notes"
+
+msgid "%(hours)s ساعة"
+msgstr "%(hours)s hr(s)"
+
+msgid "%(amount)s ر.س"
+msgstr "%(amount)s SAR"
+
+msgid "إلغاء الحجز"
+msgstr "Cancel Booking"
+
+msgid "لا توجد حجوزات نشطة"
+msgstr "No Active Bookings"
+
+msgid "ابحث عن مساعد وابدأ حجزك الأول"
+msgstr "Find a helper and start your first booking"
+
+msgid "ابحث عن مساعد"
+msgstr "Find a Helper"
+
+msgid "السجل الأخير"
+msgstr "Recent History"
+
+msgid "ملغاة"
+msgstr "Cancelled"
+
+msgid "⭐ قيّم المساعد"
+msgstr "⭐ Rate Helper"
+
+msgid "لا توجد حجوزات سابقة بعد."
+msgstr "No previous bookings yet."
+
+# ── helpers/signup.html ────────────────────────────────────────────────────────
+msgid "انضم كمساعد — سند"
+msgstr "Join as a Helper — Sanad"
+
+msgid "انضم لعائلة سند كمساعد"
+msgstr "Join the Sanad Family as a Helper"
+
+msgid "خطوتك الأولى لتقديم المساعدة تبدأ من هنا"
+msgstr "Your first step toward making a difference starts here"
+
+msgid "المعلومات الشخصية"
+msgstr "Personal Information"
+
+msgid "الوثائق الرسمية"
+msgstr "Official Documents"
+
+msgid "نسخة من الهوية الوطنية"
+msgstr "National ID Copy"
+
+msgid "ترخيص وزارة الصحة"
+msgstr "Ministry of Health Authorization"
+
+msgid "شهادات التدريب"
+msgstr "Training Certificates"
+
+msgid "(اختياري)"
+msgstr "(optional)"
+
+msgid "إرسال الطلب للمراجعة"
+msgstr "Submit for Review"
+
+# ── helpers/dashboard.html ────────────────────────────────────────────────────
+msgid "لوحة تحكم المساعد — سند"
+msgstr "Helper Dashboard — Sanad"
+
+msgid "%(count)s طلب مفتوح يتوافق مع تخصصك"
+msgstr "%(count)s open request(s) matching your specialty"
+
+msgid "جاهز لاستقبال الحجوزات الجديدة"
+msgstr "Ready to receive new bookings"
+
+msgid "أكمل ملفك الشخصي لبدء استقبال الحجوزات"
+msgstr "Complete your profile to start receiving bookings"
+
+msgid "تعديل الملف المهني"
+msgstr "Edit Professional Profile"
+
+msgid "🔔 الإشعارات"
+msgstr "🔔 Notifications"
+
+msgid "قيد الانتظار"
+msgstr "Pending"
+
+msgid "نشطة"
+msgstr "Active"
+
+msgid "هذا الشهر"
+msgstr "This Month"
+
+msgid "التقييم"
+msgstr "Rating"
+
+msgid "الحجوزات القادمة"
+msgstr "Upcoming Bookings"
+
+msgid "%(hours)s ساعة"
+msgstr "%(hours)s hr(s)"
+
+msgid "الباحث: %(name)s"
+msgstr "Seeker: %(name)s"
+
+msgid "لا توجد حجوزات قادمة"
+msgstr "No Upcoming Bookings"
+
+msgid "تأكد أن ملفك الشخصي مكتمل لاستقطاب المزيد من الطلبات"
+msgstr "Make sure your profile is complete to attract more requests"
+
+msgid "أكمل ملفك الشخصي"
+msgstr "Complete Your Profile"
+
+msgid "طلبك قيد المراجعة"
+msgstr "Your Application is Under Review"
+
+msgid "نحن نتحقق حالياً من وثائقك المهنية والصحية."
+msgstr "We are currently verifying your professional and health documents."
+
+msgid "ستصلك رسالة بريد إلكتروني فور تحديث حالة طلبك."
+msgstr "You will receive an email as soon as your application status is updated."
+
+msgid "تسجيل الحساب ✅"
+msgstr "Account Created ✅"
+
+msgid "المراجعة 🔄"
+msgstr "Under Review 🔄"
+
+msgid "الاعتماد ⏳"
+msgstr "Approval ⏳"
+
+msgid "جاري التحميل..."
+msgstr "Loading..."
+
+msgid "العودة للرئيسية"
+msgstr "Back to Home"
+
+# ── helpers/edit_profile.html ──────────────────────────────────────────────────
+msgid "تعديل الملف المهني — سند"
+msgstr "Edit Professional Profile — Sanad"
+
+msgid "الملف المهني"
+msgstr "Professional Profile"
+
+msgid "حدّث معلوماتك وخبراتك لاستقطاب المزيد من الحجوزات"
+msgstr "Update your information and experiences to attract more bookings"
+
+msgid "نبذة عنك"
+msgstr "About You"
+
+msgid "المدينة"
+msgstr "City"
+
+msgid "التخصص"
+msgstr "Specialty"
+
+msgid "أو اكتب مدينتك هنا إن لم تجدها..."
+msgstr "Or type your city here if not listed..."
+
+msgid "أو اكتب تخصصك هنا إن لم تجده..."
+msgstr "Or type your specialty here if not listed..."
+
+msgid "الخدمات المقدمة"
+msgstr "Services Offered"
+
+msgid "أضف الخدمات التي تقدمها"
+msgstr "Add the services you offer"
+
+msgid "مثال: مساعدة في التسوق"
+msgstr "Example: Shopping assistance"
+
+msgid "+ إضافة"
+msgstr "+ Add"
+
+msgid "الخبرات المسجلة"
+msgstr "Registered Experience"
+
+msgid "%(years)s سنوات خبرة"
+msgstr "%(years)s year(s) experience"
+
+msgid "لا توجد خبرات مضافة بعد."
+msgstr "No experience added yet."
+
+msgid "إضافة خبرة جديدة:"
+msgstr "Add new experience:"
+
+msgid "جدول الإتاحة"
+msgstr "Availability Schedule"
+
+msgid "لا توجد أوقات مضافة بعد."
+msgstr "No availability slots added yet."
+
+msgid "إضافة وقت جديد:"
+msgstr "Add new slot:"
+
+msgid "السعر بالساعة (ر.س)"
+msgstr "Hourly Rate (SAR)"
+
+msgid "حفظ وتحديث الملف"
+msgstr "Save and Update Profile"
+
+# ── helpers/signin.html ────────────────────────────────────────────────────────
+msgid "دخول المساعد — سند"
+msgstr "Helper Sign In — Sanad"
+
+msgid "تسجيل دخول المساعد"
+msgstr "Helper Sign In"
+
+msgid "أدخل بيانات حسابك للمتابعة"
+msgstr "Enter your account credentials to continue"
+
+msgid "ليس لديك حساب؟"
+msgstr "Don't have an account?"
+
+msgid "سجل الآن"
+msgstr "Register Now"
+
+# ── helpers/wait_review.html ──────────────────────────────────────────────────
+msgid "طلبك قيد المراجعة — سند"
+msgstr "Application Under Review — Sanad"
+
+msgid "طلبك قيد المراجعة حالياً"
+msgstr "Your Application is Currently Under Review"
+
+msgid "شكراً لانضمامك إلى %(brand)s. فريقنا يقوم حالياً بمراجعة الوثائق الرسمية التي أرفقتها."
+msgstr "Thank you for joining %(brand)s. Our team is currently reviewing the official documents you submitted."
+
+msgid "ستصلك رسالة عبر البريد الإلكتروني فور تحديث حالة طلبك."
+msgstr "You will receive an email once your application status is updated."
+
+# ── helpers/access_denied.html ────────────────────────────────────────────────
+msgid "وصول غير مصرح — سند"
+msgstr "Access Denied — Sanad"
+
+msgid "دخول غير مصرح به"
+msgstr "Access Denied"
+
+msgid "عذراً، لا يمكنك تعديل بيانات الملف الشخصي حتى يتم اعتماد حسابك من قِبل %(authority)s والإدارة."
+msgstr "Sorry, you cannot edit your profile until your account is approved by %(authority)s and the administration."
+
+msgid "العودة للوحة التحكم"
+msgstr "Back to Dashboard"
+
+# ── helpers/helper_list.html & bookings/helpers_list.html ─────────────────────
+msgid "ابحث عن مساعد — سند"
+msgstr "Find a Helper — Sanad"
+
+msgid "تصفح المساعدين المعتمدين من وزارة الصحة"
+msgstr "Browse helpers certified by the Ministry of Health"
+
+msgid "تصفح المساعدين المعتمدين من وزارة الصحة في مدينتك"
+msgstr "Browse helpers certified by the Ministry of Health in your city"
+
+msgid "بحث بالاسم"
+msgstr "Search by Name"
+
+msgid "اسم المساعد..."
+msgstr "Helper name..."
+
+msgid "ابحث بالاسم..."
+msgstr "Search by name..."
+
+msgid "نوع الخدمة"
+msgstr "Service Type"
+
+msgid "الكل"
+msgstr "All"
+
+msgid "كل المدن"
+msgstr "All Cities"
+
+msgid "كل التخصصات"
+msgstr "All Specialties"
+
+msgid "أقصى سعر"
+msgstr "Max Price"
+
+msgid "أقصى سعر/ساعة"
+msgstr "Max Price/hr"
+
+msgid "أدنى تقييم"
+msgstr "Min Rating"
+
+msgid "ريال"
+msgstr "SAR"
+
+msgid "بحث"
+msgstr "Search"
+
+msgid "مسح"
+msgstr "Clear"
+
+msgid "%(count)s مساعد متاح"
+msgstr "%(count)s helper(s) available"
+
+msgid "موصى لك"
+msgstr "Recommended for You"
+
+msgid " المميز بـ \"موصى لك\" يناسب احتياجك تحديداً"
+msgstr " Items marked \"Recommended for You\" match your specific needs"
+
+msgid "لا يوجد مساعدون بهذه المعايير"
+msgstr "No helpers match these criteria"
+
+msgid "جرب تغيير الفلاتر أو البحث بكلمات مختلفة"
+msgstr "Try changing the filters or searching with different keywords"
+
+msgid "إعادة تعيين الفلاتر"
+msgstr "Reset Filters"
+
+msgid "عرض الملف الشخصي"
+msgstr "View Profile"
+
+msgid "احجز الآن"
+msgstr "Book Now"
+
+msgid "عرض الملف"
+msgstr "View Profile"
+
+msgid "لا يوجد تقييم بعد"
+msgstr "No rating yet"
+
+msgid "%(years)s سنوات"
+msgstr "%(years)s yr(s)"
+
+msgid "%(rate)s ر.س / ساعة"
+msgstr "%(rate)s SAR/hr"
+
+# ── bookings/book_helper.html ─────────────────────────────────────────────────
+msgid "حجز %(name)s — سند"
+msgstr "Book %(name)s — Sanad"
+
+msgid "← رجوع للملف الشخصي"
+msgstr "← Back to Profile"
+
+msgid "حجز مساعد"
+msgstr "Book a Helper"
+
+msgid "الخدمة"
+msgstr "Service"
+
+msgid "اختر الخدمة"
+msgstr "Choose a service"
+
+msgid "تاريخ الموعد"
+msgstr "Appointment Date"
+
+msgid "وقت البدء"
+msgstr "Start Time"
+
+msgid "عدد الساعات"
+msgstr "Number of Hours"
+
+msgid "مثال: 2"
+msgstr "e.g. 2"
+
+msgid "%(rate)s ر.س / ساعة"
+msgstr "%(rate)s SAR/hr"
+
+msgid "ملاحظات"
+msgstr "Notes"
+
+msgid "أي تفاصيل إضافية تود إخبار المساعد بها..."
+msgstr "Any additional details you'd like the helper to know..."
+
+msgid "متابعة للدفع"
+msgstr "Continue to Payment"
+
+# ── bookings/helper_detail.html ───────────────────────────────────────────────
+msgid "← رجوع للقائمة"
+msgstr "← Back to List"
+
+msgid "%(count)s مهمة مكتملة"
+msgstr "%(count)s completed task(s)"
+
+msgid "نبذة شخصية"
+msgstr "About"
+
+msgid "الخبرات"
+msgstr "Experience"
+
+msgid "الخدمات المقدمة"
+msgstr "Services Offered"
+
+msgid "أوقات التوفر"
+msgstr "Availability"
+
+msgid "✅ دفع آمن · استرداد كامل عند الإلغاء"
+msgstr "✅ Secure payment · Full refund upon cancellation"
+
+# ── bookings/rate_helper.html ─────────────────────────────────────────────────
+msgid "⭐ قيّم المساعد"
+msgstr "⭐ Rate the Helper"
+
+msgid "اختر تقييمك"
+msgstr "Choose your rating"
+
+msgid "تعليق (اختياري)"
+msgstr "Comment (optional)"
+
+msgid "شاركنا تجربتك مع هذا المساعد..."
+msgstr "Share your experience with this helper..."
+
+msgid "إرسال التقييم"
+msgstr "Submit Rating"
+
+# ── payments/checkout.html ────────────────────────────────────────────────────
+msgid "تأكيد الدفع — سند"
+msgstr "Payment Confirmation — Sanad"
+
+msgid "← رجوع"
+msgstr "← Back"
+
+msgid "تأكيد الدفع"
+msgstr "Payment Confirmation"
+
+msgid "يُحتجز الدفع حتى اكتمال المهمة. استرداد كامل في حال الإلغاء قبل البدء."
+msgstr "Payment is held until the task is completed. Full refund if cancelled before start."
+
+msgid "ملخص الطلب"
+msgstr "Order Summary"
+
+msgid "التاريخ"
+msgstr "Date"
+
+msgid "السعر بالساعة"
+msgstr "Hourly Rate"
+
+msgid "الساعات المقدرة"
+msgstr "Estimated Hours"
+
+msgid "الإجمالي"
+msgstr "Total"
+
+msgid "طريقة الدفع"
+msgstr "Payment Method"
+
+msgid "سيُحتجز دفعك من قِبل سند ويُحرَّر للمساعد بعد اكتمال المهمة. يمكنك الإلغاء في أي وقت قبل بدء المهمة للحصول على استرداد كامل."
+msgstr "Your payment will be held by Sanad and released to the helper after the task is completed. You can cancel any time before the task starts for a full refund."
+
+msgid "تجريبي: استخدام دفع وهمي"
+msgstr "Test: Use fake payment"
+
+msgid "تخطي مويسر (دفع وهمي)"
+msgstr "Skip Moyasar (fake payment)"
+
+# ── payments/success.html ─────────────────────────────────────────────────────
+msgid "تم الدفع بنجاح — سند"
+msgstr "Payment Successful — Sanad"
+
+msgid "تم تأكيد الدفع"
+msgstr "Payment Confirmed"
+
+msgid "تم تأكيد حجزك. لقد أرسلنا إشعاراً للمساعد."
+msgstr "Your booking has been confirmed. We've sent a notification to the helper."
+
+msgid "رقم الحجز"
+msgstr "Booking Number"
+
+msgid "الذهاب للوحة التحكم"
+msgstr "Go to Dashboard"
+
+# ── payments/failed.html ──────────────────────────────────────────────────────
+msgid "فشل الدفع — سند"
+msgstr "Payment Failed — Sanad"
+
+msgid "فشل الدفع"
+msgstr "Payment Failed"
+
+msgid "حدث خطأ في الدفع. لم يتم تأكيد حجزك."
+msgstr "A payment error occurred. Your booking was not confirmed."
+
+msgid "حاول مجدداً"
+msgstr "Try Again"
+
+msgid "العودة للوحة التحكم"
+msgstr "Back to Dashboard"
+
+# ── payments/refund_confirm.html ──────────────────────────────────────────────
+msgid "تأكيد إلغاء الحجز — سند"
+msgstr "Cancel Booking — Sanad"
+
+msgid "→ العودة للوحة التحكم"
+msgstr "→ Back to Dashboard"
+
+msgid "تأكيد إلغاء الحجز"
+msgstr "Confirm Booking Cancellation"
+
+msgid "سيتم استرداد المبلغ كاملاً إلى بطاقتك خلال ٥-٧ أيام عمل."
+msgstr "The full amount will be refunded to your card within 5–7 business days."
+
+msgid "تفاصيل الحجز"
+msgstr "Booking Details"
+
+msgid "الموعد"
+msgstr "Appointment"
+
+msgid "عدد الساعات"
+msgstr "Number of Hours"
+
+msgid "المبلغ المسترد"
+msgstr "Refund Amount"
+
+msgid " تنبيه"
+msgstr " Warning"
+
+msgid "بمجرد تأكيد الإلغاء، لن يتمكن المساعد من إكمال هذه المهمة. سيتم استرداد المبلغ المدفوع بالكامل تلقائياً."
+msgstr "Once you confirm cancellation, the helper will not be able to complete this task. The full payment will be automatically refunded."
+
+msgid "العودة"
+msgstr "Back"
+
+msgid "تأكيد الإلغاء"
+msgstr "Confirm Cancellation"
+
+# ── payments/refund_success.html ──────────────────────────────────────────────
+msgid "تم إلغاء الحجز — سند"
+msgstr "Booking Cancelled — Sanad"
+
+msgid "تم إلغاء الحجز بنجاح"
+msgstr "Booking Cancelled Successfully"
+
+# ── notifications/notifications_list.html ─────────────────────────────────────
+msgid "الإشعارات — سند"
+msgstr "Notifications — Sanad"
+
+msgid "🔔 الإشعارات"
+msgstr "🔔 Notifications"
+
+msgid "%(time)s مضت"
+msgstr "%(time)s ago"
+
+msgid "جديد"
+msgstr "New"
+
+msgid "لا توجد إشعارات بعد"
+msgstr "No notifications yet"
+
+msgid "ستظهر إشعاراتك هنا عند وصول تقييم جديد."
+msgstr "Your notifications will appear here when a new rating arrives."
+
+# ── Shared strings ────────────────────────────────────────────────────────────
+msgid "الخدمة"
+msgstr "Service"
+
+msgid "ر.س"
+msgstr "SAR"
+
+msgid "ر.س/ساعة"
+msgstr "SAR/hr"
+
+msgid "مساعد"
+msgstr "Helper"
+
+msgid "وزارة الصحة"
+msgstr "Ministry of Health"

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}إنشاء حساب — سند{% endblock %}
+{% block title %}{% trans "إنشاء حساب — سند" %}{% endblock %}
 
 {% block content %}
 <div class="container py-5">
@@ -8,8 +9,8 @@
     <div class="col-md-8 col-lg-7">
 
       <div class="text-center mb-4">
-        <h1 class="h3 fw-bold mb-2">إنشاء حساب</h1>
-        <p class="text-muted">أخبرنا عنك حتى نتمكن من مطابقتك مع المساعد المناسب.</p>
+        <h1 class="h3 fw-bold mb-2">{% trans "إنشاء حساب" %}</h1>
+        <p class="text-muted">{% trans "أخبرنا عنك حتى نتمكن من مطابقتك مع المساعد المناسب." %}</p>
       </div>
 
       {% if messages %}
@@ -22,86 +23,86 @@
         {% csrf_token %}
         <div class="card-body p-4 p-md-5">
 
-          <p class="text-uppercase small text-muted fw-semibold mb-3" style="letter-spacing: 1px;">معلوماتك الشخصية</p>
+          <p class="text-uppercase small text-muted fw-semibold mb-3" style="letter-spacing: 1px;">{% trans "معلوماتك الشخصية" %}</p>
 
           <div class="row g-3">
             <div class="col-md-6">
-              <label for="first_name" class="form-label small fw-medium">الاسم الأول</label>
+              <label for="first_name" class="form-label small fw-medium">{% trans "الاسم الأول" %}</label>
               <input type="text" name="first_name" id="first_name" class="form-control" required>
             </div>
             <div class="col-md-6">
-              <label for="last_name" class="form-label small fw-medium">الاسم الأخير</label>
+              <label for="last_name" class="form-label small fw-medium">{% trans "الاسم الأخير" %}</label>
               <input type="text" name="last_name" id="last_name" class="form-control" required>
             </div>
           </div>
 
           <div class="mt-3">
-            <label for="email" class="form-label small fw-medium">البريد الإلكتروني</label>
+            <label for="email" class="form-label small fw-medium">{% trans "البريد الإلكتروني" %}</label>
             <input type="email" name="email" id="email" class="form-control" required>
           </div>
 
           <div class="mt-3">
-            <label for="phone" class="form-label small fw-medium">رقم الجوال</label>
+            <label for="phone" class="form-label small fw-medium">{% trans "رقم الجوال" %}</label>
             <input type="text" name="phone" id="phone" class="form-control" placeholder="+966..." required>
           </div>
 
           <div class="row g-3 mt-1">
             <div class="col-md-6">
-              <label for="password" class="form-label small fw-medium">كلمة المرور</label>
+              <label for="password" class="form-label small fw-medium">{% trans "كلمة المرور" %}</label>
               <input type="password" name="password" id="password" class="form-control" required>
             </div>
             <div class="col-md-6">
-              <label for="password_confirm" class="form-label small fw-medium">تأكيد كلمة المرور</label>
+              <label for="password_confirm" class="form-label small fw-medium">{% trans "تأكيد كلمة المرور" %}</label>
               <input type="password" name="password_confirm" id="password_confirm" class="form-control" required>
             </div>
           </div>
 
           <hr class="my-4">
 
-          <p class="text-uppercase small text-muted fw-semibold mb-3" style="letter-spacing: 1px;">احتياجاتك</p>
+          <p class="text-uppercase small text-muted fw-semibold mb-3" style="letter-spacing: 1px;">{% trans "احتياجاتك" %}</p>
 
           <div class="row g-3">
             <div class="col-md-6">
-              <label for="disability_type" class="form-label small fw-medium">النوع</label>
+              <label for="disability_type" class="form-label small fw-medium">{% trans "النوع" %}</label>
               <select name="disability_type" id="disability_type" class="form-select" required>
-                <option value="">اختر...</option>
-                <option value="PERMANENT">دائم</option>
-                <option value="TEMPORARY">مؤقت</option>
+                <option value="">{% trans "اختر..." %}</option>
+                <option value="PERMANENT">{% trans "دائم" %}</option>
+                <option value="TEMPORARY">{% trans "مؤقت" %}</option>
               </select>
             </div>
             <div class="col-md-6">
-              <label for="disability_category" class="form-label small fw-medium">الفئة</label>
+              <label for="disability_category" class="form-label small fw-medium">{% trans "الفئة" %}</label>
               <select name="disability_category" id="disability_category" class="form-select" required>
-                <option value="">اختر...</option>
-                <option value="MOBILITY">حركة</option>
-                <option value="VISUAL">بصري</option>
-                <option value="HEARING">سمعي</option>
-                <option value="COGNITIVE">إدراكي</option>
-                <option value="TEMPORARY_INJURY">إصابة مؤقتة</option>
+                <option value="">{% trans "اختر..." %}</option>
+                <option value="MOBILITY">{% trans "حركة" %}</option>
+                <option value="VISUAL">{% trans "بصري" %}</option>
+                <option value="HEARING">{% trans "سمعي" %}</option>
+                <option value="COGNITIVE">{% trans "إدراكي" %}</option>
+                <option value="TEMPORARY_INJURY">{% trans "إصابة مؤقتة" %}</option>
               </select>
             </div>
           </div>
 
           <div class="mt-3">
-            <label for="address" class="form-label small fw-medium">العنوان</label>
+            <label for="address" class="form-label small fw-medium">{% trans "العنوان" %}</label>
             <input type="text" name="address" id="address" class="form-control" required>
           </div>
 
           <div class="mt-3">
-            <label for="emergency_contact" class="form-label small fw-medium">جهة الاتصال في الطوارئ</label>
+            <label for="emergency_contact" class="form-label small fw-medium">{% trans "جهة الاتصال في الطوارئ" %}</label>
             <input type="text" name="emergency_contact" id="emergency_contact" class="form-control" placeholder="+966..." required>
           </div>
 
-          <button type="submit" class="btn btn-dark w-100 mt-4 py-2 fw-medium">إنشاء الحساب</button>
+          <button type="submit" class="btn btn-dark w-100 mt-4 py-2 fw-medium">{% trans "إنشاء الحساب" %}</button>
 
         </div>
       </form>
 
       <p class="text-center mt-3 small text-muted">
-        هل أنت مساعد؟ <a href="{% url 'helpers:signup_helper' %}" class="text-dark fw-medium">إنشاء حساب مساعد</a>
+        {% trans "هل أنت مساعد؟" %} <a href="{% url 'helpers:signup_helper' %}" class="text-dark fw-medium">{% trans "إنشاء حساب مساعد" %}</a>
       </p>
       <p class="text-center small text-muted">
-        لديك حساب بالفعل؟ <a href="{% url 'login' %}" class="text-dark fw-medium">تسجيل الدخول</a>
+        {% trans "لديك حساب بالفعل؟" %} <a href="{% url 'login' %}" class="text-dark fw-medium">{% trans "تسجيل الدخول" %}</a>
       </p>
 
     </div>
