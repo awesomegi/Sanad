@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}تأكيد إلغاء الحجز — سند{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+
+      <div class="mb-4">
+        <a href="{% url 'seeker_dashboard' %}" class="small text-muted text-decoration-none">→ العودة للوحة التحكم</a>
+      </div>
+
+      <h1 class="h3 fw-bold mb-2">تأكيد إلغاء الحجز</h1>
+      <p class="text-muted small mb-4">
+        سيتم استرداد المبلغ كاملاً إلى بطاقتك خلال ٥-٧ أيام عمل.
+      </p>
+
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-warning small">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+
+      <!-- Booking summary card -->
+      <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body p-4">
+          <p class="text-uppercase small text-muted fw-semibold mb-3" style="letter-spacing: 1px;">تفاصيل الحجز</p>
+
+          <!-- Helper info row -->
+          <div class="d-flex align-items-center pb-3 mb-3 border-bottom">
+            <div class="rounded-circle bg-light d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+              <span class="small fw-medium text-muted">{{ booking.helper.user.first_name|first }}{{ booking.helper.user.last_name|first }}</span>
+            </div>
+            <div>
+              <p class="mb-0 fw-medium">{{ booking.helper.user.first_name }} {{ booking.helper.user.last_name }}</p>
+              <p class="small text-muted mb-0">{{ booking.helper.specialty.name }}</p>
+            </div>
+          </div>
+
+          <!-- Booking details -->
+          <table class="w-100 small">
+            <tr>
+              <td class="text-muted py-1">الخدمة</td>
+              <td class="text-end py-1">{{ booking.service.name }}</td>
+            </tr>
+            <tr>
+              <td class="text-muted py-1">الموعد</td>
+              <td class="text-end py-1">{{ booking.scheduled_date }} · {{ booking.scheduled_start_time }}</td>
+            </tr>
+            <tr>
+              <td class="text-muted py-1">عدد الساعات</td>
+              <td class="text-end py-1">{{ booking.hours }}</td>
+            </tr>
+            <tr class="border-top">
+              <td class="fw-medium pt-3">المبلغ المسترد</td>
+              <td class="text-end pt-3 h5 mb-0 fw-bold">{{ booking.total_amount }} ر.س</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Warning notice -->
+      <div class="bg-light border-warning rounded p-3 mb-4 small">
+        <p class="fw-medium mb-2"> تنبيه</p>
+        <p class="text-muted mb-0">
+          بمجرد تأكيد الإلغاء، لن يتمكن المساعد من إكمال هذه المهمة. سيتم استرداد المبلغ المدفوع بالكامل تلقائياً.
+        </p>
+      </div>
+
+      <!-- Action buttons -->
+      <form method="post" action="{% url 'process_refund' booking.id %}" class="d-flex gap-2 justify-content-end pt-3 border-top">
+       {% csrf_token %}
+          <a href="{% url 'seeker_dashboard' %}" class="btn btn-outline-secondary px-4 py-2">العودة</a>
+           <button type="submit" class="btn btn-danger px-4 py-2 fw-medium">تأكيد الإلغاء</button>
+      </form>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
