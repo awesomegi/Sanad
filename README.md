@@ -84,8 +84,6 @@ sanad/
 
 ## Team
 
-- **[Ghadi]** — Backend (accounts, verification, payments, notifications)
-- **[Rimas]** — Backend (requests, ratings, shared templates)
 - **[Rimas]** — Backend (accounts, verification, payments, notifications)
 - **[Ghadi]** — Backend (helpers, bookings, ratings, shared templates)
 
