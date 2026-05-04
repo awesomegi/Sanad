@@ -20,6 +20,7 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('i18n/', include('django.conf.urls.i18n')),
     path('', views.home, name='home'),
     path('set-theme/', views.set_theme, name='set_theme'),
     path('accounts/', include('accounts.urls')),

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load i18n static %}
 
-{% block title %}ابحث عن مساعد — سند{% endblock %}
+{% block title %}{% trans "ابحث عن مساعد — سند" %}{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -44,8 +44,8 @@
 <!-- Page Header -->
 <div class="py-4" style="background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);">
   <div class="container text-center py-3">
-    <h1 class="fw-bold text-white mb-2">ابحث عن مساعد</h1>
-    <p class="mb-0" style="color:#d4af37;">تصفح المساعدين المعتمدين من وزارة الصحة في مدينتك</p>
+    <h1 class="fw-bold text-white mb-2">{% trans "ابحث عن مساعد" %}</h1>
+    <p class="mb-0" style="color:#d4af37;">{% trans "تصفح المساعدين المعتمدين من وزارة الصحة في مدينتك" %}</p>
   </div>
 </div>
 
@@ -57,43 +57,43 @@
       <form method="get">
         <div class="row g-2 align-items-end">
           <div class="col-12 col-md-3">
-            <label class="form-label small fw-medium mb-1">بحث بالاسم</label>
-            <input type="text" name="q" class="form-control" placeholder="اسم المساعد..."
+            <label class="form-label small fw-medium mb-1">{% trans "بحث بالاسم" %}</label>
+            <input type="text" name="q" class="form-control" placeholder="{% trans "اسم المساعد..." %}"
                    value="{{ query|default:'' }}">
           </div>
           <div class="col-6 col-md-2">
-            <label class="form-label small fw-medium mb-1">نوع الخدمة</label>
+            <label class="form-label small fw-medium mb-1">{% trans "نوع الخدمة" %}</label>
             <select name="service" class="form-select">
-              <option value="">الكل</option>
+              <option value="">{% trans "الكل" %}</option>
               {% for s in services %}
                 <option value="{{ s.id }}" {% if selected_service == s.id|stringformat:"s" %}selected{% endif %}>{{ s.name }}</option>
               {% endfor %}
             </select>
           </div>
           <div class="col-6 col-md-2">
-            <label class="form-label small fw-medium mb-1">المدينة</label>
+            <label class="form-label small fw-medium mb-1">{% trans "المدينة" %}</label>
             <select name="city" class="form-select">
-              <option value="">الكل</option>
+              <option value="">{% trans "الكل" %}</option>
               {% for c in cities %}
                 <option value="{{ c.id }}" {% if selected_city == c.id|stringformat:"s" %}selected{% endif %}>{{ c.name }}</option>
               {% endfor %}
             </select>
           </div>
           <div class="col-6 col-md-2">
-            <label class="form-label small fw-medium mb-1">أقصى سعر/ساعة</label>
-            <input type="number" name="max_rate" class="form-control" placeholder="ريال"
+            <label class="form-label small fw-medium mb-1">{% trans "أقصى سعر/ساعة" %}</label>
+            <input type="number" name="max_rate" class="form-control" placeholder="{% trans "ريال" %}"
                    value="{{ max_rate|default:'' }}" min="0">
           </div>
           <div class="col-6 col-md-2">
-            <label class="form-label small fw-medium mb-1">أدنى تقييم</label>
+            <label class="form-label small fw-medium mb-1">{% trans "أدنى تقييم" %}</label>
             <select name="min_rating" class="form-select">
-              <option value="">الكل</option>
+              <option value="">{% trans "الكل" %}</option>
               <option value="4" {% if min_rating == '4' %}selected{% endif %}>4+ ⭐</option>
               <option value="3" {% if min_rating == '3' %}selected{% endif %}>3+ ⭐</option>
             </select>
           </div>
           <div class="col-12 col-md-1">
-            <button type="submit" class="btn btn-dark w-100">بحث</button>
+            <button type="submit" class="btn btn-dark w-100">{% trans "بحث" %}</button>
           </div>
         </div>
       </form>
@@ -102,9 +102,9 @@
 
   <!-- عدد النتائج -->
   <div class="d-flex justify-content-between align-items-center mb-3">
-    <span class="small text-muted">{{ helpers|length }} مساعد متاح</span>
+    <span class="small text-muted">{% blocktrans with count=helpers|length %}{{ count }} مساعد متاح{% endblocktrans %}</span>
     {% if recommended_ids %}
-      <span class="badge-recommended"> المميز بـ "موصى لك" يناسب احتياجك تحديداً</span>
+      <span class="badge-recommended">{% trans " المميز بـ \"موصى لك\" يناسب احتياجك تحديداً" %}</span>
     {% endif %}
   </div>
 
@@ -126,14 +126,14 @@
                   <div class="d-flex align-items-center gap-2 flex-wrap">
                     <span class="fw-bold">{{ helper.user.get_full_name }}</span>
                     {% if helper.id in recommended_ids %}
-                      <span class="badge-recommended"> موصى لك</span>
+                      <span class="badge-recommended"> {% trans "موصى لك" %}</span>
                     {% endif %}
                   </div>
                   <div class="small text-muted mt-1">
                      {{ helper.city.name|default:"—" }} &nbsp;·&nbsp; {{ helper.specialty.name|default:"" }}
                   </div>
                   <div class="small text-muted">
-                     {{ helper.avg_rating|floatformat:1|default:"لا يوجد" }}
+                     {{ helper.avg_rating|floatformat:1|default:_("لا يوجد") }}
                   </div>
                 </div>
               </div>
@@ -149,8 +149,8 @@
               </div>
 
               <div class="d-flex justify-content-between align-items-center">
-                <span class="rate-badge">{{ helper.hourly_rate|default:"—" }} ر.س / ساعة</span>
-                <a href="{% url 'helpers:detail' helper.pk %}" class="btn btn-dark btn-sm">عرض الملف</a>
+                <span class="rate-badge">{% blocktrans with rate=helper.hourly_rate|default:"—" %}{{ rate }} ر.س / ساعة{% endblocktrans %}</span>
+                <a href="{% url 'helpers:detail' helper.pk %}" class="btn btn-dark btn-sm">{% trans "عرض الملف" %}</a>
               </div>
 
             </div>
@@ -161,9 +161,9 @@
   {% else %}
     <div class="text-center py-5 text-muted">
       <div style="font-size:3rem; margin-bottom:1rem;"></div>
-      <h5>لا يوجد مساعدون بهذه المعايير</h5>
-      <p>جرب تغيير الفلاتر أو البحث بكلمات مختلفة</p>
-      <a href="{% url 'helpers:list' %}" class="btn btn-outline-dark mt-2">إعادة تعيين الفلاتر</a>
+      <h5>{% trans "لا يوجد مساعدون بهذه المعايير" %}</h5>
+      <p>{% trans "جرب تغيير الفلاتر أو البحث بكلمات مختلفة" %}</p>
+      <a href="{% url 'helpers:list' %}" class="btn btn-outline-dark mt-2">{% trans "إعادة تعيين الفلاتر" %}</a>
     </div>
   {% endif %}
 

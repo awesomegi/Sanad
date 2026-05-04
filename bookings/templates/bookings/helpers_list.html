@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}ابحث عن مساعد — سند{% endblock %}
+{% block title %}{% trans "ابحث عن مساعد — سند" %}{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -18,8 +19,8 @@
 
 <div class="py-4" style="background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);">
   <div class="container text-center py-3">
-    <h1 class="fw-bold text-white mb-2">ابحث عن مساعد</h1>
-    <p class="mb-0" style="color:#d4af37;">تصفح المساعدين المعتمدين من وزارة الصحة</p>
+    <h1 class="fw-bold text-white mb-2">{% trans "ابحث عن مساعد" %}</h1>
+    <p class="mb-0" style="color:#d4af37;">{% trans "تصفح المساعدين المعتمدين من وزارة الصحة" %}</p>
   </div>
 </div>
 
@@ -31,36 +32,36 @@
       <form method="get">
         <div class="row g-2 align-items-end">
           <div class="col-12 col-md-3">
-            <label class="form-label small fw-medium mb-1">بحث بالاسم</label>
-            <input type="text" name="q" value="{{ query|default:'' }}" class="form-control" placeholder="ابحث بالاسم...">
+            <label class="form-label small fw-medium mb-1">{% trans "بحث بالاسم" %}</label>
+            <input type="text" name="q" value="{{ query|default:'' }}" class="form-control" placeholder="{% trans "ابحث بالاسم..." %}">
           </div>
           <div class="col-6 col-md-2">
-            <label class="form-label small fw-medium mb-1">المدينة</label>
+            <label class="form-label small fw-medium mb-1">{% trans "المدينة" %}</label>
             <select name="city" class="form-select">
-              <option value="">كل المدن</option>
+              <option value="">{% trans "كل المدن" %}</option>
               {% for city in cities %}
                 <option value="{{ city.id }}" {% if selected_city == city.id|stringformat:"s" %}selected{% endif %}>{{ city.name }}</option>
               {% endfor %}
             </select>
           </div>
           <div class="col-6 col-md-2">
-            <label class="form-label small fw-medium mb-1">التخصص</label>
+            <label class="form-label small fw-medium mb-1">{% trans "التخصص" %}</label>
             <select name="specialty" class="form-select">
-              <option value="">كل التخصصات</option>
+              <option value="">{% trans "كل التخصصات" %}</option>
               {% for spec in specialties %}
                 <option value="{{ spec.id }}" {% if selected_specialty == spec.id|stringformat:"s" %}selected{% endif %}>{{ spec.name }}</option>
               {% endfor %}
             </select>
           </div>
           <div class="col-6 col-md-2">
-            <label class="form-label small fw-medium mb-1">أقصى سعر</label>
-            <input type="number" name="max_rate" value="{{ max_rate|default:'' }}" class="form-control" placeholder="ريال">
+            <label class="form-label small fw-medium mb-1">{% trans "أقصى سعر" %}</label>
+            <input type="number" name="max_rate" value="{{ max_rate|default:'' }}" class="form-control" placeholder="{% trans "ريال" %}">
           </div>
           <div class="col-6 col-md-2">
-            <button type="submit" class="btn btn-dark w-100">بحث</button>
+            <button type="submit" class="btn btn-dark w-100">{% trans "بحث" %}</button>
           </div>
           <div class="col-12 col-md-1">
-            <a href="{% url 'bookings:helpers_list' %}" class="btn btn-outline-secondary w-100 small">مسح</a>
+            <a href="{% url 'bookings:helpers_list' %}" class="btn btn-outline-secondary w-100 small">{% trans "مسح" %}</a>
           </div>
         </div>
       </form>
@@ -68,7 +69,7 @@
   </div>
 
   <div class="mb-3">
-    <span class="small text-muted">{{ helpers|length }} مساعد متاح</span>
+    <span class="small text-muted">{% blocktrans with count=helpers|length %}{{ count }} مساعد متاح{% endblocktrans %}</span>
   </div>
 
   {% if helpers %}
@@ -82,8 +83,8 @@
   {% else %}
     <div class="text-center py-5 text-muted">
       <div style="font-size:3rem; margin-bottom:1rem;"></div>
-      <h5>لا يوجد مساعدون بهذه المعايير</h5>
-      <a href="{% url 'bookings:helpers_list' %}" class="btn btn-outline-dark mt-2">إعادة تعيين الفلاتر</a>
+      <h5>{% trans "لا يوجد مساعدون بهذه المعايير" %}</h5>
+      <a href="{% url 'bookings:helpers_list' %}" class="btn btn-outline-dark mt-2">{% trans "إعادة تعيين الفلاتر" %}</a>
     </div>
   {% endif %}
 

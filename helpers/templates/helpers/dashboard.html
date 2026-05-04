@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}لوحة تحكم المساعد — سند{% endblock %}
+{% block title %}{% trans "لوحة تحكم المساعد — سند" %}{% endblock %}
 
 {% block content %}
 
@@ -11,26 +12,26 @@
   <div class="container">
     <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
       <div>
-        <h1 class="h3 fw-bold mb-1">مرحباً، {{ user.first_name }} 👋</h1>
+        <h1 class="h3 fw-bold mb-1">{% blocktrans with name=user.first_name %}مرحباً، {{ name }} 👋{% endblocktrans %}</h1>
         <p class="text-muted small mb-0">
           {% if helper %}
           {% if open_requests %}
-          {{ open_requests|length }} طلب مفتوح يتوافق مع تخصصك
+          {% with count=open_requests|length %}{% blocktrans %}{{ count }} طلب مفتوح يتوافق مع تخصصك{% endblocktrans %}{% endwith %}
           {% else %}
-          جاهز لاستقبال الحجوزات الجديدة
+          {% trans "جاهز لاستقبال الحجوزات الجديدة" %}
           {% endif %}
           {% else %}
-          أكمل ملفك الشخصي لبدء استقبال الحجوزات
+          {% trans "أكمل ملفك الشخصي لبدء استقبال الحجوزات" %}
           {% endif %}
         </p>
       </div>
       <a href="{% url 'helpers:edit_profile' %}" class="btn btn-gold px-4 fw-medium">
-        تعديل الملف المهني
+        {% trans "تعديل الملف المهني" %}
       </a>
 
       <!-- Notifications link — added by Rimas -->
       <a href="{% url 'notifications:list' %}" class="btn btn-outline-secondary px-3">
-        🔔 الإشعارات
+        {% trans "🔔 الإشعارات" %}
         {% if unread_notifications > 0 %}
         <span class="badge bg-danger ms-1">{{ unread_notifications }}</span>
         {% endif %}
@@ -45,7 +46,7 @@
               <div class="card-body d-flex align-items-center gap-3">
                 <div class="stat-icon" style="background:#fef9c3;"></div>
                 <div>
-                  <p class="text-muted small mb-0">قيد الانتظار</p>
+                  <p class="text-muted small mb-0">{% trans "قيد الانتظار" %}</p>
                   <p class="h3 fw-bold mb-0 h-display">{{ pending_count }}</p>
                 </div>
               </div>
@@ -57,7 +58,7 @@
               <div class="card-body d-flex align-items-center gap-3">
                 <div class="stat-icon" style="background:#dcfce7;"></div>
                 <div>
-                  <p class="text-muted small mb-0">نشطة</p>
+                  <p class="text-muted small mb-0">{% trans "نشطة" %}</p>
                   <p class="h3 fw-bold mb-0 h-display">{{ active_count }}</p>
                 </div>
               </div>
@@ -69,10 +70,10 @@
               <div class="card-body d-flex align-items-center gap-3">
                 <div class="stat-icon" style="background:#dbeafe;"></div>
                 <div>
-                  <p class="text-muted small mb-0">هذا الشهر</p>
+                  <p class="text-muted small mb-0">{% trans "هذا الشهر" %}</p>
                   <p class="h3 fw-bold mb-0 h-display">
                     {{ monthly_earnings }}
-                    <span class="small fw-normal text-muted">ر.س</span>
+                    <span class="small fw-normal text-muted">{% trans "ر.س" %}</span>
                   </p>
                 </div>
               </div>
@@ -84,7 +85,7 @@
               <div class="card-body d-flex align-items-center gap-3">
                 <div class="stat-icon" style="background:#fce7f3;"></div>
                 <div>
-                  <p class="text-muted small mb-0">التقييم</p>
+                  <p class="text-muted small mb-0">{% trans "التقييم" %}</p>
                   <p class="h3 fw-bold mb-0 h-display">
                     {{ rating|floatformat:1|default:"—" }}
                     {% if rating %}<span class="small fw-normal text-muted">/ 5</span>{% endif %}
@@ -97,7 +98,7 @@
         </div>
 
         <!-- الحجوزات القادمة -->
-        <h2 class="h5 fw-bold mb-3">الحجوزات القادمة</h2>
+        <h2 class="h5 fw-bold mb-3">{% trans "الحجوزات القادمة" %}</h2>
 
         {% if upcoming_bookings %}
         <div class="d-flex flex-column gap-3">
@@ -110,19 +111,19 @@
                   <div class="d-flex align-items-center gap-3 flex-wrap">
                     <span class="small text-muted"> {{ booking.scheduled_date }}</span>
                     <span class="small text-muted"> {{ booking.scheduled_start_time }}</span>
-                    <span class="small text-muted">{{ booking.hours }} ساعة</span>
+                    <span class="small text-muted">{% blocktrans with hours=booking.hours %}{{ hours }} ساعة{% endblocktrans %}</span>
                   </div>
                   <p class="small text-muted mt-1 mb-0">
-                    الباحث: {{ booking.seeker.user.first_name }} {{ booking.seeker.user.last_name }}
+                    {% blocktrans with name=booking.seeker.user.first_name %}الباحث: {{ name }}{% endblocktrans %} {{ booking.seeker.user.last_name }}
                   </p>
                 </div>
                 <div class="text-end">
-                  <p class="fw-bold mb-1 text-gold">{{ booking.total_amount }} ر.س</p>
+                  <p class="fw-bold mb-1 text-gold">{% blocktrans with amount=booking.total_amount %}{{ amount }} ر.س{% endblocktrans %}</p>
                   <span class="badge rounded-pill small
                     {% if booking.status == 'BOOKED' %}status-booked
                     {% elif booking.status == 'ACTIVE' %}status-active
                     {% endif %}">
-                    {% if booking.status == 'BOOKED' %}محجوز{% elif booking.status == 'ACTIVE' %}جارٍ{% endif %}
+                    {% if booking.status == 'BOOKED' %}{% trans "محجوز" %}{% elif booking.status == 'ACTIVE' %}{% trans "جارٍ" %}{% endif %}
                   </span>
                 </div>
               </div>
@@ -135,9 +136,9 @@
         <div class="card border-0 shadow-sm">
           <div class="card-body empty-state">
             <div class="empty-icon"></div>
-            <h6 class="fw-semibold mb-2">لا توجد حجوزات قادمة</h6>
-            <p class="text-muted small mb-3">تأكد أن ملفك الشخصي مكتمل لاستقطاب المزيد من الطلبات</p>
-            <a href="{% url 'helpers:edit_profile' %}" class="btn btn-dark btn-sm px-4">أكمل ملفك الشخصي</a>
+            <h6 class="fw-semibold mb-2">{% trans "لا توجد حجوزات قادمة" %}</h6>
+            <p class="text-muted small mb-3">{% trans "تأكد أن ملفك الشخصي مكتمل لاستقطاب المزيد من الطلبات" %}</p>
+            <a href="{% url 'helpers:edit_profile' %}" class="btn btn-dark btn-sm px-4">{% trans "أكمل ملفك الشخصي" %}</a>
           </div>
         </div>
         {% endif %}
@@ -153,20 +154,20 @@
             <div class="card border-0 shadow-sm text-center p-5">
 
               <div class="mb-3" style="font-size:3.5rem;">⏳</div>
-              <h2 class="fw-bold mb-3">طلبك قيد المراجعة</h2>
+              <h2 class="fw-bold mb-3">{% trans "طلبك قيد المراجعة" %}</h2>
               <p class="text-muted mb-2">
-                نحن نتحقق حالياً من وثائقك المهنية والصحية.
+                {% trans "نحن نتحقق حالياً من وثائقك المهنية والصحية." %}
               </p>
               <p class="text-muted mb-4">
-                ستصلك رسالة بريد إلكتروني فور تحديث حالة طلبك.
+                {% trans "ستصلك رسالة بريد إلكتروني فور تحديث حالة طلبك." %}
               </p>
 
               <!-- شريط التقدم -->
               <div class="mb-4">
                 <div class="d-flex justify-content-between small text-muted mb-1">
-                  <span>تسجيل الحساب ✅</span>
-                  <span>المراجعة 🔄</span>
-                  <span>الاعتماد ⏳</span>
+                  <span>{% trans "تسجيل الحساب ✅" %}</span>
+                  <span>{% trans "المراجعة 🔄" %}</span>
+                  <span>{% trans "الاعتماد ⏳" %}</span>
                 </div>
                 <div class="progress" style="height:8px; border-radius:8px;">
                   <div class="progress-bar" role="progressbar" style="width:50%; background:#d4af37;"
@@ -177,11 +178,11 @@
 
               <div class="d-flex justify-content-center mb-4">
                 <div class="spinner-border" style="color:#d4af37;" role="status">
-                  <span class="visually-hidden">جاري التحميل...</span>
+                  <span class="visually-hidden">{% trans "جاري التحميل..." %}</span>
                 </div>
               </div>
 
-              <a href="{% url 'home' %}" class="btn btn-outline-secondary btn-sm">العودة للرئيسية</a>
+              <a href="{% url 'home' %}" class="btn btn-outline-secondary btn-sm">{% trans "العودة للرئيسية" %}</a>
             </div>
           </div>
         </div>

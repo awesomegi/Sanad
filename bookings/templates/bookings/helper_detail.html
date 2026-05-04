@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}{{ helper.user.get_full_name }} — سند{% endblock %}
+{% block title %}{{ helper.user.get_full_name }} — {% trans "سند" %}{% endblock %}
 
 {% block content %}
 <div class="container py-5">
 
-  <a href="{% url 'bookings:helpers_list' %}" class="small text-muted text-decoration-none">← رجوع للقائمة</a>
+  <a href="{% url 'bookings:helpers_list' %}" class="small text-muted text-decoration-none">{% trans "← رجوع للقائمة" %}</a>
 
   <div class="row g-4 mt-1">
 
@@ -30,9 +31,9 @@
               <p class="text-muted small mb-0">
                  {{ helper.city.name|default:"—" }}
                 &nbsp;·&nbsp;
-                 ⭐ {{ avg_rating|floatformat:1|default:"لا يوجد" }}
+                 ⭐ {{ avg_rating|floatformat:1|default:_("لا يوجد") }}
                 &nbsp;·&nbsp;
-                 {{ completed_count }} مهمة مكتملة
+                 {% blocktrans with count=completed_count %}{{ count }} مهمة مكتملة{% endblocktrans %}
               </p>
             </div>
           </div>
@@ -43,7 +44,7 @@
       {% if helper.bio %}
         <div class="card border-0 shadow-sm mb-4">
           <div class="card-body p-4">
-            <h5 class="fw-bold mb-3" style="color:#d4af37;"> نبذة شخصية</h5>
+            <h5 class="fw-bold mb-3" style="color:#d4af37;"> {% trans "نبذة شخصية" %}</h5>
             <p class="text-muted mb-0" style="line-height:1.8;">{{ helper.bio }}</p>
           </div>
         </div>
@@ -53,11 +54,11 @@
       {% if helper.experiences.exists %}
         <div class="card border-0 shadow-sm mb-4">
           <div class="card-body p-4">
-            <h5 class="fw-bold mb-3" style="color:#d4af37;"> الخبرات</h5>
+            <h5 class="fw-bold mb-3" style="color:#d4af37;"> {% trans "الخبرات" %}</h5>
             {% for exp in helper.experiences.all %}
               <div class="mb-3 pb-3 border-bottom">
                 <div class="fw-semibold">{{ exp.title }}</div>
-                <div class="small text-muted">{{ exp.years }} سنوات خبرة</div>
+                <div class="small text-muted">{% blocktrans with years=exp.years %}{{ years }} سنوات خبرة{% endblocktrans %}</div>
                 {% if exp.description %}
                   <div class="small text-muted mt-1">{{ exp.description }}</div>
                 {% endif %}
@@ -71,7 +72,7 @@
       {% if helper.services.exists %}
         <div class="card border-0 shadow-sm mb-4">
           <div class="card-body p-4">
-            <h5 class="fw-bold mb-3" style="color:#d4af37;"> الخدمات المقدمة</h5>
+            <h5 class="fw-bold mb-3" style="color:#d4af37;"> {% trans "الخدمات المقدمة" %}</h5>
             <div class="d-flex flex-wrap gap-2">
               {% for service in helper.services.all %}
                 <span style="background:#fff8e8;color:#b8860b;border-radius:20px;padding:6px 14px;font-size:.85rem;font-weight:600;">
@@ -87,7 +88,7 @@
       {% if availability %}
         <div class="card border-0 shadow-sm">
           <div class="card-body p-4">
-            <h5 class="fw-bold mb-3" style="color:#d4af37;"> أوقات التوفر</h5>
+            <h5 class="fw-bold mb-3" style="color:#d4af37;"> {% trans "أوقات التوفر" %}</h5>
             {% for slot in availability %}
               <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
                 <span class="fw-medium">{{ slot.get_day_display }}</span>
@@ -106,10 +107,10 @@
         <div class="card-body p-4 text-center">
           <div class="mb-4">
             <span class="fw-bold" style="font-size:2rem;color:#d4af37;">{{ helper.hourly_rate|default:"—" }}</span>
-            <span class="text-muted small"> ر.س / ساعة</span>
+            <span class="text-muted small"> {% trans "ر.س/ساعة" %}</span>
           </div>
-          <a href="{% url 'bookings:book_helper' helper.pk %}" class="btn btn-dark w-100 py-2 fw-medium mb-3">احجز الآن</a>
-          <p class="small text-muted mb-0">✅ دفع آمن · استرداد كامل عند الإلغاء</p>
+          <a href="{% url 'bookings:book_helper' helper.pk %}" class="btn btn-dark w-100 py-2 fw-medium mb-3">{% trans "احجز الآن" %}</a>
+          <p class="small text-muted mb-0">{% trans "✅ دفع آمن · استرداد كامل عند الإلغاء" %}</p>
         </div>
       </div>
     </div>

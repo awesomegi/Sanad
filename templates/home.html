@@ -1,20 +1,21 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}سند — المساعدة، حين تحتاجها{% endblock %}
+{% block title %}{% trans "سند — المساعدة، حين تحتاجها" %}{% endblock %}
 
 {% block content %}
 
 <!-- Hero -->
 <section class="py-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
   <div class="container py-5 text-center">
-    <span class="badge mb-3 px-3 py-2 badge-gold">معتمد من وزارة الصحة</span>
-    <h1 class="display-4 fw-bold mb-3">المساعدة، حين تحتاجها.</h1>
+    <span class="badge mb-3 px-3 py-2 badge-gold">{% trans "معتمد من وزارة الصحة" %}</span>
+    <h1 class="display-4 fw-bold mb-3">{% trans "المساعدة، حين تحتاجها." %}</h1>
     <p class="lead text-muted mb-4 mx-auto" style="max-width: 600px;">
-      نربط ذوي الإعاقة بمساعدين موثوقين معتمدين من الجهات الحكومية. مدربون، آمنون، وعلى بُعد حجز واحد.
+      {% trans "نربط ذوي الإعاقة بمساعدين موثوقين معتمدين من الجهات الحكومية. مدربون، آمنون، وعلى بُعد حجز واحد." %}
     </p>
     <div class="d-flex gap-2 justify-content-center flex-wrap">
-      <a href="{% url 'signup_seeker' %}" class="btn btn-dark btn-lg px-4">أحتاج مساعدة</a>
-      <a href="{% url 'helpers:signup_helper' %}" class="btn btn-outline-dark btn-lg px-4">أريد المساعدة</a>
+      <a href="{% url 'signup_seeker' %}" class="btn btn-dark btn-lg px-4">{% trans "أحتاج مساعدة" %}</a>
+      <a href="{% url 'helpers:signup_helper' %}" class="btn btn-outline-dark btn-lg px-4">{% trans "أريد المساعدة" %}</a>
     </div>
   </div>
 </section>
@@ -22,15 +23,15 @@
 <!-- كيف يعمل -->
 <section class="py-5">
   <div class="container">
-    <h2 class="text-center mb-5 fw-bold">كيف يعمل سند</h2>
+    <h2 class="text-center mb-5 fw-bold">{% trans "كيف يعمل سند" %}</h2>
     <div class="row g-4">
       <div class="col-md-4">
         <div class="text-center px-3">
           <div class="d-inline-flex align-items-center justify-content-center mb-3 rounded-circle bg-white shadow-sm" style="width:64px;height:64px;">
             <span class="h3 mb-0" style="color:#d4af37;">١</span>
           </div>
-          <h5 class="fw-semibold">تصفح المساعدين المعتمدين</h5>
-          <p class="text-muted small">جميع المساعدين معتمدون من وزارة الصحة ومدربون على دعم ذوي الإعاقة.</p>
+          <h5 class="fw-semibold">{% trans "تصفح المساعدين المعتمدين" %}</h5>
+          <p class="text-muted small">{% trans "جميع المساعدين معتمدون من وزارة الصحة ومدربون على دعم ذوي الإعاقة." %}</p>
         </div>
       </div>
       <div class="col-md-4">
@@ -38,8 +39,8 @@
           <div class="d-inline-flex align-items-center justify-content-center mb-3 rounded-circle bg-white shadow-sm" style="width:64px;height:64px;">
             <span class="h3 mb-0" style="color:#d4af37;">٢</span>
           </div>
-          <h5 class="fw-semibold">احجز حسب جدولك</h5>
-          <p class="text-muted small">اختر مساعداً، خدمةً، ووقتاً يناسبك.</p>
+          <h5 class="fw-semibold">{% trans "احجز حسب جدولك" %}</h5>
+          <p class="text-muted small">{% trans "اختر مساعداً، خدمةً، ووقتاً يناسبك." %}</p>
         </div>
       </div>
       <div class="col-md-4">
@@ -47,8 +48,8 @@
           <div class="d-inline-flex align-items-center justify-content-center mb-3 rounded-circle bg-white shadow-sm" style="width:64px;height:64px;">
             <span class="h3 mb-0" style="color:#d4af37;">٣</span>
           </div>
-          <h5 class="fw-semibold">ادفع بأمان</h5>
-          <p class="text-muted small">نقبل مدى وفيزا وآبل باي. استرداد كامل عند الإلغاء.</p>
+          <h5 class="fw-semibold">{% trans "ادفع بأمان" %}</h5>
+          <p class="text-muted small">{% trans "نقبل مدى وفيزا وآبل باي. استرداد كامل عند الإلغاء." %}</p>
         </div>
       </div>
     </div>
@@ -60,12 +61,12 @@
   <div class="container">
     <div class="row align-items-center">
       <div class="col-lg-6 mb-4 mb-lg-0">
-        <h2 class="fw-bold mb-3">مصمم للحظات التي تهم.</h2>
+        <h2 class="fw-bold mb-3">{% trans "مصمم للحظات التي تهم." %}</h2>
         <p class="text-muted mb-3">
-          سواء كانت حاجتك دائمة أو مؤقتة — التواء كاحل، تعافٍ من عملية، أو دعم يومي للحركة — يمنحك سند شبكة من المساعدين المدربين الذين يفهمون احتياجاتك تماماً.
+          {% trans "سواء كانت حاجتك دائمة أو مؤقتة — التواء كاحل، تعافٍ من عملية، أو دعم يومي للحركة — يمنحك سند شبكة من المساعدين المدربين الذين يفهمون احتياجاتك تماماً." %}
         </p>
         <p class="text-muted">
-          لا داعي للاعتماد على عائلة بعيدة. ولا حرج من طلب المساعدة من الأصدقاء. فقط مساعدة موثوقة، بشروطك أنت.
+          {% trans "لا داعي للاعتماد على عائلة بعيدة. ولا حرج من طلب المساعدة من الأصدقاء. فقط مساعدة موثوقة، بشروطك أنت." %}
         </p>
       </div>
       <div class="col-lg-6">
@@ -74,7 +75,7 @@
             <div class="card border-0 shadow-sm h-100">
               <div class="card-body p-4">
                 <p class="h2 fw-bold mb-1" style="color:#d4af37;">١٠٠٪</p>
-                <p class="small text-muted mb-0">مساعدون معتمدون</p>
+                <p class="small text-muted mb-0">{% trans "مساعدون معتمدون" %}</p>
               </div>
             </div>
           </div>
@@ -82,7 +83,7 @@
             <div class="card border-0 shadow-sm h-100">
               <div class="card-body p-4">
                 <p class="h2 fw-bold mb-1" style="color:#d4af37;">٥</p>
-                <p class="small text-muted mb-0">مجالات تخصص</p>
+                <p class="small text-muted mb-0">{% trans "مجالات تخصص" %}</p>
               </div>
             </div>
           </div>
@@ -90,15 +91,15 @@
             <div class="card border-0 shadow-sm h-100">
               <div class="card-body p-4">
                 <p class="h2 fw-bold mb-1" style="color:#d4af37;">٢٤/٧</p>
-                <p class="small text-muted mb-0">حجز متاح دائماً</p>
+                <p class="small text-muted mb-0">{% trans "حجز متاح دائماً" %}</p>
               </div>
             </div>
           </div>
           <div class="col-6">
             <div class="card border-0 shadow-sm h-100">
               <div class="card-body p-4">
-                <p class="h2 fw-bold mb-1" style="color:#d4af37;">ر.س</p>
-                <p class="small text-muted mb-0">دفع آمن عبر مدى</p>
+                <p class="h2 fw-bold mb-1" style="color:#d4af37;">{% trans "ر.س" %}</p>
+                <p class="small text-muted mb-0">{% trans "دفع آمن عبر مدى" %}</p>
               </div>
             </div>
           </div>

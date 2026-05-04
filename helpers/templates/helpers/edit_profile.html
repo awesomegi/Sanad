@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}تعديل الملف المهني — سند{% endblock %}
+{% block title %}{% trans "تعديل الملف المهني — سند" %}{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -50,8 +51,8 @@
     <div class="col-md-9">
 
       <div class="mb-4">
-        <h1 class="h3 fw-bold mb-1">الملف المهني</h1>
-        <p class="text-muted small">حدّث معلوماتك وخبراتك لاستقطاب المزيد من الحجوزات</p>
+        <h1 class="h3 fw-bold mb-1">{% trans "الملف المهني" %}</h1>
+        <p class="text-muted small">{% trans "حدّث معلوماتك وخبراتك لاستقطاب المزيد من الحجوزات" %}</p>
       </div>
 
       <div class="card border-0 shadow-sm">
@@ -62,36 +63,36 @@
 
             <!-- نبذة -->
             <div class="mb-4">
-              <label class="form-label small fw-medium">نبذة عنك</label>
+              <label class="form-label small fw-medium">{% trans "نبذة عنك" %}</label>
               {{ form.bio }}
             </div>
 
             <!-- المدينة والتخصص -->
             <div class="row mb-3">
               <div class="col-md-6 mb-3">
-                <label class="form-label small fw-medium">المدينة</label>
+                <label class="form-label small fw-medium">{% trans "المدينة" %}</label>
                 {{ form.city }}
                 <input type="text" name="city_other" class="form-control mt-2"
-                       placeholder="أو اكتب مدينتك هنا إن لم تجدها...">
+                       placeholder="{% trans "أو اكتب مدينتك هنا إن لم تجدها..." %}">
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label small fw-medium">التخصص</label>
+                <label class="form-label small fw-medium">{% trans "التخصص" %}</label>
                 {{ form.specialty }}
                 <input type="text" name="specialty_other" class="form-control mt-2"
-                       placeholder="أو اكتب تخصصك هنا إن لم تجده...">
+                       placeholder="{% trans "أو اكتب تخصصك هنا إن لم تجده..." %}">
               </div>
             </div>
 
             <!-- الخدمات -->
             <div class="mb-4 pt-3 border-top">
-              <h5 class="section-title">الخدمات المقدمة</h5>
-              <p class="small text-muted mb-3">أضف الخدمات التي تقدمها</p>
+              <h5 class="section-title">{% trans "الخدمات المقدمة" %}</h5>
+              <p class="small text-muted mb-3">{% trans "أضف الخدمات التي تقدمها" %}</p>
 
               <div class="d-flex gap-2 mb-3">
                 <input type="text" id="serviceInput" class="form-control"
-                       placeholder="مثال: مساعدة في التسوق">
+                       placeholder="{% trans "مثال: مساعدة في التسوق" %}">
                 <button type="button" onclick="addService()" class="btn btn-gold px-3" style="white-space:nowrap;">
-                  + إضافة
+                  {% trans "+ إضافة" %}
                 </button>
               </div>
 
@@ -101,22 +102,22 @@
 
             <!-- الخبرات -->
             <div class="mt-4 pt-3 border-top">
-              <h5 class="section-title">الخبرات المسجلة</h5>
+              <h5 class="section-title">{% trans "الخبرات المسجلة" %}</h5>
               <div class="row mt-3 mb-3">
                 {% for exp in experiences %}
                   <div class="col-md-6 mb-2">
                     <div class="card border-0 bg-light p-3" style="border-right: 4px solid #d4af37 !important; border-radius:8px;">
                       <h6 class="mb-1 fw-semibold">{{ exp.title }}</h6>
-                      <small class="text-muted">{{ exp.years }} سنوات خبرة</small>
+                      <small class="text-muted">{% blocktrans with years=exp.years %}{{ years }} سنوات خبرة{% endblocktrans %}</small>
                       <p class="small text-muted mb-0 mt-1">{{ exp.description }}</p>
                     </div>
                   </div>
                 {% empty %}
-                  <p class="small text-muted">لا توجد خبرات مضافة بعد.</p>
+                  <p class="small text-muted">{% trans "لا توجد خبرات مضافة بعد." %}</p>
                 {% endfor %}
               </div>
 
-              <p class="small text-muted fw-medium mb-2">إضافة خبرة جديدة:</p>
+              <p class="small text-muted fw-medium mb-2">{% trans "إضافة خبرة جديدة:" %}</p>
               <div class="row g-3">
                 <div class="col-md-8">{{ exp_form.title }}</div>
                 <div class="col-md-4">{{ exp_form.years }}</div>
@@ -126,18 +127,18 @@
 
             <!-- أوقات الإتاحة -->
             <div class="mt-4 pt-3 border-top">
-              <h5 class="section-title">جدول الإتاحة</h5>
+              <h5 class="section-title">{% trans "جدول الإتاحة" %}</h5>
               <div class="d-flex flex-wrap gap-2 mb-3 mt-2">
                 {% for avail in availabilities %}
                   <span class="avail-badge">
                     {{ avail.get_day_display }}: {{ avail.start_time|time:"H:i" }} - {{ avail.end_time|time:"H:i" }}
                   </span>
                 {% empty %}
-                  <p class="small text-muted">لا توجد أوقات مضافة بعد.</p>
+                  <p class="small text-muted">{% trans "لا توجد أوقات مضافة بعد." %}</p>
                 {% endfor %}
               </div>
 
-              <p class="small text-muted fw-medium mb-2">إضافة وقت جديد:</p>
+              <p class="small text-muted fw-medium mb-2">{% trans "إضافة وقت جديد:" %}</p>
               <div class="row g-3">
                 <div class="col-md-4">{{ avail_form.day }}</div>
                 <div class="col-md-4">{{ avail_form.start_time }}</div>
@@ -147,11 +148,11 @@
 
             <!-- السعر بالساعة -->
             <div class="mt-4 mb-4 pt-3 border-top">
-              <label class="form-label small fw-medium">السعر بالساعة (ر.س)</label>
+              <label class="form-label small fw-medium">{% trans "السعر بالساعة (ر.س)" %}</label>
               {{ form.hourly_rate }}
             </div>
 
-            <button type="submit" class="btn btn-dark w-100 py-2 fw-medium">حفظ وتحديث الملف</button>
+            <button type="submit" class="btn btn-dark w-100 py-2 fw-medium">{% trans "حفظ وتحديث الملف" %}</button>
 
           </form>
         </div>
