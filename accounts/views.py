@@ -100,7 +100,8 @@ def signup_seeker(request):
 
     return render(request, 'accounts/signup_seeker.html')
 
-
+# Fix by Rimas: moved 'else' inside POST block to prevent error message
+# from showing on page load before the user attempts to login
 
 def login_view(request):
     if request.method == 'POST':
@@ -112,16 +113,14 @@ def login_view(request):
         if user is not None:
             login(request, user)
             if user.is_seeker:
-                return redirect('seeker_dashboard')  
+                return redirect('seeker_dashboard')
             elif user.is_helper:
                 return redirect('helpers:helper_dashboard')
-        return redirect('home')
-        
-    else:
+            return redirect('home')
+        else:
             messages.error(request, 'Invalid email or password')
 
     return render(request, 'accounts/login.html')
-
 
 
 def logout_view(request):
