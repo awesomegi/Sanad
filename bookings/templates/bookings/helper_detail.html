@@ -8,113 +8,112 @@
 
   <a href="{% url 'bookings:helpers_list' %}" class="small text-muted text-decoration-none">{% trans "← رجوع للقائمة" %}</a>
 
-  <div class="row g-4 mt-1">
+        <!-- العمود الرئيسي -->
+        <div class="col-12 col-lg-8">
 
-    <!-- العمود الرئيسي -->
-    <div class="col-12 col-lg-8">
+            <!-- بطاقة المساعد -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center gap-4 flex-wrap">
 
-      <!-- بطاقة المساعد -->
-      <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body p-4">
-          <div class="d-flex align-items-center gap-4 flex-wrap">
-            {% if helper.user.profile_photo %}
-              <img src="{{ helper.user.profile_photo.url }}" alt=""
-                   style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #d4af37;">
-            {% else %}
-              <div style="width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,#d4af37,#c09b28);display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:800;color:#fff;flex-shrink:0;">
-                {{ helper.user.first_name|first|upper }}
-              </div>
+                        {% if helper.profile_photo and helper.profile_photo.name %}
+                        <img src="{{ helper.profile_photo.url }}" alt="" class="helper-detail-avatar">
+                        {% else %}
+                        <div class="helper-detail-avatar-placeholder">
+                            {{ helper.user.first_name|first|upper }}
+                        </div>
+                        {% endif %}
+
+                        <div>
+                            <h3 class="fw-bold mb-1">{{ helper.user.get_full_name }}</h3>
+                            <p class="mb-1 fw-semibold helper-card-specialty">{{ helper.specialty.name|default:"—" }}</p>
+                            <p class="text-muted small mb-0">
+                                📍 {{ helper.city.name|default:"—" }}
+                                &nbsp;·&nbsp;
+                                ⭐ {{ avg_rating|floatformat:1|default:"لا يوجد" }}
+                                &nbsp;·&nbsp;
+                                {{ completed_count }} مهمة مكتملة
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- نبذة -->
+            {% if helper.bio %}
+            <div class="card shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-3 section-title">👤 نبذة شخصية</h5>
+                    <p class="text-muted mb-0" style="line-height:1.8;">{{ helper.bio }}</p>
+                </div>
+            </div>
             {% endif %}
-            <div>
-              <h3 class="fw-bold mb-1">{{ helper.user.get_full_name }}</h3>
-              <p class="mb-1 fw-semibold" style="color:#d4af37;">{{ helper.specialty.name|default:"—" }}</p>
-              <p class="text-muted small mb-0">
-                 {{ helper.city.name|default:"—" }}
-                &nbsp;·&nbsp;
-                 ⭐ {{ avg_rating|floatformat:1|default:_("لا يوجد") }}
-                &nbsp;·&nbsp;
-                 {% blocktrans with count=completed_count %}{{ count }} مهمة مكتملة{% endblocktrans %}
-              </p>
+
+            <!-- الخبرات -->
+            {% if helper.experiences.exists %}
+            <div class="card shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-3 section-title">💼 الخبرات</h5>
+                    {% for exp in helper.experiences.all %}
+                    <div class="mb-3 pb-3 border-bottom">
+                        <div class="fw-semibold">{{ exp.title }}</div>
+                        <div class="small text-muted">{{ exp.years }} سنوات خبرة</div>
+                        {% if exp.description %}
+                        <div class="small text-muted mt-1">{{ exp.description }}</div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
+            {% endif %}
 
-      <!-- نبذة -->
-      {% if helper.bio %}
-        <div class="card border-0 shadow-sm mb-4">
-          <div class="card-body p-4">
-            <h5 class="fw-bold mb-3" style="color:#d4af37;"> {% trans "نبذة شخصية" %}</h5>
-            <p class="text-muted mb-0" style="line-height:1.8;">{{ helper.bio }}</p>
-          </div>
-        </div>
-      {% endif %}
-
-      <!-- الخبرات -->
-      {% if helper.experiences.exists %}
-        <div class="card border-0 shadow-sm mb-4">
-          <div class="card-body p-4">
-            <h5 class="fw-bold mb-3" style="color:#d4af37;"> {% trans "الخبرات" %}</h5>
-            {% for exp in helper.experiences.all %}
-              <div class="mb-3 pb-3 border-bottom">
-                <div class="fw-semibold">{{ exp.title }}</div>
-                <div class="small text-muted">{% blocktrans with years=exp.years %}{{ years }} سنوات خبرة{% endblocktrans %}</div>
-                {% if exp.description %}
-                  <div class="small text-muted mt-1">{{ exp.description }}</div>
-                {% endif %}
-              </div>
-            {% endfor %}
-          </div>
-        </div>
-      {% endif %}
-
-      <!-- الخدمات -->
-      {% if helper.services.exists %}
-        <div class="card border-0 shadow-sm mb-4">
-          <div class="card-body p-4">
-            <h5 class="fw-bold mb-3" style="color:#d4af37;"> {% trans "الخدمات المقدمة" %}</h5>
-            <div class="d-flex flex-wrap gap-2">
-              {% for service in helper.services.all %}
-                <span style="background:#fff8e8;color:#b8860b;border-radius:20px;padding:6px 14px;font-size:.85rem;font-weight:600;">
-                  {{ service.name }}
-                </span>
-              {% endfor %}
+            <!-- الخدمات -->
+            {% if helper.services.exists %}
+            <div class="card shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-3 section-title">🛠 الخدمات المقدمة</h5>
+                    <div class="d-flex flex-wrap gap-2">
+                        {% for service in helper.services.all %}
+                        <span class="helper-card-service-tag">{{ service.name }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      {% endif %}
+            {% endif %}
 
-      <!-- أوقات التوفر -->
-      {% if availability %}
-        <div class="card border-0 shadow-sm">
-          <div class="card-body p-4">
-            <h5 class="fw-bold mb-3" style="color:#d4af37;"> {% trans "أوقات التوفر" %}</h5>
-            {% for slot in availability %}
-              <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
-                <span class="fw-medium">{{ slot.get_day_display }}</span>
-                <span class="small text-muted">{{ slot.start_time|time:"g:i A" }} — {{ slot.end_time|time:"g:i A" }}</span>
-              </div>
-            {% endfor %}
-          </div>
+            <!-- أوقات التوفر -->
+            {% if availability %}
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-3 section-title">📅 أوقات التوفر</h5>
+                    {% for slot in availability %}
+                    <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                        <span class="fw-medium">{{ slot.get_day_display }}</span>
+                        <span class="small text-muted">{{ slot.start_time|time:"g:i A" }} — {{ slot.end_time|time:"g:i A" }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
         </div>
-      {% endif %}
+
+        <!-- عمود الحجز -->
+        <div class="col-12 col-lg-4">
+            <div class="card shadow-sm booking-panel">
+                <div class="card-body p-4 text-center">
+                    <div class="mb-4">
+                        <span class="helper-detail-rate">{{ helper.hourly_rate|default:"—" }}</span>
+                        <span class="text-muted small"> ر.س / ساعة</span>
+                    </div>
+                    <a href="#"class="btn btn-dark w-100 py-2 fw-medium mb-3">
+                        احجز الآن
+                    </a>
+                    <p class="small text-muted mb-0">✅ دفع آمن · استرداد كامل عند الإلغاء</p>
+                </div>
+            </div>
+        </div>
 
     </div>
-
-    <!-- عمود الحجز -->
-    <div class="col-12 col-lg-4">
-      <div class="card border-0 shadow-sm" style="position:sticky; top:2rem;">
-        <div class="card-body p-4 text-center">
-          <div class="mb-4">
-            <span class="fw-bold" style="font-size:2rem;color:#d4af37;">{{ helper.hourly_rate|default:"—" }}</span>
-            <span class="text-muted small"> {% trans "ر.س/ساعة" %}</span>
-          </div>
-          <a href="{% url 'bookings:book_helper' helper.pk %}" class="btn btn-dark w-100 py-2 fw-medium mb-3">{% trans "احجز الآن" %}</a>
-          <p class="small text-muted mb-0">{% trans "✅ دفع آمن · استرداد كامل عند الإلغاء" %}</p>
-        </div>
-      </div>
-    </div>
-
-  </div>
 </div>
 {% endblock %}

@@ -218,7 +218,7 @@ def edit_profile(request):
                         updated_profile.services.add(service)
 
             messages.success(request, 'تم تحديث ملفك الشخصي بنجاح.')
-            return redirect('helpers:dashboard')
+            return redirect('helpers:helper_dashboard')
 
     else:
         form       = HelperProfileForm(instance=profile)

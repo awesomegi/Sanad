@@ -22,7 +22,7 @@
               </div>
               <div class="flex-grow-1">
                 <p class="mb-1 fw-medium" style="font-size:0.92rem;">{{ notification.message }}</p>
-                <p class="mb-0 small text-muted">{{ notification.created_at|timesince }} مضت</p>
+                <p class="mb-0 small text-muted">{{ notification.created_at|date:"d M Y - g:i A" }} مضت</p>
               </div>
               {% if not notification.is_read %}
                 <span class="badge" style="background:#d4af37; color:#1a1a1a;">جديد</span>

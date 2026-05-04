@@ -1,67 +1,78 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load static %}
 
 {% block title %}{% trans "سند — المساعدة، حين تحتاجها" %}{% endblock %}
 
 {% block content %}
 
 <!-- Hero -->
-<section class="py-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
-  <div class="container py-5 text-center">
-    <span class="badge mb-3 px-3 py-2 badge-gold">{% trans "معتمد من وزارة الصحة" %}</span>
-    <h1 class="display-4 fw-bold mb-3">{% trans "المساعدة، حين تحتاجها." %}</h1>
-    <p class="lead text-muted mb-4 mx-auto" style="max-width: 600px;">
-      {% trans "نربط ذوي الإعاقة بمساعدين موثوقين معتمدين من الجهات الحكومية. مدربون، آمنون، وعلى بُعد حجز واحد." %}
+<section class="hero-section" style="background-image: url('{% static 'imges/image_bg.png' %}');">
+  <div class="container text-center">
+    <span class="badge hero-badge mb-3 px-3 py-2">معتمد من وزارة الصحة</span>
+    <h1 class="display-4 fw-bold mb-3">المساعدة، حين تحتاجها.</h1>
+    <p class="lead mb-4 mx-auto hero-text" style="max-width:600px;">
+      نربط ذوي الإعاقة بمساعدين موثوقين معتمدين من الجهات الحكومية. مدربون، آمنون، وعلى بُعد حجز واحد.
     </p>
-    <div class="d-flex gap-2 justify-content-center flex-wrap">
-      <a href="{% url 'signup_seeker' %}" class="btn btn-dark btn-lg px-4">{% trans "أحتاج مساعدة" %}</a>
-      <a href="{% url 'helpers:signup_helper' %}" class="btn btn-outline-dark btn-lg px-4">{% trans "أريد المساعدة" %}</a>
+    <div class="d-flex gap-3 justify-content-center flex-wrap">
+      <a href="{% url 'signup_seeker' %}" class="btn btn-hero-primary btn-lg px-4">أحتاج مساعدة</a>
+      <a href="{% url 'helpers:signup_helper' %}" class="btn btn-hero-outline btn-lg px-4">أريد المساعدة</a>
     </div>
   </div>
 </section>
 
+
+
 <!-- كيف يعمل -->
 <section class="py-5">
   <div class="container">
-    <h2 class="text-center mb-5 fw-bold">{% trans "كيف يعمل سند" %}</h2>
-    <div class="row g-4">
+    <h2 class="text-center fw-bold mb-5 section-title">كيف يعمل سند</h2>
+    <div class="row g-4 justify-content-center">
+
       <div class="col-md-4">
-        <div class="text-center px-3">
-          <div class="d-inline-flex align-items-center justify-content-center mb-3 rounded-circle bg-white shadow-sm" style="width:64px;height:64px;">
-            <span class="h3 mb-0" style="color:#d4af37;">١</span>
+        <div class="how-card text-center position-relative">
+          <span class="how-number">١</span>
+          <!-- الأيقونة فوق الكارد -->
+          <div class="how-icon mx-auto">
+            <span class="material-icons">search</span>
           </div>
-          <h5 class="fw-semibold">{% trans "تصفح المساعدين المعتمدين" %}</h5>
-          <p class="text-muted small">{% trans "جميع المساعدين معتمدون من وزارة الصحة ومدربون على دعم ذوي الإعاقة." %}</p>
+          <h5 class="fw-semibold mb-2 mt-4">تصفح المساعدين المعتمدين</h5>
+          <p class="text-muted small">جميع المساعدين معتمدون من وزارة الصحة.</p>
         </div>
       </div>
+
       <div class="col-md-4">
-        <div class="text-center px-3">
-          <div class="d-inline-flex align-items-center justify-content-center mb-3 rounded-circle bg-white shadow-sm" style="width:64px;height:64px;">
-            <span class="h3 mb-0" style="color:#d4af37;">٢</span>
+        <div class="how-card text-center position-relative">
+          <span class="how-number">٢</span>
+          <div class="how-icon mx-auto">
+            <span class="material-icons">calendar_today</span>
           </div>
-          <h5 class="fw-semibold">{% trans "احجز حسب جدولك" %}</h5>
-          <p class="text-muted small">{% trans "اختر مساعداً، خدمةً، ووقتاً يناسبك." %}</p>
+          <h5 class="fw-semibold mb-2 mt-4">احجز حسب جدولك</h5>
+          <p class="text-muted small">اختر مساعداً، خدمةً، ووقتاً يناسبك.</p>
         </div>
       </div>
+
       <div class="col-md-4">
-        <div class="text-center px-3">
-          <div class="d-inline-flex align-items-center justify-content-center mb-3 rounded-circle bg-white shadow-sm" style="width:64px;height:64px;">
-            <span class="h3 mb-0" style="color:#d4af37;">٣</span>
+        <div class="how-card text-center position-relative">
+          <span class="how-number">٣</span>
+          <div class="how-icon mx-auto">
+            <span class="material-icons">payment</span>
           </div>
-          <h5 class="fw-semibold">{% trans "ادفع بأمان" %}</h5>
-          <p class="text-muted small">{% trans "نقبل مدى وفيزا وآبل باي. استرداد كامل عند الإلغاء." %}</p>
+          <h5 class="fw-semibold mb-2 mt-4">ادفع بأمان</h5>
+          <p class="text-muted small">نقبل مدى وفيزا وآبل باي. استرداد كامل عند الإلغاء.</p>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
 <!-- لماذا سند -->
-<section class="py-5 bg-white">
+<section class="why-section py-5">
   <div class="container">
     <div class="row align-items-center">
+
       <div class="col-lg-6 mb-4 mb-lg-0">
-        <h2 class="fw-bold mb-3">{% trans "مصمم للحظات التي تهم." %}</h2>
+        <h2 class="fw-bold mb-3 section-title">مصمم للحظات التي تهم.</h2>
         <p class="text-muted mb-3">
           {% trans "سواء كانت حاجتك دائمة أو مؤقتة — التواء كاحل، تعافٍ من عملية، أو دعم يومي للحركة — يمنحك سند شبكة من المساعدين المدربين الذين يفهمون احتياجاتك تماماً." %}
         </p>
@@ -69,42 +80,62 @@
           {% trans "لا داعي للاعتماد على عائلة بعيدة. ولا حرج من طلب المساعدة من الأصدقاء. فقط مساعدة موثوقة، بشروطك أنت." %}
         </p>
       </div>
+
+      <!-- الكاردات داخل col-lg-6 -->
       <div class="col-lg-6">
         <div class="row g-3">
+
           <div class="col-6">
-            <div class="card border-0 shadow-sm h-100">
-              <div class="card-body p-4">
-                <p class="h2 fw-bold mb-1" style="color:#d4af37;">١٠٠٪</p>
-                <p class="small text-muted mb-0">{% trans "مساعدون معتمدون" %}</p>
+            <div class="card h-100">
+              <div class="card-body p-4 d-flex align-items-center gap-3">
+                <span class="material-icons stat-icon-material">verified</span>
+                <div>
+                  <p class="h2 fw-bold mb-1 stat-number">١٠٠٪</p>
+                  <p class="small text-muted mb-0">مساعدون معتمدون</p>
+                </div>
               </div>
             </div>
           </div>
+
           <div class="col-6">
-            <div class="card border-0 shadow-sm h-100">
-              <div class="card-body p-4">
-                <p class="h2 fw-bold mb-1" style="color:#d4af37;">٥</p>
-                <p class="small text-muted mb-0">{% trans "مجالات تخصص" %}</p>
+            <div class="card h-100">
+              <div class="card-body p-4 d-flex align-items-center gap-3">
+                <span class="material-icons stat-icon-material">psychology</span>
+                <div>
+                  <p class="h2 fw-bold mb-1 stat-number">٥</p>
+                  <p class="small text-muted mb-0">مجالات تخصص</p>
+                </div>
               </div>
             </div>
           </div>
+
           <div class="col-6">
-            <div class="card border-0 shadow-sm h-100">
-              <div class="card-body p-4">
-                <p class="h2 fw-bold mb-1" style="color:#d4af37;">٢٤/٧</p>
-                <p class="small text-muted mb-0">{% trans "حجز متاح دائماً" %}</p>
+            <div class="card h-100">
+              <div class="card-body p-4 d-flex align-items-center gap-3">
+                <span class="material-icons stat-icon-material">schedule</span>
+                <div>
+                  <p class="h2 fw-bold mb-1 stat-number">٢٤/٧</p>
+                  <p class="small text-muted mb-0">حجز متاح دائماً</p>
+                </div>
               </div>
             </div>
           </div>
+
           <div class="col-6">
-            <div class="card border-0 shadow-sm h-100">
-              <div class="card-body p-4">
-                <p class="h2 fw-bold mb-1" style="color:#d4af37;">{% trans "ر.س" %}</p>
-                <p class="small text-muted mb-0">{% trans "دفع آمن عبر مدى" %}</p>
+            <div class="card h-100">
+              <div class="card-body p-4 d-flex align-items-center gap-3">
+                <span class="material-icons stat-icon-material">lock</span>
+                <div>
+                  <p class="h2 fw-bold mb-1 stat-number">ر.س</p>
+                  <p class="small text-muted mb-0">دفع آمن عبر مدى</p>
+                </div>
               </div>
             </div>
           </div>
+
         </div>
       </div>
+
     </div>
   </div>
 </section>
