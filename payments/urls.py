@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+#added by rimas
 app_name = 'payments'
  
  

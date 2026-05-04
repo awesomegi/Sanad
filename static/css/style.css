@@ -297,7 +297,7 @@ footer .text-muted {
 .step-circle span { color: var(--color-primary); font-size: 1.5rem; font-weight: 700; }
 
 /* ── Why section ──────────────────────────────────────────── */
-.why-section  { background: var(--color-bg-section); }
+.why-section { background: var(--color-bg-page); }
 .section-title { color: var(--color-primary-dark); }
 .stat-number  { color: var(--color-primary) !important; }
 
@@ -606,4 +606,103 @@ main {
   color: var(--color-primary);
   display: block;
   margin-bottom: 0.5rem;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+}
+
+.notif-icon { font-size: 1.8rem; }
+.notif-icon.rating   { color: #F39C12; }
+.notif-icon.booking  { color: var(--color-primary); }
+.notif-icon.cancel   { color: var(--color-danger); }
+.notif-icon.payment  { color: var(--color-success); }
+.notif-icon.warning  { color: var(--color-warning); }
+
+.stat-card .material-symbols-outlined {
+  color: #ffffff;
+}
+
+/* ── Dark Mode ────────────────────────────────────────────── */
+[data-bs-theme="dark"] {
+  --color-primary:       #088395;
+  --color-primary-dark:  #09637E;
+  --color-primary-light: #7AB2B2;
+  --color-primary-bg:    #0d2d35;
+
+  --color-card-bg:       #1a2e35;
+  --color-card-border:   #1e4050;
+  --color-card-hover:    #0d2d35;
+
+  --color-text-dark:     #EBF4F6;
+  --color-text-body:     #C8E0E4;
+  --color-text-muted:    #7AB2B2;
+
+  --color-bg-page:       #0a1e25;
+  --color-bg-section:    #0d2d35;
+  --color-bg-input:      #1a2e35;
+
+  --color-border:        #1e4050;
+  --color-border-focus:  #088395;
+}
+
+[data-bs-theme="dark"] body {
+  background-color: var(--color-bg-page);
+  color: var(--color-text-body);
+}
+
+[data-bs-theme="dark"] .card {
+  background-color: var(--color-card-bg) !important;
+  border-color: var(--color-card-border) !important;
+}
+
+[data-bs-theme="dark"] .form-control,
+[data-bs-theme="dark"] .form-select {
+  background-color: var(--color-bg-input) !important;
+  color: var(--color-text-body) !important;
+  border-color: var(--color-border) !important;
+}
+
+[data-bs-theme="dark"] .text-muted {
+  color: var(--color-text-muted) !important;
+}
+
+[data-bs-theme="dark"] .bg-light {
+  background-color: var(--color-bg-section) !important;
+}
+
+[data-bs-theme="dark"] .why-section {
+  background: var(--color-bg-page);
+}
+
+[data-bs-theme="dark"] .how-card {
+  background: var(--color-card-bg);
+  border-color: var(--color-card-border);
+}
+
+[data-bs-theme="dark"] .helper-card-service-tag {
+  background: var(--color-primary-bg);
+  color: var(--color-primary-light);
+}
+
+[data-bs-theme="dark"] .avail-badge {
+  background: var(--color-bg-section);
+  border-color: var(--color-border);
+  color: var(--color-text-body);
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-size: 18px;
+  vertical-align: middle;
+}
+
+
+[data-bs-theme="dark"] a {
+  color: var(--color-text-body) !important;
+}
+
+[data-bs-theme="dark"] a:hover {
+  color: var(--color-primary) !important;
 }

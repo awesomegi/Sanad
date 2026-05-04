@@ -10,28 +10,29 @@
 <div class="border-bottom py-4">
   <div class="container">
     <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-      
+
       <!-- صورة الملف الشخصي -->
-        {% if helper and helper.profile_photo %}
-          <img src="{{ helper.profile_photo.url }}" alt=""
-               style="width:60px; height:60px; border-radius:50%; object-fit:cover; border:3px solid var(--color-primary);">
-        {% else %}
-          <div style="width:60px; height:60px; border-radius:50%; background: var(--color-primary); display:flex; align-items:center; justify-content:center; font-size:1.4rem; font-weight:800; color:#fff; flex-shrink:0;">
-            {{ user.first_name|first|upper }}
-          </div>
-        {% endif %}
+      {% if helper and helper.profile_photo %}
+      <img src="{{ helper.profile_photo.url }}" alt=""
+        style="width:60px; height:60px; border-radius:50%; object-fit:cover; border:3px solid var(--color-primary);">
+      {% else %}
+      <div
+        style="width:60px; height:60px; border-radius:50%; background: var(--color-primary); display:flex; align-items:center; justify-content:center; font-size:1.4rem; font-weight:800; color:#fff; flex-shrink:0;">
+        {{ user.first_name|first|upper }}
+      </div>
+      {% endif %}
       <div>
 
-        <h1 class="h3 fw-bold mb-1">مرحباً، {{ user.first_name }} 👋</h1>
+        <h1 class="h3 fw-bold mb-1">مرحباً، {{ user.first_name }} </h1>
         <p class="text-muted small mb-0">
           {% if helper %}
-            {% if open_requests %}
-              {{ open_requests|length }} طلب مفتوح يتوافق مع تخصصك
-            {% else %}
-              جاهز لاستقبال الحجوزات الجديدة
-            {% endif %}
+          {% if open_requests %}
+          {{ open_requests|length }} طلب مفتوح يتوافق مع تخصصك
           {% else %}
-            أكمل ملفك الشخصي لبدء استقبال الحجوزات
+          جاهز لاستقبال الحجوزات الجديدة
+          {% endif %}
+          {% else %}
+          أكمل ملفك الشخصي لبدء استقبال الحجوزات
           {% endif %}
         </p>
       </div>
@@ -41,9 +42,10 @@
           تعديل الملف المهني
         </a>
         <a href="{% url 'notifications:list' %}" class="btn btn-outline-secondary px-3">
-          🔔 الإشعارات
+          <span class="material-symbols-outlined" style="font-size:18px; vertical-align:middle;">notifications</span>
+          الإشعارات
           {% if unread_notifications > 0 %}
-            <span class="badge bg-danger ms-1">{{ unread_notifications }}</span>
+          <span class="badge bg-danger ms-1">{{ unread_notifications }}</span>
           {% endif %}
         </a>
       </div>
@@ -55,108 +57,116 @@
 <div class="container py-4">
 
   <!-- إحصائيات سريعة -->
-  <div class="row g-3 mb-5">
+<div class="row g-3 mb-5">
 
-    <div class="col-6 col-md-3">
-      <div class="card stat-card h-100">
-        <div class="card-body d-flex align-items-center gap-3">
-          <div class="stat-icon"></div>
-          <div>
-            <p class="small mb-0">قيد الانتظار</p>
-            <p class="h3 fw-bold mb-0 h-display">{{ pending_count }}</p>
-          </div>
+  <div class="col-6 col-md-3">
+    <div class="card stat-card h-100">
+      <div class="card-body d-flex align-items-center gap-3">
+        <div class="stat-icon">
+          <span class="material-symbols-outlined">pending</span>
+        </div>
+        <div>
+          <p class="small mb-0">حجوزات قيد الانتظار</p>
+          <p class="h3 fw-bold mb-0 h-display">{{ pending_count }}</p>
         </div>
       </div>
     </div>
-
-    <div class="col-6 col-md-3">
-      <div class="card stat-card h-100">
-        <div class="card-body d-flex align-items-center gap-3">
-          <div class="stat-icon"></div>
-          <div>
-            <p class="small mb-0">نشطة</p>
-            <p class="h3 fw-bold mb-0 h-display">{{ active_count }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-6 col-md-3">
-      <div class="card stat-card h-100">
-        <div class="card-body d-flex align-items-center gap-3">
-          <div class="stat-icon"></div>
-          <div>
-            <p class="small mb-0">هذا الشهر</p>
-            <p class="h3 fw-bold mb-0 h-display">
-              {{ monthly_earnings }}
-              <span class="small fw-normal">ر.س</span>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-6 col-md-3">
-      <div class="card stat-card h-100">
-        <div class="card-body d-flex align-items-center gap-3">
-          <div class="stat-icon"></div>
-          <div>
-            <p class="small mb-0">التقييم</p>
-            <p class="h3 fw-bold mb-0 h-display">
-              {{ rating|floatformat:1|default:"—" }}
-              {% if rating %}<span class="small fw-normal">/ 5</span>{% endif %}
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
+
+  <div class="col-6 col-md-3">
+    <div class="card stat-card h-100">
+      <div class="card-body d-flex align-items-center gap-3">
+        <div class="stat-icon">
+          <span class="material-symbols-outlined">bolt</span>
+        </div>
+        <div>
+          <p class="small mb-0">حجوزات نشطة</p>
+          <p class="h3 fw-bold mb-0 h-display">{{ active_count }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6 col-md-3">
+    <div class="card stat-card h-100">
+      <div class="card-body d-flex align-items-center gap-3">
+        <div class="stat-icon">
+          <span class="material-symbols-outlined">payments</span>
+        </div>
+        <div>
+          <p class="small mb-0">أرباح هذا الشهر</p>
+          <p class="h3 fw-bold mb-0 h-display">
+            {{ monthly_earnings }}
+            <span class="small fw-normal">ر.س</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6 col-md-3">
+    <div class="card stat-card h-100">
+      <div class="card-body d-flex align-items-center gap-3">
+        <div class="stat-icon">
+          <span class="material-symbols-outlined">star</span>
+        </div>
+        <div>
+          <p class="small mb-0">التقييم</p>
+          <p class="h3 fw-bold mb-0 h-display">
+            {{ rating|floatformat:1|default:"—" }}
+            {% if rating %}<span class="small fw-normal">/ 5</span>{% endif %}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
 
   <!-- الحجوزات القادمة -->
   <h2 class="h5 fw-bold mb-3">الحجوزات القادمة</h2>
 
   {% if upcoming_bookings %}
-    <div class="d-flex flex-column gap-3">
-      {% for booking in upcoming_bookings %}
-      <div class="card booking-card shadow-sm">
-        <div class="card-body p-3">
-          <div class="d-flex align-items-start justify-content-between gap-2 flex-wrap">
-            <div>
-              <p class="fw-semibold mb-1">{{ booking.service.name }}</p>
-              <div class="d-flex align-items-center gap-3 flex-wrap">
-                <span class="small text-muted">{{ booking.scheduled_date }}</span>
-                <span class="small text-muted">{{ booking.scheduled_start_time }}</span>
-                <span class="small text-muted">{{ booking.hours }} ساعة</span>
-              </div>
-              <p class="small text-muted mt-1 mb-0">
-                الباحث: {{ booking.seeker.user.first_name }} {{ booking.seeker.user.last_name }}
-              </p>
+  <div class="d-flex flex-column gap-3">
+    {% for booking in upcoming_bookings %}
+    <div class="card booking-card shadow-sm">
+      <div class="card-body p-3">
+        <div class="d-flex align-items-start justify-content-between gap-2 flex-wrap">
+          <div>
+            <p class="fw-semibold mb-1">{{ booking.service.name }}</p>
+            <div class="d-flex align-items-center gap-3 flex-wrap">
+              <span class="small text-muted">{{ booking.scheduled_date }}</span>
+              <span class="small text-muted">{{ booking.scheduled_start_time }}</span>
+              <span class="small text-muted">{{ booking.hours }} ساعة</span>
             </div>
-            <div class="text-end">
-              <p class="fw-bold mb-1 text-gold">{{ booking.total_amount }} ر.س</p>
-              <span class="badge rounded-pill small
+            <p class="small text-muted mt-1 mb-0">
+              الباحث: {{ booking.seeker.user.first_name }} {{ booking.seeker.user.last_name }}
+            </p>
+          </div>
+          <div class="text-end">
+            <p class="fw-bold mb-1 text-gold">{{ booking.total_amount }} ر.س</p>
+            <span class="badge rounded-pill small
                 {% if booking.status == 'BOOKED' %}status-booked
                 {% elif booking.status == 'ACTIVE' %}status-active
                 {% endif %}">
-                {% if booking.status == 'BOOKED' %}محجوز{% elif booking.status == 'ACTIVE' %}جارٍ{% endif %}
-              </span>
-            </div>
+              {% if booking.status == 'BOOKED' %}محجوز{% elif booking.status == 'ACTIVE' %}جارٍ{% endif %}
+            </span>
           </div>
         </div>
       </div>
-      {% endfor %}
     </div>
+    {% endfor %}
+  </div>
 
   {% else %}
-    <div class="card border-0 shadow-sm">
-      <div class="card-body empty-state">
-        <div class="empty-icon"></div>
-        <h6 class="fw-semibold mb-2">لا توجد حجوزات قادمة</h6>
-        <p class="text-muted small mb-3">تأكد أن ملفك الشخصي مكتمل لاستقطاب المزيد من الطلبات</p>
-        <a href="{% url 'helpers:edit_profile' %}" class="btn btn-dark btn-sm px-4">أكمل ملفك الشخصي</a>
-      </div>
+  <div class="card border-0 shadow-sm">
+    <div class="card-body empty-state">
+      <div class="empty-icon"></div>
+      <h6 class="fw-semibold mb-2">لا توجد حجوزات قادمة</h6>
+      <p class="text-muted small mb-3">تأكد أن ملفك الشخصي مكتمل لاستقطاب المزيد من الطلبات</p>
+      <a href="{% url 'helpers:edit_profile' %}" class="btn btn-dark btn-sm px-4">أكمل ملفك الشخصي</a>
     </div>
+  </div>
   {% endif %}
 
 </div>
@@ -180,8 +190,8 @@
             <span>الاعتماد ⏳</span>
           </div>
           <div class="progress" style="height:8px; border-radius:8px;">
-            <div class="progress-bar" role="progressbar"
-                 style="width:50%; background: var(--color-primary);" aria-valuenow="50">
+            <div class="progress-bar" role="progressbar" style="width:50%; background: var(--color-primary);"
+              aria-valuenow="50">
             </div>
           </div>
         </div>
