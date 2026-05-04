@@ -37,13 +37,8 @@
   <div class="container">
     <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
       <div>
-<<<<<<< HEAD
         <h1 class="h3 fw-bold mb-1">مرحباً، {{ user.first_name }}</h1>
         <p class="text-muted small mb-0">إليك ملخص حجوزاتك</p>
-=======
-        <h1 class="h3 fw-bold mb-1">{% blocktrans with name=user.first_name %}مرحباً، {{ name }} 👋{% endblocktrans %}</h1>
-        <p class="text-muted small mb-0">{% trans "إليك ملخص حجوزاتك" %}</p>
->>>>>>> 50ec9fff0d25e300418646a387948d6c758ee7f0
       </div>
       <a href="{% url 'bookings:helpers_list' %}" class="btn btn-dark px-4 fw-medium">
         {% trans "+ ابحث عن مساعد" %}
@@ -64,11 +59,7 @@
             <span class="material-symbols-outlined">event_available</span>
           </div>
           <div>
-<<<<<<< HEAD
             <p class="small mb-0">حجوزات نشطة</p>
-=======
-            <p class="text-muted small mb-0">{% trans "حجوزات نشطة" %}</p>
->>>>>>> 50ec9fff0d25e300418646a387948d6c758ee7f0
             <p class="h3 fw-bold mb-0 h-display">{{ active_count }}</p>
           </div>
         </div>
@@ -82,11 +73,7 @@
             <span class="material-symbols-outlined">task_alt</span>
           </div>
           <div>
-<<<<<<< HEAD
             <p class="small mb-0">مكتملة</p>
-=======
-            <p class="text-muted small mb-0">{% trans "مكتملة" %}</p>
->>>>>>> 50ec9fff0d25e300418646a387948d6c758ee7f0
             <p class="h3 fw-bold mb-0 h-display">{{ completed_count }}</p>
           </div>
         </div>
@@ -100,17 +87,10 @@
             <span class="material-symbols-outlined">account_balance_wallet</span>
           </div>
           <div>
-<<<<<<< HEAD
             <p class="small mb-0">إجمالي الإنفاق</p>
             <p class="h3 fw-bold mb-0 h-display">
               {{ total_spent }}
               <span class="small fw-normal">ر.س</span>
-=======
-            <p class="text-muted small mb-0">{% trans "إجمالي الإنفاق" %}</p>
-            <p class="h3 fw-bold mb-0 h-display">
-              {{ total_spent }}
-              <span class="small fw-normal text-muted">{% trans "ر.س" %}</span>
->>>>>>> 50ec9fff0d25e300418646a387948d6c758ee7f0
             </p>
           </div>
         </div>
@@ -169,7 +149,6 @@
             <div class="bg-light rounded p-3 mb-3 small">
               <div class="row g-2">
                 <div class="col-6">
-<<<<<<< HEAD
                   <p class="text-muted mb-1" style="font-size: 0.75rem;">
                     <span class="material-symbols-outlined" style="font-size:14px;">calendar_month</span> التاريخ
                   </p>
@@ -198,26 +177,6 @@
                   <p class="text-muted mb-1" style="font-size: 0.75rem;">
                     <span class="material-symbols-outlined" style="font-size:14px;">edit_note</span> ملاحظات
                   </p>
-=======
-                  <p class="text-muted mb-1" style="font-size: 0.75rem;">{% trans "📅 التاريخ" %}</p>
-                  <p class="fw-medium mb-0">{{ booking.scheduled_date }}</p>
-                </div>
-                <div class="col-6">
-                  <p class="text-muted mb-1" style="font-size: 0.75rem;">{% trans "🕐 الوقت" %}</p>
-                  <p class="fw-medium mb-0">{{ booking.scheduled_start_time }}</p>
-                </div>
-                <div class="col-6">
-                  <p class="text-muted mb-1" style="font-size: 0.75rem;">{% trans "⏱️ المدة" %}</p>
-                  <p class="fw-medium mb-0">{% blocktrans with hours=booking.hours %}{{ hours }} ساعة{% endblocktrans %}</p>
-                </div>
-                <div class="col-6">
-                  <p class="text-muted mb-1" style="font-size: 0.75rem;">{% trans "💰 المبلغ" %}</p>
-                  <p class="fw-medium mb-0 text-gold">{% blocktrans with amount=booking.total_amount %}{{ amount }} ر.س{% endblocktrans %}</p>
-                </div>
-                {% if booking.notes %}
-                <div class="col-12 mt-2 pt-2 border-top">
-                  <p class="text-muted mb-1" style="font-size: 0.75rem;">{% trans "📝 ملاحظات" %}</p>
->>>>>>> 50ec9fff0d25e300418646a387948d6c758ee7f0
                   <p class="mb-0 small">{{ booking.notes }}</p>
                 </div>
                 {% endif %}
@@ -271,12 +230,8 @@
                 {% if booking.status == 'COMPLETED' and not booking.rating %}
                 <a href="{% url 'bookings:rate_helper' booking.id %}" class="btn btn-sm btn-outline-warning mt-1"
                   style="font-size:0.75rem;">
-<<<<<<< HEAD
                   <span class="material-symbols-outlined" style="font-size:14px;">star</span>
                   قيّم المساعد
-=======
-                  {% trans "⭐ قيّم المساعد" %}
->>>>>>> 50ec9fff0d25e300418646a387948d6c758ee7f0
                 </a>
                 {% elif booking.status == 'COMPLETED' and booking.rating %}
                 <span class="small" style="color:var(--color-primary);">

@@ -157,3 +157,4 @@ def rate_helper(request, booking_id):
             return redirect('seeker_dashboard')
 
     return render(request, 'bookings/rate_helper.html', {'booking': booking})
+
