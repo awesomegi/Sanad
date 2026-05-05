@@ -31,7 +31,7 @@ os.environ.get('MOYASAR_SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = ["https://sanad-project.up.railway.app/"]
+CSRF_TRUSTED_ORIGINS = ["https://sanad-project.up.railway.app"]
 
 
 # Application definition
