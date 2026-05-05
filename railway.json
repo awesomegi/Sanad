@@ -4,7 +4,7 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "preDeployCommand": "python manage.py migrate && python manage.py collectstatic --noinput",
+    "preDeployCommand": "python manage.py migrate && python manage.py collectstatic --noinput && python manage.py ensure_superuser",
     "startCommand": "gunicorn sanad.wsgi --bind 0.0.0.0:$PORT",
     "runtime": "v2",
     "restartPolicyType": "ON_FAILURE",
