@@ -1,5 +1,7 @@
+import os
 from django.db import models
 from django.conf import settings
+from django.templatetags.static import static
 
 
 
@@ -91,6 +93,27 @@ class HelperProfile(models.Model):
     is_active = models.BooleanField(default=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def get_photo_url(self):
+        if self.profile_photo and self.profile_photo.name:
+            return self.profile_photo.url
+        first_name = self.user.first_name.strip()
+        if not first_name:
+            return None
+        search_dirs = [str(d) for d in getattr(settings, 'STATICFILES_DIRS', [])]
+        if getattr(settings, 'STATIC_ROOT', None):
+            search_dirs.append(str(settings.STATIC_ROOT))
+        for base_dir in search_dirs:
+            images_dir = os.path.join(base_dir, 'images')
+            try:
+                for filename in os.listdir(images_dir):
+                    stem = os.path.splitext(filename)[0]
+                    if (stem.lower() == first_name.lower() or
+                            stem.lower().startswith(first_name.lower() + '_')):
+                        return static(f'images/{filename}')
+            except OSError:
+                continue
+        return None
 
     def __str__(self):
         return f"{self.user.email} ({self.verification_status})"

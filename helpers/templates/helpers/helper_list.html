@@ -117,11 +117,13 @@
             <div class="card-body p-4">
 
               <div class="d-flex align-items-start gap-3 mb-3">
-                {% if helper.user.profile_photo %}
-                  <img src="{{ helper.user.profile_photo.url }}" class="helper-avatar" alt="">
+                {% with photo_url=helper.get_photo_url %}
+                {% if photo_url %}
+                  <img src="{{ photo_url }}" class="helper-avatar" alt="">
                 {% else %}
                   <div class="helper-avatar-placeholder">{{ helper.user.first_name|first|upper }}</div>
                 {% endif %}
+                {% endwith %}
                 <div class="flex-grow-1">
                   <div class="d-flex align-items-center gap-2 flex-wrap">
                     <span class="fw-bold">{{ helper.user.get_full_name }}</span>

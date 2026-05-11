@@ -3,8 +3,9 @@
 <div class="card h-100 border-0 shadow-sm" style="border-radius:14px; overflow:hidden;">
 
     <div class="text-center pt-4">
-        {% if helper.profile_photo and helper.profile_photo.name %}
-        <img src="{{ helper.profile_photo.url }}" alt=""
+        {% with photo_url=helper.get_photo_url %}
+        {% if photo_url %}
+        <img src="{{ photo_url }}" alt=""
             style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid var(--color-primary);">
         {% else %}
         <div
@@ -12,6 +13,7 @@
             {{ helper.user.first_name|first|upper }}
         </div>
         {% endif %}
+        {% endwith %}
     </div>
 
     <div class="card-body text-center px-4 pb-4 d-flex flex-column">

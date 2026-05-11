@@ -18,13 +18,15 @@
                 <div class="card-body p-4">
                     <div class="d-flex align-items-center gap-4 flex-wrap">
 
-                        {% if helper.profile_photo and helper.profile_photo.name %}
-                        <img src="{{ helper.profile_photo.url }}" alt="" class="helper-detail-avatar">
+                        {% with photo_url=helper.get_photo_url %}
+                        {% if photo_url %}
+                        <img src="{{ photo_url }}" alt="" class="helper-detail-avatar">
                         {% else %}
                         <div class="helper-detail-avatar-placeholder">
                             {{ helper.user.first_name|first|upper }}
                         </div>
                         {% endif %}
+                        {% endwith %}
 
                         <div>
                             <h3 class="fw-bold mb-1">{{ helper.user.get_full_name }}</h3>
